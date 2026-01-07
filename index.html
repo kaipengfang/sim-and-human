@@ -19,6 +19,7 @@ layout: default
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" type="image/x-icon" href="{{ '/favicon.ico' | relative_url }}">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
@@ -135,7 +136,7 @@ layout: default
     <!-- Background Video -->
     <!-- Desktop Splash -->
     <div class="hero-video desktop-only" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden;">
-      <video preload="auto" playsinline autoplay muted loop style="width: 100%; height: 100%; object-fit: cover; object-position: center bottom;" poster="./resources/images/Website_background_poster.jpg">
+      <video preload="auto" playsinline autoplay muted loop style="width: 100%; height: 100%; object-fit: cover; object-position: center bottom;" poster="./resources/images/website_background_poster.jpg">
         <source src="./resources/video/website_background.mp4"  type="video/mp4">
       </video>
     </div>
@@ -277,12 +278,12 @@ layout: default
 
   <!-- Introduction -->
   <section class="section">
-    <div class="container is-max-desktop">
-      <video id="teaser" autoplay muted loop playsinline controls style="width: 100%; height: auto; border-radius: 0px;">
+    <div class="container is-max-desktop" data-aos="fade-in">
+      <video id="teaser" autoplay muted loop playsinline controls style="width: 100%; height: auto; border-radius: 0px; border: 2px solid #000;">
         <source src="./resources/video/introduction_video.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
-      <div class="content has-text-justified" style="margin-top: 1.5rem;">
+      <div class="content has-text-justified" style="margin-top: 1.5rem;" data-aos="fade-in">
         <p>
           DexWild enables generalization to unseen objects, environments, and robot embodiments...
           (在这里填入你的项目介绍文字)
@@ -293,9 +294,9 @@ layout: default
 
   <section class="section">
     <div class="container">
-      <h2 class="title is-2 is-size-3-mobile">Introduction</h2>
-      <img src="./resources/images/Introduction.png" style="width: 100%; display: block; margin-bottom: 20px;" alt="Teaser Image">
-      <div class="container mb-6">
+      <h2 class="title is-2 is-size-3-mobile" data-aos="fade-up">Introduction</h2>
+      <img src="./resources/images/Introduction.png" style="width: 100%; display: block; margin-bottom: 20px;" data-aos="zoom-in" alt="Teaser Image">
+      <div class="container mb-6" data-aos="fade-in">
         <br>
           <b>Sim-and-Human </b>enables generalization to unseen objects, environments, and robot embodiments by scaling up human demonstrations collected with a low-cost, mobile capture system. With <b>9,290 demos across 93 environments</b>, our co-training framework leverages both <b>human and robot data</b> to learn robust policies that generalize across indoor/outdoor, cluttered scenes, and diverse tasks—achieving 4× higher success rate in novel environments and 5.8× better embodiment transfer than robot-only training.
       </div>
@@ -304,9 +305,9 @@ layout: default
   <!-- Approach -->
   <section class="section">
     <div class="container">
-      <h2 class="title is-2 is-size-3-mobile">Approach</h2>
-      <img src="./resources/images/Frame.png" style="width: 100%; display: block; margin-bottom: 20px;" alt="Teaser Image">
-      <div class="container mb-6">
+      <h2 class="title is-2 is-size-3-mobile" data-aos="fade-up">Approach</h2>
+      <img src="./resources/images/Frame.png" style="width: 100%; display: block; margin-bottom: 20px;" data-aos="zoom-in" alt="Teaser Image">
+      <div class="container mb-6" data-aos="fade-in">
         <br>below are example videos of our collected human demonstrations and simulation demonstrations in diverse environments for different tasks.
       </div>
     </div>
@@ -315,23 +316,23 @@ layout: default
   <!-- Dataset Videos -->
   <section class="section">
     <div class="container">
-    <h2 class="title is-2 is-size-3-mobile">Simulation & Human & Robot Demonstrations</h2>
-    <div class="container mb-6">
+    <h2 class="title is-2 is-size-3-mobile" data-aos="fade-up">Simulation & Human & Robot Demonstrations</h2>
+    <div class="container mb-6" data-aos="fade-up">
         <br>below are example videos of our collected human demonstrations and simulation demonstrations in diverse environments for different tasks.
     </div>
-    <h3 class="title is-4 has-text-centered" style="margin-bottom: 50px; color: #0091ff;">All Videos Autonomous 1×</h3>
-    <div class="tabs">
-        <button class="tab-btn active" onclick="switchVideo(this, 'click_bell')">click_bell</button>
-        <button class="tab-btn" onclick="switchVideo(this, 'grab_roller')">grab_roller</button>
-        <button class="tab-btn" onclick="switchVideo(this, 'stack_bowls')">stack_bowls</button>
-        <button class="tab-btn" onclick="switchVideo(this, 'put_object_cabinet')">put_object_cabinet</button>
+    <h3 class="title is-4 has-text-centered" data-aos="fade-up" style="margin-bottom: 50px; color: #0091ff;">All Videos Autonomous 1×</h3>
+    <div class="tabs" data-aos="fade-up">
+        <button class="tab-btn active" onclick="switchDatasetVideo(this, 'click_bell')">click_bell</button>
+        <button class="tab-btn" onclick="switchDatasetVideo(this, 'grab_roller')">grab_roller</button>
+        <button class="tab-btn" onclick="switchDatasetVideo(this, 'stack_bowls')">stack_bowls</button>
+        <button class="tab-btn" onclick="switchDatasetVideo(this, 'put_object_cabinet')">put_object_cabinet</button>
     </div>
 
     <div class="video-display">
-        <div class="video-box">
+        <div class="video-box" data-aos="zoom-in">
             <h3>Simulation Data</h3>
             <video id="Simulation_video" autoplay loop muted playsinline>
-                <source src="./resources/ours/cloth/cloth_itwx_4th_window_day_sdr.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
+                <source src="./resources/video/inference/ours/click_bell/clean_click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
             <div class="badges-container">
               <div class="badge danger">
@@ -353,10 +354,10 @@ layout: default
               </div>
             </div>
         </div>
-        <div class="video-box">
+        <div class="video-box" data-aos="zoom-in">
             <h3>Human Data</h3>
             <video id="Human_video" autoplay loop muted playsinline>
-                <source src="./resources/ours/cloth/cloth_itwx_4th_window_day_sdr.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
+                <source src="./resources/video/inference/ours/click_bell/clean_click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
             <div class="badges-container">
               <div class="badge success">
@@ -378,10 +379,10 @@ layout: default
               </div>
             </div>
         </div>
-        <div class="video-box">
+        <div class="video-box" data-aos="zoom-in">
             <h3>real-world Observation</h3>
             <video id="Real-Robot_video" autoplay loop muted playsinline>
-                <source src="./resources/ours/cloth/cloth_itwx_4th_window_day_sdr.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
+                <source src="./resources/video/inference/ours/click_bell/clean_click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
             <div class="badges-container">
               <div class="badge success">
@@ -538,15 +539,15 @@ layout: default
 
     <!-- Two-column layout: image left, video right -->
     <div class="container mb-6">
-      <h2 class="title is-2 is-size-3-mobile" >Data-Collection-System</h2>
+      <h2 class="title is-2 is-size-3-mobile" data-aos="fade-up" >Data-Collection-System</h2>
       <div class="columns is-vcentered">
-        <div class="column is-half has-text-centered">
+        <div class="column is-half has-text-centered" data-aos="zoom-in">
           <figure>
             <img src="./resources/images/human_collection_system.png" alt="Data-Collection System Photo" style="border-radius: 10px; border: px solid #bbb; width: 90%;">
             <figcaption style="margin-top: 10px; font-style: italic; font-weight: bold;">Data-Collection System Hardware</figcaption>
           </figure>
         </div>
-        <div class="column is-half has-text-centered">
+        <div class="column is-half has-text-centered" data-aos="zoom-in">
           <video autoplay loop muted playsinline 
                 src="./resources/misc/dexwild_system_sdr_2.mp4" 
                 poster="./resources/loading-icon.gif"
@@ -558,7 +559,7 @@ layout: default
     </div>
 
     <!-- Paragraph -->
-    <div class="container mb-6">
+    <div class="container mb-6" data-aos="fade-up">
       <p>
         <b>Data-Collection System</b> is a portable, high-fidelity, and embodiment-agnostic data collection system capable of efficiently gathering dexterous human hand data across many environments. We employ a team of untrained data collectors and collect <b>9,290 demonstrations across 93 diverse environments at 4.6× the speed of teleoperation.</b>
       </p>
@@ -567,175 +568,54 @@ layout: default
   <!-- Inference Videos -->
   <section class="section">
     <div class="container">
-      <h2 class="title is-2 is-size-3-mobile" >Real-Robot Experiments</h2>
-      <div class="container mb-6">
+      <h2 class="title is-2 is-size-3-mobile" data-aos="fade-up" >Real-Robot Experiments</h2>
+      <div class="container mb-6" data-aos="fade-up">
         <br>below are example videos of our collected human demonstrations and simulation demonstrations in diverse environments for different tasks.
       </div>
-      <h3 class="title is-4 has-text-centered" style="margin-bottom: 0; color: #0091ff;">All Videos Autonomous 1×</h3>
+      <h3 class="title is-4 has-text-centered" data-aos="fade-up" style="margin-bottom: 50px; color: #0091ff;">All Videos Autonomous 1×</h3>
+      <div class="tabs" data-aos="fade-up">
+        <button class="tab-btn active" onclick="switchInferVideo(this, 'click_bell_infer')">click_bell</button>
+        <button class="tab-btn" onclick="switchInferVideo(this, 'grab_roller_infer')">grab_roller</button>
+        <button class="tab-btn" onclick="switchInferVideo(this, 'stack_bowls_infer')">stack_bowls</button>
+        <button class="tab-btn" onclick="switchInferVideo(this, 'put_object_cabinet_infer')">put_object_cabinet</button>
+      </div>
       <div class="task-group">
-        <h3 class="task-title">Click bell</h3>
         <div class="video-grid-four">
-          <div class="grid-item">
-              <video controls autoplay loop muted playsinline>
+          <div class="grid-item" data-aos="zoom-in">
+              <video id="Clean_video" controls autoplay loop muted playsinline>
                   <source src="./resources/video/inference/ours/click_bell/clean_click_bell.mp4" type="video/mp4">
               </video>
               <div class="caption">esay setting</div>
           </div>
-          <div class="grid-item">
-              <video controls autoplay loop muted playsinline>
+          <div class="grid-item" data-aos="zoom-in">
+              <video id="Red_video" controls autoplay loop muted playsinline>
                   <source src="./resources/video/inference/ours/click_bell/red_click_bell.mp4" type="video/mp4">
               </video>
               <div class="caption">middle1 setting</div>
           </div>
-          <div class="grid-item">
-              <video controls autoplay loop muted playsinline>
+          <div class="grid-item" data-aos="zoom-in">
+              <video id="Yellow_video" controls autoplay loop muted playsinline>
                   <source src="./resources/video/inference/ours/click_bell/yellow_click_bell.mp4" type="video/mp4">
               </video>
               <div class="caption">middle2 setting</div>
           </div>
-          <div class="grid-item">
-              <video controls autoplay loop muted playsinline>
+          <div class="grid-item" data-aos="zoom-in">
+              <video id="Grey_video" controls autoplay loop muted playsinline>
                   <source src="./resources/video/inference/ours/click_bell/grey_click_bell.mp4" type="video/mp4">
               </video>
               <div class="caption">middle3 setting</div>
           </div>
         </div>
         <div class="video-grid-two">
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
+          <div class="grid-item" data-aos="zoom-in">
+            <video id="Hard1_video" controls autoplay loop muted playsinline>
                 <source src="./resources/video/inference/ours/click_bell/hard1_click_bell.mp4" type="video/mp4">
             </video>
             <div class="caption">hard1 setting</div>
           </div>
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
+          <div class="grid-item" data-aos="zoom-in">
+            <video id="Hard2_video" controls autoplay loop muted playsinline>
                 <source src="./resources/video/inference/ours/click_bell/hard2_click_bell.mp4" type="video/mp4">
-            </video>
-            <div class="caption">hard2 setting</div>
-          </div>
-        </div>
-
-        <h3 class="task-title">Grab roller</h3>
-        <div class="video-grid-four">
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/grab_roller/clean_grab_roller.mp4" type="video/mp4">
-            </video>
-            <div class="caption">esay setting</div>
-          </div>
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/grab_roller/red_grab_roller.mp4" type="video/mp4">
-            </video>
-            <div class="caption">middle1 setting</div>
-          </div>
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/grab_roller/yellow_grab_roller.mp4" type="video/mp4">
-            </video>
-            <div class="caption">middle2 setting</div>
-          </div>
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/grab_roller/grey_grab_roller.mp4" type="video/mp4">
-            </video>
-            <div class="caption">middle3 setting</div>
-          </div>
-        </div>
-        <div class="video-grid-two">
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/grab_roller/hard1_grab_roller.mp4" type="video/mp4">
-            </video>
-            <div class="caption">hard1 setting</div>
-          </div>
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/grab_roller/hard2_grab_roller.mp4" type="video/mp4">
-            </video>
-            <div class="caption">hard2 setting</div>
-          </div>
-        </div>
-
-        <h3 class="task-title">Stack Bowls Two</h3>
-        <div class="video-grid-four">
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/stack_bowls/clean_stack_bowls.mp4" type="video/mp4">
-            </video>
-            <div class="caption">esay setting</div>
-          </div>
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/stack_bowls/red_stack_bowls.mp4" type="video/mp4">
-            </video>
-            <div class="caption">middle1 setting</div>
-          </div>
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/stack_bowls/yellow_stack_bowls.mp4" type="video/mp4">
-            </video>
-            <div class="caption">middle2 setting</div>
-          </div>
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/stack_bowls/grey_stack_bowls.mp4" type="video/mp4">
-            </video>
-            <div class="caption">middle3 setting</div>
-          </div>
-        </div>
-        <div class="video-grid-two">
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/stack_bowls/hard1_stack_bowls.mp4" type="video/mp4">
-            </video>
-            <div class="caption">hard1 setting</div>
-          </div>
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/stack_bowls/hard2_stack_bowls.mp4" type="video/mp4">
-            </video>
-            <div class="caption">hard2 setting</div>
-          </div>
-        </div>
-
-        <h3 class="task-title">Put Object Cabinet</h3>
-        <div class="video-grid-four">
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/put_object_cabinet/clean_put_object_cabinet.mp4" type="video/mp4">
-            </video>
-            <div class="caption">esay setting</div>
-          </div>
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/put_object_cabinet/red_put_object_cabinet.mp4" type="video/mp4">
-            </video>
-            <div class="caption">middle1 setting</div>
-          </div>
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/put_object_cabinet/yellow_put_object_cabinet.mp4" type="video/mp4">
-            </video>
-            <div class="caption">middle2 setting</div>
-          </div>
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/put_object_cabinet/grey_put_object_cabinet.mp4" type="video/mp4">
-            </video>
-            <div class="caption">middle3 setting</div>
-          </div>
-        </div>
-        <div class="video-grid-two">
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/put_object_cabinet/hard1_put_object_cabinet.mp4" type="video/mp4">
-            </video>
-            <div class="caption">hard1 setting</div>
-          </div>
-          <div class="grid-item">
-            <video controls autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/put_object_cabinet/hard2_put_object_cabinet.mp4" type="video/mp4">
             </video>
             <div class="caption">hard2 setting</div>
           </div>
@@ -832,13 +712,13 @@ layout: default
       <div class="columns is-multiline is-mobile">
         <div class="column is-half-desktop is-full-mobile has-text-centered">
           <h3 class="title is-4">New-Hand</h3>
-          <video controls autoplay loop muted playsinline preload="metadata" src="./resources/xembodiment/LeapHand Video 1.mp4" poster="./resources/loading-icon.gif" style="width: 100%; border-radius: 10px;"></video>
-          <video controls autoplay loop muted playsinline preload="metadata" src="./resources/xembodiment/LeapHand Video 2.mp4" poster="./resources/loading-icon.gif" style="width: 100%; border-radius: 10px;"></video>
+          <video controls autoplay loop muted playsinline preload="metadata" src="./resources/video/inference/ours/click_bell/clean_click_bell.mp4" poster="./resources/loading-icon.gif" style="width: 100%; border-radius: 10px;"></video>
+          <video controls autoplay loop muted playsinline preload="metadata" src="./resources/video/inference/ours/click_bell/clean_click_bell.mp4" poster="./resources/loading-icon.gif" style="width: 100%; border-radius: 10px;"></video>
         </div>
         <div class="column is-half-desktop is-full-mobile has-text-centered">
           <h3 class="title is-4">New-Arm</h3>
-          <video controls autoplay loop muted playsinline preload="metadata" src="./resources/xembodiment/Franka Spray Video.mp4" poster="./resources/loading-icon.gif" style="width: 100%; border-radius: 10px;"></video>
-          <video controls autoplay loop muted playsinline preload="metadata" src="./resources/xembodiment/Franka Toy Video.mp4" poster="./resources/loading-icon.gif" style="width: 100%; border-radius: 10px;"></video>
+          <video controls autoplay loop muted playsinline preload="metadata" src="./resources/video/inference/ours/put_object_cabinet/clean_put_object_cabinet.mp4" poster="./resources/loading-icon.gif" style="width: 100%; border-radius: 10px;"></video>
+          <video controls autoplay loop muted playsinline preload="metadata" src="./resources/video/inference/ours/put_object_cabinet/clean_put_object_cabinet.mp4" poster="./resources/loading-icon.gif" style="width: 100%; border-radius: 10px;"></video>
         </div>
       </div>
 
@@ -867,236 +747,6 @@ layout: default
 
   }
   </style>
-
-  <section class="section">
-  <div class="container">
-    <h2 class="title is-2 is-size-3-mobile">DexWild Generalizes to Completely Unseen Environments</h2>
-    <p style="margin-bottom: 20px;">
-      Policies trained using DexWild data are capable of generalizing to <b>completely unseen</b>
-      environments. DexWild enables generalization in indoor, outdoor, crowded, and cluttered environments
-      with different lighting conditions! Our models demonstrate strong performance in these environments,
-      largely attributed to the diversity and quality of the DexWild dataset. 
-      DexWild also faciliates effective transfer of skills from the spraying task to the pouring task, <b>requiring no additional robot data!</b>
-      <br>
-      <br>
-      💪 and 🦾 indicates number of human and robot demonstrations, respectively.
-    </p>
-
-    <h3 class="title is-4 has-text-centered" style="margin-bottom: 0; color: #0091ff;">All Videos Autonomous 1×</h3>
-    <br>
-
-    <div class="container" style="margin-bottom: 50px;">
-      <div class="level" style="margin-bottom: 0;">
-    <div class="level-left">
-      <h3 class="title is-3">Task: Florist 💐</h3>
-    </div>
-    <div class="level-right">
-      <h3 class="title is-3">💪 1,545 | 🦾 236</h3>
-    </div>
-  </div>
-
-
-      
-      <br>
-    <div class="tight-video-grid">
-      <video id="florist_1" controls playsinline muted preload="metadata" loop
-            src="./resources/ours/florist/florist_itwx_outdoors_sdr.mp4"></video>
-      <video id="florist_2" controls playsinline muted preload="metadata" loop
-            src="./resources/ours/florist/florist_itwx_laprima2_sdr.mp4"></video>
-      <video id="florist_3" controls playsinline muted preload="metadata" loop
-            src="./resources/ours/florist/florist_itwx_balcony_sdr.mp4"></video>
-      <video id="florist_4" controls playsinline muted preload="metadata" loop
-            src="./resources/ours/florist/florist_itwx_labinside_sdr.mp4"></video>
-      <video id="florist_5" controls playsinline muted preload="metadata" loop
-            src="./resources/ours/florist/florist_itwx_7thwindows_sdr.mp4"></video>
-      <video id="florist_6" controls playsinline muted preload="metadata" loop
-            src="./resources/ours/florist/florist_itwx_4th_window_day_sdr.mp4"></video>
-      <video id="florist_7" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/florist/florist_itwx_tepper_sdr.mp4"></video>
-      <video id="florist_8" controls playsinline muted preload="metadata" loop
-            src="./resources/ours/florist/florist_itwx_labwindow_sdr.mp4"></video>
-      <video id="florist_9"controls playsinline muted preload="metadata" loop
-            src="./resources/ours/florist/floirst_itwx_6th_study_sdr.mp4"></video>
-      </div>
-    </div>
-    <div class="container" style="margin-bottom: 50px;">
-      <div class="level" style="margin-bottom: 0;">
-      <div class="level-left">
-      <h3 class="title is-3" style="margin-bottom: 0;">Task: Clothes Folding 👕</h3>
-      </div>
-      <div class="level-right">
-        <h3 class="title is-3">💪 1,124 | 🦾 290</h3>
-      </div>
-    </div>
-
-
-
-      <br>
-    <!-- here’s the new grid -->
-  <div class="tight-video-grid">
-    <video id="clothes_1" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/cloth/cloth_itwx_4th_window_day_sdr.mp4"></video>
-    <video id="clothes_2" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/cloth/cloth_itwx_6th_study_sdr.mp4"></video>
-    <video id="clothes_3" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/cloth/cloth_itwx_balcony_sdr.mp4"></video>
-    <video id="clothes_4" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/cloth/cloth_itwx_outdoors_sdr.mp4"></video>
-    <video id="clothes_5" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/cloth/cloth_itwx_hci_sdr.mp4"></video>
-    <video id="clothes_6" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/cloth/cloth_itwx_gates_laprima_sdr.mp4"></video>
-    <video id="clothes_7" controls playsinline muted preload="metadata" loop
-        src="./resources/ours/cloth/cloth_itwx_4th_sprial_sdr.mp4"></video>
-    <video id="clothes_8" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/cloth/cloth_itwx_7th_windows_sdr.mp4"></video>
-    <video id="clothes_9"controls playsinline muted preload="metadata" loop
-          src="./resources/ours/cloth/cloth_itwx_labinside_sdr.mp4"></video>
-    </div>
-    </div>  
-
-    <div class="container" style="margin-bottom: 50px;">
-
-            <div class="level" style="margin-bottom: 0;">
-    <div class="level-left">
-      <h3 class="title is-3" style="margin-bottom: 0;">Task: Pouring 🍾</h3>
-    </div>
-    <div class="level-right">
-      <h3 class="title is-3" style="margin-bottom: 0;">💪 621 | 🦾 <span style="color: #0091ff;">0*</span></h3>
-    </div>
-  </div>
-  <p class="is-size-5 has-text-grey has-text-right" style="margin-top: 0;">
-    *pouring task: 0 | spray task: 388
-  </p>
-    <br>
-    <!-- here’s the new grid -->
-  <div class="tight-video-grid">
-    <video id="pour_1" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/pour/pour_itwx_tepper_outside_sdr.mp4"></video>
-    <video id="pour_2" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/pour/pour_itwx_hci_conference_sdr.mp4"></video>
-    <video id="pour_3" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/pour/pour_itwx_nsh_kitchen_sdr.mp4"></video>
-    <video id="pour_4" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/pour/pour_itwx_hunan_sdr.mp4"></video>
-    <video id="pour_5" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/pour/pour_itwx_scott_hall_sdr.mp4"></video>
-    <video id="pour_6" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/pour/pour_itwx_library_ours_sdr.mp4"></video>
-    <video id="pour_7" controls playsinline muted preload="metadata" loop
-        src="./resources/ours/pour/pour_itwx_wean_prima_sdr.mp4"></video>
-    <video id="pour_8" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/pour/pour_itwx_tepper_patio_sdr.mp4"></video>
-    <video id="pour_9"controls playsinline muted preload="metadata" loop
-          src="./resources/ours/pour/pour_itwx_tepper_5th_sdr.mp4"></video>
-    </div>
-    </div> 
-    <div class="container" style="margin-bottom: 50px;">
-        <div class="level" style="margin-bottom: 0;">
-      <div class="level-left">
-      <h3 class="title is-3" style="margin-bottom: 0;">Task: Spraying 🔫</h3>
-      </div>
-      <div class="level-right">
-        <h3 class="title is-3">💪 3,000 | 🦾 388</h3>
-      </div>
-    </div>
-    <br>
-    <!-- here’s the new grid -->
-  <div class="tight-video-grid">
-    <video id="spray_1" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/spray/spray_itwx_tepper_5th_sdr.mp4"></video>
-    <video id="spray_2" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/spray/spray_itwx_hci_conference_sdr.mp4"></video>
-    <video id="spray_3" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/spray/spray_itwx_hci_kitchen_sdr.mp4"></video>
-    <video id="spray_4" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/spray/spray_itwx_tepper_patio_sdr.mp4"></video>
-    <video id="spray_5" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/spray/spray_itwx_wean_prima_sdr.mp4"></video>
-    <video id="spray_6" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/spray/spray_itwx_nsh_kitchen_sdr.mp4"></video>
-    <video id="spray_7" controls playsinline muted preload="metadata" loop
-        src="./resources/ours/spray/spray_itwx_tepper_outiside_sdr.mp4"></video>
-    <video id="spray_8" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/spray/spray_itwx_scott_hall_sdr.mp4"></video>
-    <video id="spray_9"controls playsinline muted preload="metadata" loop
-          src="./resources/ours/spray/spray_itwx_toiler_sdr.mp4"></video>
-    </div>
-    </div>  
-
-    <div class="container" style="margin-bottom: 0px;">
-      <div class="level" style="margin-bottom: 0;">
-      <div class="level-left">
-      <h3 class="title is-3" style="margin-bottom: 0;">Task: Toy Cleanup 🧸</h3>
-      </div>
-      <div class="level-right">
-        <h3 class="title is-3">💪 3,000 | 🦾 370</h3>
-      </div>
-    </div>
-
-    <br>
-    <!-- here’s the new grid -->
-  <div class="tight-video-grid">
-    <video id="pour_1" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/toy/toy_itwx_scaife_cafe_sdr.mp4"></video>
-    <video id="pour_2" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/toy/toy_itwx_scaife_study_sdr.mp4"></video>
-    <video id="pour_3" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/toy/toy_itwx_gates_study_sdr.mp4"></video>
-    <video id="pour_4" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/toy/toy_itwx_cuc_dining_sdr.mp4"></video>
-    <video id="pour_5" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/toy/toy_itwx_cuc_lounge_sdr.mp4"></video>
-    <video id="pour_6" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/toy/toy_itwx_forest_sdr.mp4"></video>
-    <video id="pour_7" controls playsinline muted preload="metadata" loop
-        src="./resources/ours/toy/toy_itwx_cafeteria_ours_sdr.mp4"></video>
-    <video id="pour_8" controls playsinline muted preload="metadata" loop
-          src="./resources/ours/toy/toy_itwx_gates_prima_sdr.mp4"></video>
-    <video id="pour_9"controls playsinline muted preload="metadata" loop
-          src="./resources/ours/toy/toy_itwx_secret_library_sdr.mp4"></video>
-    </div>
-    </div> 
-  </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2 class="title is-2 is-size-3-mobile" style="color: rgb(226, 2, 2);" >Why using Robot Data only doesn't work</h2>
-      <p style="margin-bottom: 20px;"> <b>Scaling robot data is challenging</b>—it’s expensive, tedious, and often confined to a single robot, environment, and limited objects. As a result, policies trained solely on robot data tend to overfit to specific embodiments or settings and struggle to generalize. We show that even with varied environments, robot-only training fails to generalize to new scenes and objects. <b>Cotraining with DexWild introduces a harder, more diverse learning problem</b>, forcing the policy to better understand the task and scene. This results in more robust, generalizable behavior.
-        </p>
-        <h2 class="title is-4 has-text-centered" style="color: #e20202;">
-      All Videos Autonomous 1×, Trained with Robot Data Only
-    </h2>
-
-    <div class="tight-video-grid">
-      <video controls autoplay loop muted playsinline preload="metadata"
-             src="./resources/robot/pour_robot_sdr.mp4"
-             poster="./resources/loading-icon.gif"></video>
-
-      <video controls autoplay loop muted playsinline preload="metadata"
-             src="./resources/robot/floist_robot_sdr.mp4"
-             poster="./resources/loading-icon.gif"></video>
-
-      <video controls autoplay loop muted playsinline preload="metadata"
-             src="./resources/robot/spray_robot_sdr.mp4"
-             poster="./resources/loading-icon.gif"></video>
-
-      <video controls autoplay loop muted playsinline preload="metadata"
-             src="./resources/robot/pour_robot_leapv1_sdr.mp4"
-             poster="./resources/loading-icon.gif"></video>
-
-      <video controls autoplay loop muted playsinline preload="metadata"
-             src="./resources/robot/clothes_robot_sdr.mp4"
-             poster="./resources/loading-icon.gif"></video>
-
-      <video controls autoplay loop muted playsinline preload="metadata"
-             src="./resources/robot/spray_robot_franka_sdr.mp4"
-             poster="./resources/loading-icon.gif"></video>
-    </div>
-        
-      </div>
-  </section>
 
   <section class="section" id="BibTeX">
   <div class="container content">
@@ -1159,265 +809,155 @@ Award
   </div>
 </footer>
 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    offset: 200, // 触发动画的偏移距离 (px)
+    delay: 0,    // 延迟 (ms)
+    duration: 1600, // 动画持续时间 (ms)
+    easing: 'ease-out-cubic', // 动画曲线
+    mirror: false, 
+  });
+</script>
 
 <script>
-
+  // --- 1. 全局视频自动播放/暂停逻辑 ---
+  // 这种写法比原来的更节省性能，且适用于页面所有视频
   document.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('video-container');
-    const slides    = Array.from(container.querySelectorAll('.slide'));
-    const videos    = slides.map(s => s.querySelector('video'));
-    const prevBtn   = document.getElementById('prev-btn');
-    const nextBtn   = document.getElementById('next-btn');
-    const gap       = 16; // match your CSS gap
-    const card      = container.querySelector('.slide');
-    const scrollAmt = card.offsetWidth + gap;
-    let isAutoScrolling = false;
-
-    function updateActiveVideo() {
-      const mid = container.getBoundingClientRect().left + container.clientWidth / 2;
-      let activeIndex = -1;
-
-      videos.forEach((vid, i) => {
-        const rect   = vid.closest('.slide').getBoundingClientRect();
-        const center = rect.left + rect.width / 2;
-        const isActive = Math.abs(center - mid) < rect.width / 2;
-
-        vid.controls = isActive;
-        if (isActive) {
-          activeIndex = i;
-          // autoplay the active one
-          if (vid.paused) {
-            vid.play().catch(_=>{}); 
-          }
-        } else {
-          vid.pause();
-        }
-      });
-
-      prevBtn.disabled = container.scrollLeft <= 0;
-      nextBtn.disabled = container.scrollLeft + container.clientWidth >= container.scrollWidth;
-
-      return activeIndex;
-    }
-
-    prevBtn.addEventListener('click', () => {
-    const activeIndex = updateActiveVideo();
-    if (activeIndex > 0) {
-      slides[activeIndex - 1]
-        .scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    }
-  });
-
-  nextBtn.addEventListener('click', () => {
-    const activeIndex = updateActiveVideo();
-    if (activeIndex < slides.length - 1) {
-      slides[activeIndex + 1]
-        .scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    }
-});
-
-    container.addEventListener('scroll', () => {
-      // keep controls in sync as you scroll
-      window.requestAnimationFrame(updateActiveVideo);
-    });
-
-
-    videos.forEach((vid, i) => {
-  vid.addEventListener('ended', () => {
-    const nextIndex = i + 1;
-    if (nextIndex < videos.length) {
-      // smoothly scroll the *next* slide into the exact center
-      slides[nextIndex].scrollIntoView({ behavior: 'smooth', inline: 'center' });
-      // as soon as it’s in view, kick off playback
-      slides[nextIndex].querySelector('video').play().catch(() => {});
-    }
-  });
-});
-
-    // kick things off
-    // initially scroll so first slide is centered
-    container.scrollTo({ left: 0, behavior: 'instant' });
-    updateActiveVideo();
-  });
-
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".carousel-nav-small").forEach(nav => {
-      // the carousel itself sits immediately before the nav in your DOM
-      const container = nav.previousElementSibling;
-      const slide    = container.querySelector(".slide");
-      if (!container || !slide) return;
-
-      // figure out how far to scroll: one slide + gap
-      const slideWidth = slide.getBoundingClientRect().width;
-      // read the column-gap (fallback to 16px if the browser doesn't expose it)
-      const style    = getComputedStyle(container);
-      const gap      = parseFloat(style.columnGap || style.getPropertyValue("gap")) || 16;
-      const scrollBy = slideWidth + gap;
-
-      // hook buttons
-      nav.querySelector('button[data-dir="-1"]')
-         .addEventListener("click", () => container.scrollBy({ left: -scrollBy, behavior: "smooth" }));
-      nav.querySelector('button[data-dir="1"]')
-         .addEventListener("click", () => container.scrollBy({ left:  scrollBy, behavior: "smooth" }));
-    });
-  });
-
-  const smallContainer = document.querySelector('.video-container-small');
-  if (smallContainer) {
-    // grab every <video> inside
-    const smallVideos = Array.from(smallContainer.querySelectorAll('video'));
-    // make sure muted so browsers will let us autoplay/pause
-    smallVideos.forEach(v => v.muted = true);
-
-    // set up an IntersectionObserver scoped to that container
-    const io = new IntersectionObserver((entries) => {
+    const videos = Array.from(document.querySelectorAll('video'));
+    
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const vid = entry.target;
-        if (entry.intersectionRatio > 0.6) {
-          vid.play().catch(()=>{});
+        // 只有当视频 50% 可见时才播放，避免刚露头就播放
+        if (entry.isIntersecting) {
+          vid.play().catch(e => console.log("Autoplay blocked:", e));
         } else {
           vid.pause();
         }
       });
-    }, {
-      root: smallContainer,
-      threshold: 1.0     // fire when 60% of the video is visible
+    }, { threshold: 0.5 });
+
+    videos.forEach(v => {
+      v.muted = true; // 必须静音才能自动播放
+      observer.observe(v);
     });
-
-    // start observing
-    smallVideos.forEach(v => io.observe(v));
-  }
-
-  function play_list_videos(videoList) {
-    let index = 0;
-    function playNext() {
-      if (index < videoList.length) {
-        const v = document.getElementById(videoList[index++]);
-        if (v) v.play();
-        requestAnimationFrame(playNext);
-      }
-    }
-    playNext();
-  }
-
-  function pause_list_videos(videoList) {
-    videoList.forEach(id => {
-      const v = document.getElementById(id);
-      if (v) v.pause();
-    });
-  }
-
-  function togglePlay(buttonId, videoList) {
-    const btn = document.getElementById(buttonId);
-    const first = document.getElementById(videoList[0]);
-    if (!first) {
-      console.error('togglePlay: no video with id', videoList[0]);
-      return;
-    }
-    if (first.paused) {
-      btn.textContent = 'Pause Videos';
-      play_list_videos(videoList);
-    } else {
-      btn.textContent = 'Play Videos';
-      pause_list_videos(videoList);
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-  // 1) Grab all videos you want to auto-pause/play
-  const videos = Array.from(document.querySelectorAll('video'));
-
-  // 2) Create a single IntersectionObserver, using the viewport as root.
-  //    Adjust threshold to control “how much in view” before we treat it as visible.
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const vid = entry.target;
-      if (entry.isIntersecting) {
-        // at least threshold% is visible → auto-play
-        vid.play().catch(()=>{});
-      } else {
-        // went out of view → pause
-        vid.pause();
-      }
-    });
-  }, {
-    root: null,           // viewport
-    threshold: 0.5        // when 50% of video is visible
   });
 
-  // 3) Observe them all
-  videos.forEach(v => {
-    // ensure muted or user-gesture autoplay is allowed
-    v.muted = true;
-    io.observe(v);
-  });
-});
-
-  // Approach section functions
-  // Approach Video Data Source
+  // --- 2. 视频数据源定义 ---
   const videoData = {
+    // Dataset Section
     click_bell: {
-        simulation: './resources/ours/cloth/cloth_itwx_4th_window_day_sdr.mp4',
-        human: './resources/ours/cloth/cloth_itwx_4th_window_day_sdr.mp4',
-        real: './resources/ours/cloth/cloth_itwx_4th_window_day_sdr.mp4'
+        simulation: './resources/video/inference/ours/click_bell/clean_click_bell.mp4',
+        human: './resources/video/inference/ours/click_bell/clean_click_bell.mp4',
+        real: './resources/video/inference/ours/click_bell/clean_click_bell.mp4'
     },
     grab_roller: {
-        simulation: './resources/ours/florist/floirst_itwx_6th_study_sdr.mp4',
-        human: './resources/ours/florist/floirst_itwx_6th_study_sdr.mp4',
-        real: './resources/ours/florist/floirst_itwx_6th_study_sdr.mp4'
+        simulation: './resources/video/inference/ours/grab_roller/clean_grab_roller.mp4',
+        human: './resources/video/inference/ours/grab_roller/clean_grab_roller.mp4',
+        real: './resources/video/inference/ours/grab_roller/clean_grab_roller.mp4'
     },
     stack_bowls: {
-        simulation: './resources/ours/pour/pour_itwx_hunan_sdr.mp4',
-        human: './resources/ours/pour/pour_itwx_hunan_sdr.mp4',
-        real: './resources/ours/pour/pour_itwx_hunan_sdr.mp4'
+        simulation: './resources/video/inference/ours/stack_bowls/clean_stack_bowls.mp4',
+        human: './resources/video/inference/ours/stack_bowls/clean_stack_bowls.mp4',
+        real: './resources/video/inference/ours/stack_bowls/clean_stack_bowls.mp4'
     },
     put_object_cabinet: {
-        simulation: './resources/ours/spray/spray_itwx_hci_conference_sdr.mp4',
-        human: './resources/ours/spray/spray_itwx_hci_conference_sdr.mp4',
-        real: './resources/ours/spray/spray_itwx_hci_conference_sdr.mp4'
+        simulation: './resources/video/inference/ours/put_object_cabinet/clean_put_object_cabinet.mp4',
+        human: './resources/video/inference/ours/put_object_cabinet/clean_put_object_cabinet.mp4',
+        real: './resources/video/inference/ours/put_object_cabinet/clean_put_object_cabinet.mp4'
+    },
+    // Inference Section
+    click_bell_infer: {
+        clean: './resources/video/inference/ours/click_bell/clean_click_bell.mp4',
+        red: './resources/video/inference/ours/click_bell/red_click_bell.mp4',
+        yellow: './resources/video/inference/ours/click_bell/yellow_click_bell.mp4',
+        grey: './resources/video/inference/ours/click_bell/grey_click_bell.mp4',
+        hard1: './resources/video/inference/ours/click_bell/hard1_click_bell.mp4',
+        hard2: './resources/video/inference/ours/click_bell/hard2_click_bell.mp4'
+    },
+    grab_roller_infer: {
+        clean: './resources/video/inference/ours/grab_roller/clean_grab_roller.mp4',
+        red: './resources/video/inference/ours/grab_roller/red_grab_roller.mp4',
+        yellow: './resources/video/inference/ours/grab_roller/yellow_grab_roller.mp4',
+        grey: './resources/video/inference/ours/grab_roller/grey_grab_roller.mp4',
+        hard1: './resources/video/inference/ours/grab_roller/hard1_grab_roller.mp4',
+        hard2: './resources/video/inference/ours/grab_roller/hard2_grab_roller.mp4'
+    },
+    stack_bowls_infer: {
+        clean: './resources/video/inference/ours/stack_bowls/clean_stack_bowls.mp4',
+        red: './resources/video/inference/ours/stack_bowls/red_stack_bowls.mp4',
+        yellow: './resources/video/inference/ours/stack_bowls/yellow_stack_bowls.mp4',
+        grey: './resources/video/inference/ours/stack_bowls/grey_stack_bowls.mp4',
+        hard1:  './resources/video/inference/ours/stack_bowls/hard1_stack_bowls.mp4',
+        hard2: './resources/video/inference/ours/stack_bowls/hard2_stack_bowls.mp4'
+    },
+    put_object_cabinet_infer: {
+        clean: './resources/video/inference/ours/put_object_cabinet/clean_put_object_cabinet.mp4',
+        red: './resources/video/inference/ours/put_object_cabinet/red_put_object_cabinet.mp4',
+        yellow: './resources/video/inference/ours/put_object_cabinet/yellow_put_object_cabinet.mp4',
+        grey: './resources/video/inference/ours/put_object_cabinet/grey_put_object_cabinet.mp4',
+        hard1: './resources/video/inference/ours/put_object_cabinet/hard1_put_object_cabinet.mp4',
+        hard2: './resources/video/inference/ours/put_object_cabinet/hard2_put_object_cabinet.mp4'
     }
   };
 
-  // Approach Video Switcher
-  function switchVideo(btnElement, actionKey) {
-    // --- 第一步：处理样式切换 ---
-    
-    // 找到当前所有按钮，移除 active 类
-    const allBtns = document.querySelectorAll('.tab-btn');
-    allBtns.forEach(btn => btn.classList.remove('active'));
-
-    // 给当前点击的按钮加上 active 类
+  // --- 3. 通用更新逻辑 (Helper Function) ---
+  // 参数: btn(被点击按钮), dataKey(数据键名), map(DOM ID 到 数据字段 的映射)
+  function updateVideoSection(btnElement, actionKey, idMap) {
+    // 1. 处理样式：只移除当前按钮所在父容器(.tabs)内的 active 类
+    const parent = btnElement.parentElement;
+    if (parent) {
+        parent.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    }
     btnElement.classList.add('active');
 
-
-    // --- 第二步：处理视频切换 ---
-    
-    // 获取数据源
+    // 2. 获取数据
     const data = videoData[actionKey];
-    if (!data) return; // 如果没有对应数据就退出
+    if (!data) return;
 
-    // 获取页面上的三个 video 标签
-    const vSim = document.getElementById('Simulation_video');
-    const vHuman = document.getElementById('Human_video');
-    const vReal = document.getElementById('Real-Robot_video');
+    // 3. 循环更新视频
+    for (const [domId, dataField] of Object.entries(idMap)) {
+        const videoEl = document.getElementById(domId);
+        if (videoEl && data[dataField]) {
+            videoEl.src = data[dataField];
+            videoEl.load();
+            // 稍微延迟一下播放，或者依赖 IntersectionObserver 自动播放
+            // 但为了响应点击，强制播放是比较好的体验
+            const playPromise = videoEl.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {}); // 忽略即时播放失败（如下载未完成）
+            }
+        }
+    }
+  }
 
-    // 修改 source
-    vSim.src = data.simulation;
-    vHuman.src = data.human;
-    vReal.src = data.real;
-    // 重要：重新加载并播放！
-    // 仅仅改 src 浏览器可能不会立即反应，必须由代码触发 load
-    vSim.load();
-    vSim.play();
-    
-    vHuman.load();
-    vHuman.play();
+  // --- 4. 暴露给 HTML 调用的函数 ---
 
-    vReal.load();
-    vReal.play();
+  // Dataset Section 开关
+  function switchDatasetVideo(btnElement, actionKey) {
+    // 定义 DOM ID 和 videoData 属性的对应关系
+    const map = {
+        'Simulation_video': 'simulation',
+        'Human_video': 'human',
+        'Real-Robot_video': 'real'
+    };
+    updateVideoSection(btnElement, actionKey, map);
+  }
+
+  // Real-Robot Experiments 开关
+  function switchInferVideo(btnElement, actionKey) {
+    // 定义 DOM ID 和 videoData 属性的对应关系
+    const map = {
+        'Clean_video': 'clean',
+        'Red_video': 'red',
+        'Yellow_video': 'yellow',
+        'Grey_video': 'grey',
+        'Hard1_video': 'hard1',
+        'Hard2_video': 'hard2'
+    };
+    updateVideoSection(btnElement, actionKey, map);
   }
 </script>
-
-
 </body>
 </html>
