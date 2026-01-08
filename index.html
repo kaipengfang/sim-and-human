@@ -328,11 +328,11 @@ layout: default
         <button class="tab-btn" onclick="switchDatasetVideo(this, 'put_object_cabinet')">put_object_cabinet</button>
     </div>
 
-    <div class="video-display">
-        <div class="video-box" data-aos="zoom-in">
+    <div class="video-display" data-aos="fade-up">
+        <div class="video-box">
             <h3>Simulation Data</h3>
             <video id="Simulation_video" autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/click_bell/clean_click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
+                <source src="./resources/video/dataset/simulation/click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
             <div class="badges-container">
               <div class="badge danger">
@@ -354,10 +354,10 @@ layout: default
               </div>
             </div>
         </div>
-        <div class="video-box" data-aos="zoom-in">
+        <div class="video-box">
             <h3>Human Data</h3>
             <video id="Human_video" autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/click_bell/clean_click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
+                <source src="./resources/video/dataset/human/click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
             <div class="badges-container">
               <div class="badge success">
@@ -379,10 +379,10 @@ layout: default
               </div>
             </div>
         </div>
-        <div class="video-box" data-aos="zoom-in">
+        <div class="video-box">
             <h3>real-world Observation</h3>
             <video id="Real-Robot_video" autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/click_bell/clean_click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
+                <source src="./resources/video/dataset/real_world/click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
             <div class="badges-container">
               <div class="badge success">
@@ -485,13 +485,101 @@ layout: default
     }
 
     .badge {
-        display: inline-flex;
-        align-items: center;
-        padding: 4px 10px;
-        border-radius: 12px;
-        font-size: 0.8rem;
-        font-weight: bold;
-        border: 1px solid transparent;
+    /* === 你原本的样式 (完全保留) === */
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border: 1px solid transparent;
+
+    /* === 新增：为了交互功能必须添加的属性 === */
+    position: relative;              /* 关键：作为提示框定位的参考点 */
+    cursor: pointer;                 /* 鼠标放上去变成小手 */
+    transition: transform 0.2s ease; /* 让放大的过程变丝滑 */
+    }
+
+    /* --- 交互效果 1：鼠标悬停放大 --- */
+    .badge:hover {
+        transform: scale(1.1); /* 放大 1.1 倍 */
+        z-index: 10;           /* 防止放大后被旁边的文字遮挡 */
+    }
+
+    /* --- 交互效果 2：提示框 (Tooltip) 主体 - 自动换行版 --- */
+    .badge[data-tooltip]::after {
+        content: attr(data-tooltip);
+        
+        /* 定位保持不变 */
+        position: absolute;
+        bottom: 135%;
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+        
+        /* === 关键修改点 === */
+        white-space: normal;  /* 1. 允许文字换行 */
+        width: 300px;         /* 2. 设定固定宽度 (也可以用 max-width: 220px) */
+        text-align: left;     /* 3. 多行文字建议左对齐，阅读体验更好 */
+        line-height: 1.5;     /* 4. 增加行高，防止多行挤在一起 */
+        /* ================= */
+
+        /* 其他样式保持不变 (美化风格) */
+        background: linear-gradient(to bottom, rgba(45, 45, 45, 0.95), rgba(20, 20, 20, 0.95));
+        color: #f0f0f0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: normal;
+        letter-spacing: 0.5px;
+        
+        /* 动画保持不变 */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                    transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                    visibility 0.3s;
+        pointer-events: none;
+        z-index: 100;
+    }
+
+    /* --- 交互效果 3：提示框的小三角箭头 - 美化版 --- */
+    .badge[data-tooltip]::before {
+        content: '';
+        position: absolute;
+        bottom: 135%; /* 位置与主体底部对齐 */
+        left: 50%;
+        margin-left: -6px; /* 修正居中偏移 */
+        transform: translateY(10px); /* 初始状态向下偏移 */
+        
+        /* 画三角形 */
+        border-width: 6px;
+        border-style: solid;
+        /* 颜色要与主体背景的底部颜色一致 */
+        border-color: rgba(20, 20, 20, 0.95) transparent transparent transparent;
+        
+        /* 默认隐藏 */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                    transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                    visibility 0.3s;
+        z-index: 100;
+    }
+
+    /* --- 触发显示：鼠标悬停时显示 --- */
+    .badge:hover::after,
+    .badge:hover::before {
+        opacity: 1;
+        visibility: visible;
+        /* 悬停时回到正常位置，形成上浮动画 */
+        transform: translateX(-50%) translateY(0);
+    }
+    /* 修正箭头的悬停位置 (只需要修正 Y 轴) */
+    .badge:hover::before {
+        transform: translateY(0);
+        margin-bottom: -11px; /* 微调位置衔接 */
     }
 
     /* 绿色样式 */
@@ -499,6 +587,12 @@ layout: default
         background-color: #effaf3;
         color: #257942;
         border-color: #c3e6cb;
+    }
+    /* 黄色样式 */
+    .badge.warning {
+        background-color: #fff8e5;
+        color: #b38600;
+        border-color: #f9e29d;
     }
 
     /* 红色样式 */
@@ -541,13 +635,13 @@ layout: default
     <div class="container mb-6">
       <h2 class="title is-2 is-size-3-mobile" data-aos="fade-up" >Data-Collection-System</h2>
       <div class="columns is-vcentered">
-        <div class="column is-half has-text-centered" data-aos="zoom-in">
+        <div class="column is-half has-text-centered" data-aos="fade-up">
           <figure>
             <img src="./resources/images/human_collection_system.png" alt="Data-Collection System Photo" style="border-radius: 10px; border: px solid #bbb; width: 90%;">
             <figcaption style="margin-top: 10px; font-style: italic; font-weight: bold;">Data-Collection System Hardware</figcaption>
           </figure>
         </div>
-        <div class="column is-half has-text-centered" data-aos="zoom-in">
+        <div class="column is-half has-text-centered" data-aos="fade-up">
           <video autoplay loop muted playsinline 
                 src="./resources/misc/dexwild_system_sdr_2.mp4" 
                 poster="./resources/loading-icon.gif"
@@ -580,44 +674,62 @@ layout: default
         <button class="tab-btn" onclick="switchInferVideo(this, 'put_object_cabinet_infer')">put_object_cabinet</button>
       </div>
       <div class="task-group">
-        <div class="video-grid-four">
-          <div class="grid-item" data-aos="zoom-in">
+        <div class="video-grid-four" data-aos="fade-up">
+          <div class="grid-item" >
               <video id="Clean_video" controls autoplay loop muted playsinline>
                   <source src="./resources/video/inference/ours/click_bell/clean_click_bell.mp4" type="video/mp4">
               </video>
-              <div class="caption">esay setting</div>
+              <div class="badge success" style="margin-top: 10px; margin-bottom: 10px;" 
+                  data-tooltip="A simple scene contains only the target object, without changes in lighting, tabletop, or distractions." >
+                  easy setting
+              </div>
           </div>
-          <div class="grid-item" data-aos="zoom-in">
+          <div class="grid-item" >
               <video id="Red_video" controls autoplay loop muted playsinline>
                   <source src="./resources/video/inference/ours/click_bell/red_click_bell.mp4" type="video/mp4">
               </video>
-              <div class="caption">middle1 setting</div>
+              <div class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
+                   data-tooltip="Medium Scene 1: including a yellow flashlight, a red checkered tablecloth, 3 fruits, and 3 toy distractions.">
+                   middle1 setting
+              </div>
           </div>
-          <div class="grid-item" data-aos="zoom-in">
+          <div class="grid-item" >
               <video id="Yellow_video" controls autoplay loop muted playsinline>
                   <source src="./resources/video/inference/ours/click_bell/yellow_click_bell.mp4" type="video/mp4">
               </video>
-              <div class="caption">middle2 setting</div>
+              <div class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
+                   data-tooltip="Medium Scene 2: Turn off moving light sources, leaving only indoor lighting, including a yellow checkered tablecloth, 3 fruits, and 3 toy distractions.">
+                   middle2 setting
+              </div>
           </div>
-          <div class="grid-item" data-aos="zoom-in">
+          <div class="grid-item" >
               <video id="Grey_video" controls autoplay loop muted playsinline>
                   <source src="./resources/video/inference/ours/click_bell/grey_click_bell.mp4" type="video/mp4">
               </video>
-              <div class="caption">middle3 setting</div>
+              <div class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
+                   data-tooltip="Medium Scene 3: including a blue flash, a dark gray striped tablecloth, 3 fruits, and 3 toy distractions.">
+                   middle3 setting
+              </div> 
           </div>
         </div>
-        <div class="video-grid-two">
-          <div class="grid-item" data-aos="zoom-in">
+        <div class="video-grid-two" data-aos="fade-up">
+          <div class="grid-item" >
             <video id="Hard1_video" controls autoplay loop muted playsinline>
                 <source src="./resources/video/inference/ours/click_bell/hard1_click_bell.mp4" type="video/mp4">
             </video>
-            <div class="caption">hard1 setting</div>
+            <div class="badge danger" style="margin-top: 10px; margin-bottom: 10px;"
+                data-tooltip="Difficult Scene 1: including a red flashlight, a light gray striped tablecloth, 4 fruits, and 6 toy distractors. Neither the light nor the tablecloth exists in the training dataset.">
+                hard1 setting
+            </div> 
           </div>
-          <div class="grid-item" data-aos="zoom-in">
+          <div class="grid-item" >
             <video id="Hard2_video" controls autoplay loop muted playsinline>
                 <source src="./resources/video/inference/ours/click_bell/hard2_click_bell.mp4" type="video/mp4">
             </video>
-            <div class="caption">hard2 setting</div>
+            <div class="badge danger" style="margin-top: 10px; margin-bottom: 10px;"
+                data-tooltip="Difficult Scene 2: including a green flashlight, a white tablecloth with daisies, 3 fruits, and 6 toy distractors. The light and tablecloth are not present in the training dataset.">
+                hard2 setting
+            </div> 
           </div>
         </div>
       </div> 
@@ -848,24 +960,24 @@ Award
   const videoData = {
     // Dataset Section
     click_bell: {
-        simulation: './resources/video/inference/ours/click_bell/clean_click_bell.mp4',
-        human: './resources/video/inference/ours/click_bell/clean_click_bell.mp4',
-        real: './resources/video/inference/ours/click_bell/clean_click_bell.mp4'
+        simulation: './resources/video/dataset/simulation/click_bell.mp4',
+        human: './resources/video/dataset/human/click_bell.mp4',
+        real: './resources/video/dataset/real_world/click_bell.mp4'
     },
     grab_roller: {
-        simulation: './resources/video/inference/ours/grab_roller/clean_grab_roller.mp4',
-        human: './resources/video/inference/ours/grab_roller/clean_grab_roller.mp4',
-        real: './resources/video/inference/ours/grab_roller/clean_grab_roller.mp4'
+        simulation: './resources/video/dataset/simulation/grab_roller.mp4',
+        human: './resources/video/dataset/human/grab_roller.mp4',
+        real: './resources/video/dataset/real_world/grab_roller.mp4'
     },
     stack_bowls: {
-        simulation: './resources/video/inference/ours/stack_bowls/clean_stack_bowls.mp4',
-        human: './resources/video/inference/ours/stack_bowls/clean_stack_bowls.mp4',
-        real: './resources/video/inference/ours/stack_bowls/clean_stack_bowls.mp4'
+        simulation: './resources/video/dataset/simulation/stack_bowls_two.mp4',
+        human: './resources/video/dataset/human/stack_bowls_two.mp4',
+        real: './resources/video/dataset/real_world/stack_bowls_two.mp4'
     },
     put_object_cabinet: {
-        simulation: './resources/video/inference/ours/put_object_cabinet/clean_put_object_cabinet.mp4',
-        human: './resources/video/inference/ours/put_object_cabinet/clean_put_object_cabinet.mp4',
-        real: './resources/video/inference/ours/put_object_cabinet/clean_put_object_cabinet.mp4'
+        simulation: './resources/video/dataset/simulation/put_object_cabinet.mp4',
+        human: './resources/video/dataset/human/put_object_cabinet.mp4',
+        real: './resources/video/dataset/real_world/put_object_cabinet.mp4'
     },
     // Inference Section
     click_bell_infer: {
