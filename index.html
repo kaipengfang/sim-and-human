@@ -36,6 +36,11 @@ layout: default
 
 
   <style>
+    /* Section background alternation for visual separation */
+    .section-alt {
+      background-color: #f8f9fa;
+    }
+
     /* scroll-snap carousel */
     #video-container {
       display: flex;
@@ -278,43 +283,66 @@ layout: default
 
   <!-- Introduction -->
   <section class="section">
-    <div class="container is-max-desktop" data-aos="fade-in">
-      <video id="teaser" autoplay muted loop playsinline controls style="width: 100%; height: auto; border-radius: 0px; border: 2px solid #000;">
+    <div class="container">
+      <video id="teaser" autoplay muted loop playsinline controls style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); display: block;" data-aos="fade-in">
         <source src="./resources/video/introduction_video.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
       <div class="content has-text-justified" style="margin-top: 1.5rem;" data-aos="fade-in">
-        <p>
-          DexWild enables generalization to unseen objects, environments, and robot embodiments...
-          (在这里填入你的项目介绍文字)
+        <p style="font-size: 1.15rem; line-height: 1.8; color: #333;">
+          <strong style="font-weight: 800; color: #1a1a1a;">SimHum unifies transferable actions from simulation with realistic visuals from human data to achieve data-efficient and generalizable robotic manipulation.</strong> In this video, we demonstrate how our co-training framework leverages the inherent complementarity of these sources. Empirically, SimHum outperforms the baseline by up to <b style="font-weight: 700; color: #1a1a1a;">35%</b> under the same data budget, , and achieves relative improvements of up to <b style="font-weight: 700; color: #1a1a1a;">7.1x</b> compared to the real-only baseline in unseen environments.
         </p>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section-alt">
     <div class="container">
-      <h2 class="title is-2 is-size-3-mobile" data-aos="fade-up">Introduction</h2>
+      <h2 class="title is-2 is-size-3-mobile" data-aos="fade-up">Abstract</h2>
       <img src="./resources/images/Introduction.png" style="width: 100%; display: block; margin-bottom: 20px;" data-aos="zoom-in" alt="Teaser Image">
       <div class="container mb-6" data-aos="fade-in">
-        <br>
-          <b>Sim-and-Human </b>enables generalization to unseen objects, environments, and robot embodiments by scaling up human demonstrations collected with a low-cost, mobile capture system. With <b>9,290 demos across 93 environments</b>, our co-training framework leverages both <b>human and robot data</b> to learn robust policies that generalize across indoor/outdoor, cluttered scenes, and diverse tasks—achieving 4× higher success rate in novel environments and 5.8× better embodiment transfer than robot-only training.
+        <div class="content has-text-justified" style="font-size: 1.15rem; line-height: 1.8; color: #333;">
+          <p>
+            Synthetic simulation data and real-world human data provide scalable alternatives to circumvent the prohibitive costs of robot data collection. However, these sources suffer from the <em>sim-to-real visual gap</em> <strong style="font-family: 'Consolas', 'Courier New', monospace; font-weight: 700; color: #000; font-size: 1.2rem;">(a)</strong> and the <em>human-to-robot embodiment gap</em> <strong style="font-family: 'Consolas', 'Courier New', monospace; font-weight: 700; color: #000; font-size: 1.2rem;">(b)</strong>, respectively, which limits the policy's generalization to real-world scenarios. In this work, we identify a natural yet underexplored complementarity between these sources: simulation offers the robot action that human data lacks, while human data provides the real-world observation that simulation struggles to render. Motivated by this insight, we present SimHum, a co-training framework to simultaneously extract kinematic prior from simulated robot actions and visual prior from real-world human observations <strong style="font-family: 'Consolas', 'Courier New', monospace; font-weight: 700; color: #000; font-size: 1.2rem;">(c)</strong>. Based on the two complementary priors, we achieves data-efficient and generalizable robotic manipulation in real-world tasks. Empirically, SimHum outperforms the baseline by up to 35% under the same data collection budget, and achieves a 62.5% average success rate, showing relative improvements of up to 7.1× compared to the real-only baseline <strong style="font-family: 'Consolas', 'Courier New', monospace; font-weight: 700; color: #000; font-size: 1.2rem;">(d)</strong>.
+          </p>
+        </div>
       </div>
     </div>
   </section>
-  <!-- Approach -->
+  <!-- Data-collection System -->
   <section class="section">
-    <div class="container">
-      <h2 class="title is-2 is-size-3-mobile" data-aos="fade-up">Approach</h2>
-      <img src="./resources/images/Frame.png" style="width: 100%; display: block; margin-bottom: 20px;" data-aos="zoom-in" alt="Teaser Image">
-      <div class="container mb-6" data-aos="fade-in">
-        <br>below are example videos of our collected human demonstrations and simulation demonstrations in diverse environments for different tasks.
+
+    <!-- Two-column layout: image left, video right -->
+    <div class="container mb-6">
+      <h2 class="title is-2 is-size-3-mobile" data-aos="fade-up" >Data Collection System</h2>
+      <div class="columns is-vcentered">
+        <div class="column is-half has-text-centered" data-aos="fade-up">
+          <figure>
+            <img src="./resources/images/human_collection_system.png" alt="Data-Collection System Photo" style="border-radius: 10px; border: px solid #bbb; width: 90%;">
+            <figcaption style="margin-top: 10px; font-style: italic; font-weight: bold;">Data Collection System Hardware</figcaption>
+          </figure>
+        </div>
+        <div class="column is-half has-text-centered" data-aos="fade-up">
+          <video autoplay loop muted playsinline 
+                src="./resources/misc/dexwild_system_sdr_2.mp4" 
+                poster="./resources/loading-icon.gif"
+                style="border-radius: 10px; border: 1px solid #bbb; width: 90%;">
+          </video>
+          <figcaption style="margin-top: 10px; font-style: italic; font-weight: bold;">Example Demonstration</figcaption>
+        </div>
       </div>
     </div>
+
+    <!-- Paragraph -->
+    <div class="container mb-6" data-aos="fade-up">
+      <p>
+        <b>Data-Collection System</b> is a portable, high-fidelity, and embodiment-agnostic data collection system capable of efficiently gathering dexterous human hand data across many environments. We employ a team of untrained data collectors and collect <b>9,290 demonstrations across 93 diverse environments at 4.6× the speed of teleoperation.</b>
+      </p>
+    </div>
   </section>
-  
+
   <!-- Dataset Videos -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="container">
     <h2 class="title is-2 is-size-3-mobile" data-aos="fade-up">Simulation & Human & Robot Demonstrations</h2>
     <div class="container mb-6" data-aos="fade-up">
@@ -509,13 +537,13 @@ layout: default
     /* --- 交互效果 2：提示框 (Tooltip) 主体 - 自动换行版 --- */
     .badge[data-tooltip]::after {
         content: attr(data-tooltip);
-        
+
         /* 定位保持不变 */
         position: absolute;
         bottom: 135%;
         left: 50%;
         transform: translateX(-50%) translateY(10px);
-        
+
         /* === 关键修改点 === */
         white-space: normal;  /* 1. 允许文字换行 */
         width: 300px;         /* 2. 设定固定宽度 (也可以用 max-width: 220px) */
@@ -533,7 +561,7 @@ layout: default
         font-size: 13px;
         font-weight: normal;
         letter-spacing: 0.5px;
-        
+
         /* 动画保持不变 */
         opacity: 0;
         visibility: hidden;
@@ -552,13 +580,13 @@ layout: default
         left: 50%;
         margin-left: -6px; /* 修正居中偏移 */
         transform: translateY(10px); /* 初始状态向下偏移 */
-        
+
         /* 画三角形 */
         border-width: 6px;
         border-style: solid;
         /* 颜色要与主体背景的底部颜色一致 */
         border-color: rgba(20, 20, 20, 0.95) transparent transparent transparent;
-        
+
         /* 默认隐藏 */
         opacity: 0;
         visibility: hidden;
@@ -628,111 +656,100 @@ layout: default
       font-size: 0.9rem;
     }
   </style>
-  <!-- Data-collection System -->
-  <section class="section">
 
-    <!-- Two-column layout: image left, video right -->
-    <div class="container mb-6">
-      <h2 class="title is-2 is-size-3-mobile" data-aos="fade-up" >Data-Collection-System</h2>
-      <div class="columns is-vcentered">
-        <div class="column is-half has-text-centered" data-aos="fade-up">
-          <figure>
-            <img src="./resources/images/human_collection_system.png" alt="Data-Collection System Photo" style="border-radius: 10px; border: px solid #bbb; width: 90%;">
-            <figcaption style="margin-top: 10px; font-style: italic; font-weight: bold;">Data-Collection System Hardware</figcaption>
-          </figure>
-        </div>
-        <div class="column is-half has-text-centered" data-aos="fade-up">
-          <video autoplay loop muted playsinline 
-                src="./resources/misc/dexwild_system_sdr_2.mp4" 
-                poster="./resources/loading-icon.gif"
-                style="border-radius: 10px; border: 1px solid #bbb; width: 90%;">
-          </video>
-          <figcaption style="margin-top: 10px; font-style: italic; font-weight: bold;">Example Demonstration</figcaption>
-        </div>
-      </div>
-    </div>
-
-    <!-- Paragraph -->
-    <div class="container mb-6" data-aos="fade-up">
-      <p>
-        <b>Data-Collection System</b> is a portable, high-fidelity, and embodiment-agnostic data collection system capable of efficiently gathering dexterous human hand data across many environments. We employ a team of untrained data collectors and collect <b>9,290 demonstrations across 93 diverse environments at 4.6× the speed of teleoperation.</b>
-      </p>
-    </div>  
-  </section>
-  <!-- Inference Videos -->
+  <!-- Approach -->
   <section class="section">
     <div class="container">
-      <h2 class="title is-2 is-size-3-mobile" data-aos="fade-up" >Real-Robot Experiments</h2>
-      <div class="container mb-6" data-aos="fade-up">
+      <h2 class="title is-2 is-size-3-mobile" data-aos="fade-up">Approach</h2>
+      <img src="./resources/images/model.png" style="width: 100%; display: block; margin-bottom: 20px;" data-aos="zoom-in" alt="Teaser Image">
+      <div class="container mb-6" data-aos="fade-in">
         <br>below are example videos of our collected human demonstrations and simulation demonstrations in diverse environments for different tasks.
       </div>
-      <h3 class="title is-4 has-text-centered" data-aos="fade-up" style="margin-bottom: 50px; color: #0091ff;">All Videos Autonomous 1×</h3>
+    </div>
+  </section>
+  <!-- Main Results -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="title is-2 is-size-3-mobile" data-aos="fade-up">SimHum Generalizes to Completely Unseen Environments</h2>
+
+      <div class="content has-text-justified" style="font-size: 1.15rem; line-height: 1.8; color: #333; margin-top: 1.5rem;" data-aos="fade-in">
+        <p>
+          We evaluate the policy under <b>In-Distribution (ID)</b> and <b>Out-of-Distribution (OOD)</b> settings.
+          While baselines degrade significantly in OOD scenarios (featuring unseen background textures, distractors, and extreme lighting), SimHum maintains robust performance.  SimHum achieves relative improvements of up to <b style="font-weight: 700; color: #1a1a1a;">7.1×</b> compared to the real-only baseline in these challenging unseen environments.
+        </p>
+      </div>
+
+      <h3 class="title is-4 has-text-centered" data-aos="fade-up" style="margin-top: 2rem; margin-bottom: 50px; color: #0091ff;">All Videos Autonomous 1×</h3>
       <div class="tabs" data-aos="fade-up">
         <button class="tab-btn active" onclick="switchInferVideo(this, 'click_bell_infer')">click_bell</button>
         <button class="tab-btn" onclick="switchInferVideo(this, 'grab_roller_infer')">grab_roller</button>
         <button class="tab-btn" onclick="switchInferVideo(this, 'stack_bowls_infer')">stack_bowls</button>
         <button class="tab-btn" onclick="switchInferVideo(this, 'put_object_cabinet_infer')">put_object_cabinet</button>
       </div>
+
+      <h4 class="title is-5" data-aos="fade-up" style="margin-top: 2rem; margin-bottom: 1rem;">In-Distribution (ID)</h4>
       <div class="task-group">
         <div class="video-grid-four" data-aos="fade-up">
-          <div class="grid-item" >
+          <div class="grid-item">
               <video id="Clean_video" controls autoplay loop muted playsinline>
                   <source src="./resources/video/inference/ours/click_bell/clean_click_bell.mp4" type="video/mp4">
               </video>
-              <div class="badge success" style="margin-top: 10px; margin-bottom: 10px;" 
-                  data-tooltip="A simple scene contains only the target object, without changes in lighting, tabletop, or distractions." >
-                  easy setting
+              <div class="badge success" style="margin-top: 10px; margin-bottom: 10px;"
+                  data-tooltip="A simple scene contains only the target object, without changes in lighting, tabletop, or distractions.">
+                  Base Scene
               </div>
           </div>
-          <div class="grid-item" >
+          <div class="grid-item">
               <video id="Red_video" controls autoplay loop muted playsinline>
                   <source src="./resources/video/inference/ours/click_bell/red_click_bell.mp4" type="video/mp4">
               </video>
               <div class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
-                   data-tooltip="Medium Scene 1: including a yellow flashlight, a red checkered tablecloth, 3 fruits, and 3 toy distractions.">
-                   middle1 setting
+                   data-tooltip="Complex Scene 1: including a yellow flashlight, a red checkered tablecloth, 3 fruits, and 3 toy distractions.">
+                   Complex Scene 1
               </div>
           </div>
-          <div class="grid-item" >
+          <div class="grid-item">
               <video id="Yellow_video" controls autoplay loop muted playsinline>
                   <source src="./resources/video/inference/ours/click_bell/yellow_click_bell.mp4" type="video/mp4">
               </video>
               <div class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
-                   data-tooltip="Medium Scene 2: Turn off moving light sources, leaving only indoor lighting, including a yellow checkered tablecloth, 3 fruits, and 3 toy distractions.">
-                   middle2 setting
+                   data-tooltip="Complex Scene 2: Turn off moving light sources, leaving only indoor lighting, including a yellow checkered tablecloth, 3 fruits, and 3 toy distractions.">
+                   Complex Scene 2
               </div>
           </div>
-          <div class="grid-item" >
+          <div class="grid-item">
               <video id="Grey_video" controls autoplay loop muted playsinline>
                   <source src="./resources/video/inference/ours/click_bell/grey_click_bell.mp4" type="video/mp4">
               </video>
               <div class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
-                   data-tooltip="Medium Scene 3: including a blue flash, a dark gray striped tablecloth, 3 fruits, and 3 toy distractions.">
-                   middle3 setting
-              </div> 
+                   data-tooltip="Complex Scene 3: including a blue flash, a dark gray striped tablecloth, 3 fruits, and 3 toy distractions.">
+                   Complex Scene 3
+              </div>
           </div>
         </div>
+
+        <h4 class="title is-5" data-aos="fade-up" style="margin-top: 2rem; margin-bottom: 1rem; color: #d9534f;">Out-of-Distribution (OOD)</h4>
         <div class="video-grid-two" data-aos="fade-up">
-          <div class="grid-item" >
+          <div class="grid-item">
             <video id="Hard1_video" controls autoplay loop muted playsinline>
                 <source src="./resources/video/inference/ours/click_bell/hard1_click_bell.mp4" type="video/mp4">
             </video>
             <div class="badge danger" style="margin-top: 10px; margin-bottom: 10px;"
-                data-tooltip="Difficult Scene 1: including a red flashlight, a light gray striped tablecloth, 4 fruits, and 6 toy distractors. Neither the light nor the tablecloth exists in the training dataset.">
-                hard1 setting
-            </div> 
+                data-tooltip="Extreme Complex Scene 1: including a red flashlight, a light gray striped tablecloth, 4 fruits, and 6 toy distractors. Neither the light nor the tablecloth exists in the training dataset.">
+                Extreme Complex Scene 1
+            </div>
           </div>
-          <div class="grid-item" >
+          <div class="grid-item">
             <video id="Hard2_video" controls autoplay loop muted playsinline>
                 <source src="./resources/video/inference/ours/click_bell/hard2_click_bell.mp4" type="video/mp4">
             </video>
             <div class="badge danger" style="margin-top: 10px; margin-bottom: 10px;"
-                data-tooltip="Difficult Scene 2: including a green flashlight, a white tablecloth with daisies, 3 fruits, and 6 toy distractors. The light and tablecloth are not present in the training dataset.">
-                hard2 setting
-            </div> 
+                data-tooltip="Extreme Complex Scene 2: including a green flashlight, a white tablecloth with daisies, 3 fruits, and 6 toy distractors. The light and tablecloth are not present in the training dataset.">
+                Extreme Complex Scene 2
+            </div>
           </div>
         </div>
-      </div> 
+      </div>
     </div>
   </section>
   <style>
@@ -801,8 +818,68 @@ layout: default
       margin-top: 1rem;
     }
   </style>
-  <!-- Results Section -->
+  
   <section class="section">
+    <div class="container mb-6">
+      <h2 class="title is-2 is-size-3-mobile" data-aos="fade-up">Decoupling the Effects: Why Both Sources Matter</h2>
+      
+      <div class="columns is-centered is-variable is-8" style="margin-top: 20px;">
+        
+        <div class="column is-half" data-aos="zoom-in">
+          <div class="has-text-centered">
+            <img src="./resources/images/factor_ablation_no_randomsim.png" alt="Human Data Analysis" style="max-height: 400px; width: auto; display: block; margin: 0 auto; border-radius: 8px;">
+            <h4 class="title is-4 mt-4">Human Data <span style="color: #3273dc;">→</span> Visual Generalization</h4>
+          </div>
+          <div class="content has-text-justified" style="font-size: 1.1rem; line-height: 1.6;">
+            <p>
+              Human data provides diverse visual priors. As shown in the ablation study, excluding background diversity (<span style="font-family: 'Consolas', monospace;">F_bg</span>) causes a sharp performance drop (<b style="color: #d9534f;">-60%</b>), highlighting its critical role in handling real-world visual perturbations.
+            </p>
+          </div>
+        </div>
+
+        <div class="column is-half" data-aos="zoom-in" data-aos-delay="100">
+          <div class="has-text-centered">
+            <img src="./resources/images/position_ablation.png" alt="Sim Data Analysis" style="max-height: 400px; width: auto; display: block; margin: 0 auto; border-radius: 8px;">
+            <h4 class="title is-4 mt-4">Simulation <span style="color: #3273dc;">→</span> Spatial Robustness</h4>
+          </div>
+          <div class="content has-text-justified" style="font-size: 1.1rem; line-height: 1.6;">
+            <p>
+               Simulation data provides dense kinematic coverage. The heatmap demonstrates that SimHum generalizes significantly better to <b>unseen object positions</b> (outer grid), improving performance by <b style="color: #28a745;">+36.7%</b> compared to human-only pre-training.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section section-alt">
+    <div class="container mb-6">
+      <h2 class="title is-2 is-size-3-mobile" data-aos="fade-up">Data Efficiency and Performance Scalability</h2>
+      
+      <div class="columns is-vcentered">
+        <div class="column is-half has-text-centered" data-aos="fade-right">
+          <img src="./resources/images/time_scaling.png" alt="Data Efficiency Chart" style="max-height: 400px; width: auto; display: block; margin: 0 auto; border-radius: 8px;">
+        </div>
+        <div class="column is-half has-text-centered" data-aos="fade-left">
+          <img src="./resources/images/data_scaling.png" alt="Data Scaling Chart" style="max-height: 400px; width: auto; display: block; margin: 0 auto; border-radius: 8px;">
+        </div>
+      </div>
+
+      <div class="content has-text-justified" style="margin-top: 1.5rem; font-size: 1.15rem; line-height: 1.8; color: #333;" data-aos="fade-up">
+        <p>
+          <strong style="font-weight: 800; color: #1a1a1a;">SimHum is significantly more data-efficient.</strong> 
+          It matches the baseline performance using <b style="font-weight: 700; color: #1a1a1a;">20x less real-world data</b> (achieving comparable results with only 8 real demos vs. 160 demos for the baseline). 
+          Furthermore, our performance scales consistently with the size of pre-training datasets, suggesting continued improvements with larger simulation and human datasets.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Results Section -->
+  <!-- <section class="section">
     <div class="container">
       <h2 class="title is-2 is-size-3-mobile">Results</h2>
       <h3 class="title is-4" style="margin-top: 30px; margin-bottom: 30px;">OOD scene</h3>
@@ -811,7 +888,8 @@ layout: default
         This is because DexWild data is <b>embodiment-agnostic</b>. The cameras only capture task-relevant information and the human hand data can be retargeted to any end effector-we train on LEAP V2 Advanced and Xarm6 yet can transfer to Franka Panda arms and LEAP Hands. This enables us to deploy on entirely new robots, in unseen environments, and with never-before-seen objects.
       </p>
     </div>
-  </section>
+  </section> -->
+  
   <!-- Bad Case -->
   <section class="section">
     <div class="container">
