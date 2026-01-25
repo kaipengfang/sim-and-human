@@ -36,6 +36,16 @@ layout: default
 
 
   <style>
+    /* Button spacing */
+    .link-block {
+      margin: 0 8px;
+    }
+
+    /* Section alternating background colors */
+    .section-alt {
+      background-color: #f8f9fa;
+    }
+
     /* scroll-snap carousel */
     #video-container {
       display: flex;
@@ -554,11 +564,13 @@ layout: default
     </div>
 
     <!-- Mobile Splash -->
+    <!-- Commented out: Mobile background video file is missing
     <div class="hero-video mobile-only" style="height: 100%; width: 100vw; min-height: 100vh; position: absolute; top: 0; left: 0; z-index: 1;">
       <video preload="auto" playsinline autoplay muted loop style="object-fit: cover; width: 100%; height: 100%;" poster="./resources/images/phone_poster.png">
         <source src="./resources/misc/Website Splash Screen Phone.mp4"  type="video/mp4">
       </video>
     </div>
+    -->
 
   <style>
     .mobile-only {
@@ -591,7 +603,7 @@ layout: default
           Sim-and-Human Co-training for Data-Efficient and Generalizable Robotic Manipulation
         </h1>
         <span class="author-block is-size-6-mobile is-size-3-tablet is-size-3-desktop"  style="color: #333; font-size: 1.6rem !important;">
-          <u><a href="https://github.com/weiqing11/">Kaipeng Fang</a></u><sup>1</sup>&nbsp;&nbsp;
+          <u><a href="">Kaipeng Fang</a></u><sup>1</sup>&nbsp;&nbsp;
           <u><a href="https://github.com/weiqing11/">Weiqing Liang</a></u><sup>1</sup>&nbsp;&nbsp;
           Yuyang Li<sup>1</sup>&nbsp;&nbsp;
           <u><a href="https://jimzai.github.io/">Ji Zhang</a></u><sup>2</sup>&nbsp;&nbsp;
@@ -612,7 +624,7 @@ layout: default
         <br>
         <div class="publication-links">
           <!-- twitter Link. -->
-          <span class="link-block">
+          <!-- <span class="link-block">
             <a target="_blank" href="https://x.com/_tonytao_/status/1922275638032957673"
                 class="external-link button is-normal is-rounded is-dark">
               <span class="icon">
@@ -620,7 +632,7 @@ layout: default
               </span>
               <span>Summary</span>
             </a>
-          </span>
+          </span> -->
             <!-- arXiv Link. -->
             <span class="link-block">
               <a target="_blank" href="https://arxiv.org/abs/2505.07813"
@@ -633,7 +645,7 @@ layout: default
             </span>
           <!-- PDF Link. -->
           <span class="link-block">
-            <a href="./resources/pdf/DexWild_RSS2025_Arxiv.pdf"
+            <a href="./resources/pdf/sim-and-human co-trainging.pdf"
                class="external-link button is-normal is-rounded is-dark">
               <span class="icon">
                   <i class="fas fa-file-pdf"></i>
@@ -641,7 +653,7 @@ layout: default
               <span>PDF</span>
             </a>
           </span>
-          <span class="link-block">
+          <!-- <span class="link-block">
             <a href="https://huggingface.co/datasets/boardd/dexwild-dataset"
                class="external-link button is-normal is-rounded is-dark">
               <span class="icon">
@@ -649,39 +661,16 @@ layout: default
               </span>
               <span>Dataset</span>
             </a>
-          </span>
+          </span> -->
           <span class="link-block">
-            <a href="https://github.com/dexwild/dexwild" class="external-link button is-normal is-rounded is-dark">
+            <a href="" class="external-link button is-normal is-rounded is-dark">
               <span class="icon">
                   <svg class="svg-inline--fa fa-github fa-w-16" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg><!-- <i class="fab fa-github"></i> Font Awesome fontawesome.com -->
               </span>
-              <span>Code</span>
+              <span>Code (Coming Soon)</span>
             </a>
           </span>
-            <span class="link-block">
-            <a href="https://github.com/dexwild/dexwild-training" class="external-link button is-normal is-rounded is-dark">
-              <span class="icon">
-                  <svg class="svg-inline--fa fa-github fa-w-16" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg><!-- <i class="fab fa-github"></i> Font Awesome fontawesome.com -->
-              </span>
-              <span>Training Code</span>
-            </a>
-          </span>
-            <span class="link-block">
-            <a href="https://resisted-salad-9e6.notion.site/DexWild-Hardware-Setup-Guide-20eee3f68d27801b8eb8dfde3a5bb7c4?source=copy_link" class="external-link button is-normal is-rounded is-dark">
-              <span class="icon">
-            <svg class="svg-inline--fa fa-circle-info fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle-info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.1 8 8 119.1 8 256S119.1 504 256 504 504 392.9 504 256 392.9 8 256 8zM256 392c-13.3 0-24-10.7-24-24v-88c0-13.3 10.7-24 24-24s24 10.7 24 24v88c0 13.3-10.7 24-24 24zm0-168c-13.3 0-24-10.7-24-24v-8c0-13.3 10.7-24 24-24s24 10.7 24 24v8c0 13.3-10.7 24-24 24z"></path></svg>
-          </span>
-              <span>Hardware Guide</span>
-            </a>
-          </span>
-            <span class="link-block">
-            <a href="https://resisted-salad-9e6.notion.site/DexWild-Data-Collection-Guide-20fee3f68d27803b9a88ef9847e292d4?source=copy_link" class="external-link button is-normal is-rounded is-dark">
-            <span class="icon">
-              <svg class="svg-inline--fa fa-circle-info fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle-info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119.1 8 8 119.1 8 256S119.1 504 256 504 504 392.9 504 256 392.9 8 256 8zM256 392c-13.3 0-24-10.7-24-24v-88c0-13.3 10.7-24 24-24s24 10.7 24 24v88c0 13.3-10.7 24-24 24zm0-168c-13.3 0-24-10.7-24-24v-8c0-13.3 10.7-24 24-24s24 10.7 24 24v8c0 13.3-10.7 24-24 24z"></path></svg>
-            </span>
-              <span>Data Collection Guide</span>
-            </a>
-          </span>
+
         </div>
       </div>
     </div>
@@ -692,10 +681,15 @@ layout: default
   <!-- Introduction -->
   <section class="section">
     <div class="container">
-      <video id="teaser" autoplay muted loop playsinline controls style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); display: block;" data-aos="fade-up">
-        <source src="./resources/video/introduction_video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <div class="video-wrapper" style="position: relative; width: 100%;" data-aos="fade-up">
+        <video id="teaser" muted loop playsinline controls preload="none" poster="./resources/images/video cover.png" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); display: block;">
+          <source src="./resources/video/introduction_video.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-play-button" id="teaser-play-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: rgba(0, 0, 0, 0.7); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; z-index: 10;">
+          <div style="width: 0; height: 0; border-left: 25px solid white; border-top: 15px solid transparent; border-bottom: 15px solid transparent; margin-left: 5px;"></div>
+        </div>
+      </div>
       <div class="content has-text-justified" style="margin-top: 1.5rem;" data-aos="fade-up" data-aos-delay="100">
         <p style="font-size: 1.15rem; line-height: 1.8; color: #333;">
           <strong style="font-weight: 800; color: #1a1a1a;">SimHum unifies transferable actions from simulation with realistic visuals from human data to achieve data-efficient and generalizable robotic manipulation.</strong> In this video, we demonstrate how our co-training framework leverages the inherent complementarity of these sources. Empirically, SimHum outperforms the baseline by up to <b style="font-weight: 700; color: #1a1a1a;">35%</b> under the same data budget, , and achieves relative improvements of up to <b style="font-weight: 700; color: #1a1a1a;">7.1x</b> compared to the real-only baseline in unseen environments.
@@ -904,11 +898,8 @@ layout: default
       <!-- Hardware Image Display (Default) -->
       <div class="collection-display" id="hardware-display" data-aos="fade-up">
         <div class="hardware-image-container">
-          <img src="./resources/images/hardware_setup.png" alt="Hardware Setup" class="hardware-image">
-          <div class="image-caption">
-            <i class="fas fa-info-circle"></i>
-            Complete hardware setup including cameras, sensors, and recording devices
-          </div>
+          <img src="./resources/images/human_collection_system.png" alt="Hardware Setup" class="hardware-image">
+         
         </div>
       </div>
 
@@ -995,18 +986,17 @@ layout: default
 
         /* Hardware Image Display */
         .collection-display {
-          margin: 2rem 0;
+          margin: 0.5rem 0;
         }
 
         .hardware-image-container {
           background: #fff;
           border-radius: 12px;
-          padding: 20px;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+          padding: 10px 20px;
         }
 
         .hardware-image {
-          width: 100%;
+          width: 95%;
           height: auto;
           border-radius: 8px;
           display: block;
@@ -1132,7 +1122,7 @@ layout: default
           }
 
           .collection-tab-btn {
-            padding: 10px 20px;
+            padding: 5px 20px;
             font-size: 14px;
           }
 
@@ -1399,7 +1389,7 @@ layout: default
   </style>
 
   <!-- Approach -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="container">
       <h2 class="title is-2 is-size-3-mobile" id="approach">Approach</h2>
       <img src="./resources/images/model.png" style="width: 100%; display: block; margin-bottom: 20px;" data-aos="zoom-in" alt="Teaser Image">
@@ -1413,7 +1403,7 @@ layout: default
     </div>
   </section>
   <!-- Main Results -->
-  <section class="section section-alt">
+  <section class="section">
     <div class="container">
       <h2 class="title is-2 is-size-3-mobile" id="real-world">SimHum in Real-World Scenarios</h2>
 
@@ -1630,7 +1620,7 @@ layout: default
     }
   </style>
   
-  <section class="section">
+  <section class="section section-alt">
     <div class="container mb-6">
       <h2 class="title is-2 is-size-3-mobile" id="decoupling">Decoupling the Effects: Why Both Sources Matter</h2>
       <p style="text-align: center; color: #999; font-size: 0.95rem; font-style: italic; margin-top: 0.5rem; margin-bottom: 0;" data-aos="fade-up"><i class="fas fa-info-circle" style="margin-right: 5px;"></i>Hover over the charts to view detailed data</p>
@@ -1708,7 +1698,7 @@ layout: default
   </section>
 
 
-  <section class="section section-alt">
+  <section class="section">
     <div class="container mb-6">
       <h2 class="title is-2 is-size-3-mobile" id="scalability">Data Efficiency and Performance Scalability</h2>
       <p style="text-align: center; color: #999; font-size: 0.95rem; font-style: italic; margin-top: 0.5rem; margin-bottom: 0;" data-aos="fade-up"><i class="fas fa-info-circle" style="margin-right: 5px;"></i>Hover over the charts to view detailed data</p>
@@ -1850,7 +1840,7 @@ layout: default
   </section> -->
   
   <!-- Bad Case -->
-  <section class="section">
+  <section class="section section-alt">
     <div class="container">
       <h2 class="title is-2 is-size-3-mobile" id="baseline-failures">Baseline Failure Cases in OOD Settings</h2>
       <div class="container mb-6" data-aos="fade-up">
@@ -1893,6 +1883,8 @@ layout: default
           </div>
         </div>
       </div>
+
+      <h3 class="title is-4 has-text-centered" style="margin-top: 2rem; margin-bottom: 50px; color: #0091ff;" data-aos="fade-up">All Videos Autonomous 1×</h3>
 
       <div class="tabs" data-aos="fade-up">
         <button class="tab-btn active" onclick="switchDefeatVideo(this, 'click_bell')"><span style="font-size: larger;">Click Bell</span></button>
@@ -1994,7 +1986,9 @@ Award
     <div class="columns is-centered">
       <div class="column is-half is-centered has-text-centered">
         <figure>
+        <!-- Commented out: end.mp4 file is missing
         <video controls autoplay loop muted playsinline preload="metadata" src="./resources/misc/end.mp4" poster="./resources/loading-icon.gif" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;"></video>
+        -->
       </figure>
       </div>
     </div>
@@ -2157,10 +2151,10 @@ Award
       humreal: {
         score: '0/2',
         tooltip: 'Failed to reach the grasping points on the roller.',
-        class: 'warning'
+        class: 'danger'
       },
       simreal: {
-        score: '1/2%',
+        score: '1/2',
         tooltip: 'Right arm reached the roller, but left arm failed to align.',
         class: 'warning'
       }
@@ -2172,8 +2166,8 @@ Award
         class: 'danger'
       },
       humreal: {
-        score: '2/3',
-        tooltip: 'Successfully grasped both bowls but failed to stack them.',
+        score: '1/3',
+        tooltip: 'Successfully grasped the left bowl but failed to grasp the right bowl.',
         class: 'warning'
       },
       simreal: {
@@ -2185,7 +2179,7 @@ Award
     put_object_cabinet_defeat: {
       realonly: {
         score: '0/3',
-        tooltip: 'Left arm failed to grasp the target bread.',
+        tooltip: 'Left arm failed to grasp the target bread firmly,resulting in a drop.',
         class: 'danger'
       },
       humreal: {
@@ -2195,7 +2189,7 @@ Award
       },
       simreal: {
         score: '2/3',
-        tooltip: 'Grasped the bread and opened the cabinet, but failed to place the bread inside.',
+        tooltip: 'Successfully Grasped the bread and opened the cabinet, but failed to place the bread inside.',
         class: 'warning'
       }
     }

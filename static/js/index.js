@@ -29,6 +29,39 @@ $(document).ready(function() {
 
     });
 
+    // Teaser video play button functionality
+    var teaserVideo = document.getElementById('teaser');
+    var teaserPlayButton = document.getElementById('teaser-play-button');
+
+    if (teaserVideo && teaserPlayButton) {
+      // Click play button to play video
+      teaserPlayButton.addEventListener('click', function() {
+        teaserVideo.play();
+        teaserPlayButton.style.display = 'none';
+      });
+
+      // Show play button when video is paused
+      teaserVideo.addEventListener('pause', function() {
+        teaserPlayButton.style.display = 'flex';
+      });
+
+      // Hide play button when video is playing
+      teaserVideo.addEventListener('play', function() {
+        teaserPlayButton.style.display = 'none';
+      });
+
+      // Hover effect for play button
+      teaserPlayButton.addEventListener('mouseenter', function() {
+        this.style.background = 'rgba(0, 0, 0, 0.9)';
+        this.style.transform = 'translate(-50%, -50%) scale(1.1)';
+      });
+
+      teaserPlayButton.addEventListener('mouseleave', function() {
+        this.style.background = 'rgba(0, 0, 0, 0.7)';
+        this.style.transform = 'translate(-50%, -50%) scale(1)';
+      });
+    }
+
     var options = {
 			slidesToScroll: 1,
 			slidesToShow: 3,
