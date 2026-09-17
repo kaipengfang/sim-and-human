@@ -810,10 +810,11 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
   .figure-legend-columns {
     margin: 0.5rem 0 0 !important;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
     align-items: stretch;
   }
+  .figure-legend-columns:has(.is-one-third) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .figure-legend-columns .column { width: auto; flex: none; }
   @media (max-width: 768px) { .figure-legend-columns { grid-template-columns: 1fr; } }
   .figure-legend-columns .column {
@@ -1173,7 +1174,7 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
           <div class="data-card-body">
             <div class="video-section">
               <video autoplay loop muted playsinline class="data-video">
-                <source src="./resources/video/dataset/simulation/click_bell.mp4" type="video/mp4">
+                <source src="./resources/video/dataset/simulation/stack_bowls_two.mp4" type="video/mp4">
               </video>
             </div>
             <div class="info-section">
@@ -1206,7 +1207,7 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
           <div class="data-card-body">
             <div class="video-section">
               <video autoplay loop muted playsinline class="data-video">
-                <source src="./resources/video/dataset/real_world/click_bell.mp4" type="video/mp4">
+                <source src="./resources/video/dataset/real_world/stack_bowls_two.mp4" type="video/mp4">
               </video>
             </div>
             <div class="info-section">
@@ -1239,7 +1240,7 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
           <div class="data-card-body">
             <div class="video-section">
               <video autoplay loop muted playsinline class="data-video">
-                <source src="./resources/video/dataset/human/click_bell.mp4" type="video/mp4">
+                <source src="./resources/video/dataset/human/stack_bowls_two.mp4" type="video/mp4">
               </video>
             </div>
             <div class="info-section">
@@ -1465,8 +1466,8 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
       </div>
       <!-- <h3 class="title is-4 has-text-centered" data-aos="fade-up" style="margin-bottom: 3.125rem; color: #0091ff;">All Videos Autonomous 1×</h3> -->
     <div class="tabs" data-aos="fade-up">
-        <button class="tab-btn" onclick="switchDatasetVideo(this, 'click_bell')"><span style="font-size: larger;">Click Bell</span></button>
-        <button class="tab-btn active" onclick="switchDatasetVideo(this, 'grab_roller')"><span style="font-size: larger;">Grab Roller</span></button>
+        <button class="tab-btn active" onclick="switchDatasetVideo(this, 'click_bell')"><span style="font-size: larger;">Click Bell</span></button>
+        <button class="tab-btn" onclick="switchDatasetVideo(this, 'grab_roller')"><span style="font-size: larger;">Grab Roller</span></button>
         <button class="tab-btn" onclick="switchDatasetVideo(this, 'stack_bowls')"><span style="font-size: larger;">Stack Bowls Two</span></button>
         <button class="tab-btn" onclick="switchDatasetVideo(this, 'put_object_cabinet')"><span style="font-size: larger;">Put Object Cabinet</span></button>
     </div>
@@ -1474,20 +1475,20 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
     <div class="video-display" data-aos="fade-up">
         <div class="video-box">
             <h3><i class="fas fa-desktop" style="color: #48c774; margin-right: 0.5rem;"></i>Simulation Data</h3>
-            <video id="Simulation_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/dataset_simulation_grab_roller.jpg">
-                <source data-src="./resources/video/dataset/simulation/grab_roller.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
+            <video id="Simulation_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/dataset_simulation_click_bell.jpg">
+                <source data-src="./resources/video/dataset/simulation/click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
         </div>
         <div class="video-box">
             <h3><i class="fas fa-hand-paper" style="color: #ffaa00; margin-right: 0.5rem;"></i>Human Data</h3>
-            <video id="Human_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/dataset_human_grab_roller.jpg">
-                <source data-src="./resources/video/dataset/human/grab_roller.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
+            <video id="Human_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/dataset_human_click_bell.jpg">
+                <source data-src="./resources/video/dataset/human/click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
         </div>
         <div class="video-box">
             <h3><i class="fas fa-robot" style="color: #3273dc; margin-right: 0.5rem;"></i>Real Robot Data</h3>
-            <video id="Real-Robot_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/dataset_real_world_grab_roller.jpg">
-                <source data-src="./resources/video/dataset/real_world/grab_roller.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
+            <video id="Real-Robot_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/dataset_real_world_click_bell.jpg">
+                <source data-src="./resources/video/dataset/real_world/click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
         </div>
     </div>
