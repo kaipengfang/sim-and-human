@@ -618,12 +618,6 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
     transform-origin: 70% 80%;
     animation: venue-wiggle 3.2s ease-in-out 1.1s infinite;
   }
-  .venue-line .venue-text {
-    background: linear-gradient(100deg, #9D1616 0%, #9D1616 40%, #ff8a8a 50%, #9D1616 60%, #9D1616 100%);
-    background-size: 240% 100%;
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-    animation: venue-shine 3.2s ease-in-out 1.1s infinite;
-  }
   @keyframes venue-in { from { opacity: 0; transform: translateY(10px) scale(0.96); } to { opacity: 1; transform: none; } }
   @keyframes venue-wiggle {
     0%, 20%, 100% { transform: rotate(0); }
@@ -632,10 +626,8 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
     12% { transform: rotate(-8deg)  scale(1.08); }
     16% { transform: rotate(6deg); }
   }
-  @keyframes venue-shine { 0%, 25% { background-position: 120% 0; } 45%, 100% { background-position: -120% 0; } }
   @media (prefers-reduced-motion: reduce) {
-    .venue-line, .venue-line .venue-emoji, .venue-line .venue-text { animation: none; }
-    .venue-line .venue-text { background: none; color: #9D1616; }
+    .venue-line, .venue-line .venue-emoji { animation: none; }
   }
   @media (max-width: 1100px) {
     .publication-title { font-size: 2.3rem; }
