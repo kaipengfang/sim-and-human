@@ -167,8 +167,8 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
      with the card beneath it. The three source panels have identical
      heights, so their tops and bottoms align on their own. */
   .source-grid {
-    width: min(70rem, 94vw);
-    margin-left: calc(50% - min(35rem, 47vw));
+    width: 100%;
+    margin-left: 0;
     display: grid;
     grid-template-columns: 1fr 2.9rem 1fr 2.9rem 1fr;
     grid-template-rows: auto auto;
@@ -176,7 +176,7 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
     gap: 0.875rem 0.45rem;
   }
   .system-figure { margin: 0; position: relative; align-self: end; }
-  .system-figure img { width: 100%; display: block; }
+  .system-figure img { width: 84%; margin: 0 auto; display: block; }
 
   .source-grid > .system-figure:nth-of-type(1) { grid-area: 1 / 1; }
   .source-grid > .system-figure:nth-of-type(2) { grid-area: 1 / 3; }
@@ -674,7 +674,7 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
      -- type, spacing, container width, figures -- grows together.
      Calibrated on the primary review viewport, 1358 CSS px at 2x:
      1358 -> 15.8px, 1440 -> 16.0px, 1920 -> 17.7px, 2560 -> 19px. */
-  html { font-size: clamp(15px, 0.35vw + 11px, 19px); }
+  html { font-size: clamp(12.4px, 0.27vw + 9.2px, 15.5px); }
 
   /* Bulma sizes .container in px per breakpoint; drive it from the root
      instead so the column grows with the type. */
@@ -799,17 +799,12 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
   .figure-legend-columns { margin-top: 0.5rem; }
   .inset-figure {
     display: block;
-    width: min(64rem, 94vw);
+    width: 100%;
     max-width: none;
-    margin: 0 0 1.25rem calc(50% - min(32rem, 47vw));
+    margin: 0 auto 1.25rem;
     border-radius: 8px;
   }
-  /* fig1's internal labels are set larger than the other figures', so it is
-     rendered narrower to keep its text the same visual size as body copy. */
-  .inset-figure--narrow {
-    width: min(47.5rem, 94vw);
-    margin-left: calc(50% - min(23.75rem, 47vw));
-  }
+  .inset-figure--narrow { width: 92%; }
   @media (max-width: 768px) {
     .inset-figure,
     .inset-figure--narrow { width: 100%; max-width: 100%; margin-left: 0; margin-right: 0; }
