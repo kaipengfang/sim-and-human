@@ -807,25 +807,46 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
     display: block;
     border-radius: 8px;
   }
-  .figure-legend-columns {
-    margin: 0.5rem 0 0 !important;
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-    align-items: stretch;
+  .legend-bar {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem;
+    margin-top: 0.75rem;
   }
-  .figure-legend-columns:has(.is-one-third) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .figure-legend-columns .column { width: auto; flex: none; }
-  @media (max-width: 768px) { .figure-legend-columns { grid-template-columns: 1fr; } }
-  .figure-legend-columns .column {
-    background: #fff;
-    border: 1px solid #e6e8eb;
-    border-radius: 10px;
-    padding: 1rem 1.1rem 0.9rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  .legend-item { position: relative; }
+  .legend-btn {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.92rem; font-weight: 600; color: #2b2b2b;
+    background: #fff; border: 1px solid #d9dde2; border-radius: 999px;
+    padding: 0.38em 0.95em; cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
   }
-  .figure-legend-columns .figure-subhead { text-align: left; margin-bottom: 0.6rem; padding-bottom: 0.45rem; border-bottom: 1px solid #eceff1; white-space: nowrap; }
-  .figure-legend-columns p { margin: 0; text-align: left !important; }
+  .legend-btn i { color: #0F5F28; font-size: 0.95em; }
+  .legend-item:hover .legend-btn, .legend-item.is-open .legend-btn, .legend-btn:focus-visible {
+    background: #0F5F28; border-color: #0F5F28; color: #fff; box-shadow: 0 4px 12px rgba(15,95,40,0.25);
+  }
+  .legend-item:hover .legend-btn i, .legend-item.is-open .legend-btn i, .legend-btn:focus-visible i { color: #fff; }
+  .legend-pop {
+    position: absolute; top: calc(100% + 0.6rem); left: 50%; transform: translateX(-50%) translateY(-4px);
+    width: 26rem; max-width: 90vw; z-index: 20;
+    background: #fff; border: 1px solid #e3e6ea; border-radius: 10px;
+    padding: 0.85rem 1rem; box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  }
+  .legend-pop::before {
+    content: ""; position: absolute; top: -7px; left: 50%; width: 12px; height: 12px;
+    background: #fff; border-left: 1px solid #e3e6ea; border-top: 1px solid #e3e6ea;
+    transform: translateX(-50%) rotate(45deg);
+  }
+  .legend-item:hover .legend-pop, .legend-item.is-open .legend-pop, .legend-item:focus-within .legend-pop {
+    opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0);
+  }
+  .legend-item:first-child .legend-pop { left: 0; transform: translateX(0) translateY(-4px); }
+  .legend-item:first-child:hover .legend-pop, .legend-item:first-child.is-open .legend-pop { transform: translateX(0) translateY(0); }
+  .legend-item:first-child .legend-pop::before { left: 2.5rem; }
+  .legend-item:last-child .legend-pop { left: auto; right: 0; transform: translateX(0) translateY(-4px); }
+  .legend-item:last-child:hover .legend-pop, .legend-item:last-child.is-open .legend-pop { transform: translateX(0) translateY(0); }
+  .legend-item:last-child .legend-pop::before { left: auto; right: 2.5rem; }
+  .legend-pop p { margin: 0; text-align: left; font-size: 0.95rem; line-height: 1.55; }
   .legend-row { display: flex; align-items: flex-start; gap: 0.6rem; }
   .legend-row + .legend-row { margin-top: 0.55rem; }
   .legend-tag {
@@ -835,6 +856,7 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
   }
   .legend-tag--setting { background: #eef1f4; color: #4a5560; }
   .legend-tag--finding { background: #e6f2ea; color: #0F5F28; }
+  .legend-bar-spacer { height: 0.5rem; }
   .inset-figure {
     display: block;
     width: 100%;
@@ -1962,19 +1984,19 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
         </div>
       </figure>
 
-      <div class="columns is-centered is-variable is-8 figure-legend-columns">
-        <div class="column is-half" data-aos="fade-up">
-          <h4 class="figure-subhead">(a) Human Data <span class="arrow">&rarr;</span> Visual Generalization</h4>
-          <div class="content has-text-justified prose">
+      <div class="legend-bar">
+        <div class="legend-item">
+          <button type="button" class="legend-btn" aria-haspopup="true" aria-expanded="false"><i class="fas fa-info-circle"></i>(a) Human Data &rarr; Visual Generalization</button>
+          <div class="legend-pop" role="tooltip">
             <div class="legend-row"><span class="legend-tag legend-tag--setting">Setting</span><p>Remove one diversity factor from the human data and test on the OOD scene that probes it.</p></div>
-              <div class="legend-row"><span class="legend-tag legend-tag--finding">Finding</span><p>Every removal lowers OOD SR, background most (80.0% to 20.0%). Human data supplies the visual prior.</p></div>
+            <div class="legend-row"><span class="legend-tag legend-tag--finding">Finding</span><p>Every removal lowers OOD SR, background most (80.0% to 20.0%). Human data supplies the visual prior.</p></div>
           </div>
         </div>
-        <div class="column is-half" data-aos="fade-up" data-aos-delay="100">
-          <h4 class="figure-subhead">(b) Simulation <span class="arrow">&rarr;</span> Spatial Robustness</h4>
-          <div class="content has-text-justified prose">
+        <div class="legend-item">
+          <button type="button" class="legend-btn" aria-haspopup="true" aria-expanded="false"><i class="fas fa-info-circle"></i>(b) Simulation &rarr; Spatial Robustness</button>
+          <div class="legend-pop" role="tooltip">
             <div class="legend-row"><span class="legend-tag legend-tag--setting">Setting</span><p>Objects on a 4&times;4 grid in an OOD scene. Human and real-robot demos cover only the inner 3&times;3 cells (black outline); simulation samples a broader range.</p></div>
-              <div class="legend-row"><span class="legend-tag legend-tag--finding">Finding</span><p>HumReal collapses on the unseen outer cells, while SimHum stays high, <b class="pos">+36.7%</b> PR over HumReal there. Simulation supplies spatial coverage.</p></div>
+            <div class="legend-row"><span class="legend-tag legend-tag--finding">Finding</span><p>HumReal collapses on the unseen outer cells, while SimHum stays high, <b class="pos">+36.7%</b> PR over HumReal there. Simulation supplies spatial coverage.</p></div>
           </div>
         </div>
       </div>
@@ -2087,26 +2109,26 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
         </div>
       </figure>
 
-      <div class="columns is-centered is-variable is-6 figure-legend-columns">
-        <div class="column is-one-third" data-aos="fade-up">
-          <h4 class="figure-subhead">(a) Matched Time Budget</h4>
-          <div class="content has-text-justified prose">
+      <div class="legend-bar">
+        <div class="legend-item">
+          <button type="button" class="legend-btn" aria-haspopup="true" aria-expanded="false"><i class="fas fa-info-circle"></i>(a) Matched Time Budget</button>
+          <div class="legend-pop" role="tooltip">
             <div class="legend-row"><span class="legend-tag legend-tag--setting">Setting</span><p>2/4/8&nbsp;h collection budgets. SimHum splits the time evenly between teleoperation and human collection; simulation runs in parallel and is not charged to any method.</p></div>
-              <div class="legend-row"><span class="legend-tag legend-tag--finding">Finding</span><p>SimHum leads at every budget and beats the best single-source baseline by 35.0% in absolute SR at 8&nbsp;h.</p></div>
+            <div class="legend-row"><span class="legend-tag legend-tag--finding">Finding</span><p>SimHum leads at every budget and beats the best single-source baseline by 35.0% in absolute SR at 8&nbsp;h.</p></div>
           </div>
         </div>
-        <div class="column is-one-third" data-aos="fade-up" data-aos-delay="100">
-          <h4 class="figure-subhead">(b) Real Demo Scaling</h4>
-          <div class="content has-text-justified prose">
+        <div class="legend-item">
+          <button type="button" class="legend-btn" aria-haspopup="true" aria-expanded="false"><i class="fas fa-info-circle"></i>(b) Real Demo Scaling</button>
+          <div class="legend-pop" role="tooltip">
             <div class="legend-row"><span class="legend-tag legend-tag--setting">Setting</span><p>Fine-tune on 8 to 160 real-robot demos.</p></div>
-              <div class="legend-row"><span class="legend-tag legend-tag--finding">Finding</span><p>SimHum leads at every scale, and with 8 demos it reaches the level of Real only trained on 160.</p></div>
+            <div class="legend-row"><span class="legend-tag legend-tag--finding">Finding</span><p>SimHum leads at every scale, and with 8 demos it reaches the level of Real only trained on 160.</p></div>
           </div>
         </div>
-        <div class="column is-one-third" data-aos="fade-up" data-aos-delay="200">
-          <h4 class="figure-subhead">(c) Pre-training Scaling</h4>
-          <div class="content has-text-justified prose">
+        <div class="legend-item">
+          <button type="button" class="legend-btn" aria-haspopup="true" aria-expanded="false"><i class="fas fa-info-circle"></i>(c) Pre-training Scaling</button>
+          <div class="legend-pop" role="tooltip">
             <div class="legend-row"><span class="legend-tag legend-tag--setting">Setting</span><p>Fix one pre-training source at 500 episodes and sweep the other from 0 to 500.</p></div>
-              <div class="legend-row"><span class="legend-tag legend-tag--finding">Finding</span><p>Both simulation and human data give steady PR gains with no sign of&nbsp;saturation.</p></div>
+            <div class="legend-row"><span class="legend-tag legend-tag--finding">Finding</span><p>Both simulation and human data give steady PR gains with no sign of&nbsp;saturation.</p></div>
           </div>
         </div>
       </div>
@@ -2906,6 +2928,17 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
   });
 
   /* ---------- (6) Sticky nav + scroll-spy ---------- */
+
+  // Legend popovers: tap toggles on touch devices, hover handles the rest.
+  document.querySelectorAll('.legend-btn').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var item = btn.parentElement, open = item.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.querySelectorAll('.legend-item.is-open').forEach(function (o) { if (o !== item) o.classList.remove('is-open'); });
+    });
+  });
+  document.addEventListener('click', function () { document.querySelectorAll('.legend-item.is-open').forEach(function (o) { o.classList.remove('is-open'); }); });
   var nav = document.getElementById('site-nav');
   if (nav) {
     var links = Array.prototype.slice.call(nav.querySelectorAll('.nav-links a'));
