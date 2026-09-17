@@ -487,6 +487,8 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     color: #1a1a1a;
     margin: 0 auto;
   }
+  .hero-body .publication-title, .hero-body .publication-authors, .hero-body .venue-line, .hero-body .author-block, .hero-body .affiliations { text-shadow: 0 0 10px rgba(255,255,255,0.95), 0 0 22px rgba(255,255,255,0.8); }
+  .hero-body .publication-authors a { text-shadow: 0 0 10px rgba(255,255,255,0.95), 0 0 22px rgba(255,255,255,0.8); }
   .venue-line {
     margin-top: 1rem;
     margin-bottom: 1.4rem;
@@ -793,7 +795,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     <!-- Background Video -->
     <!-- Desktop Splash -->
     <div class="hero-video desktop-only" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden;">
-      <video preload="metadata" playsinline autoplay muted loop style="width: 100%; height: 100%; object-fit: cover; object-position: center bottom;" poster="./resources/images/website_background_poster.jpg">
+      <video preload="metadata" playsinline autoplay muted loop style="width: 100%; height: 100%; object-fit: cover; object-position: center bottom; filter: brightness(0.92) saturate(0.85);" poster="./resources/images/website_background_poster.jpg">
         <source src="./resources/video/website_background.mp4"  type="video/mp4">
       </video>
     </div>
@@ -830,7 +832,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
 
     <!-- Hero Content (Text) -->
     <div class="hero-body" style="position: relative; z-index: 3;">
-      <div class="container has-text-centered" style="background: rgba(255, 255, 255, 0.78); padding: 3rem 2rem; border-radius: 20px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 8px 32px rgba(0,0,0,0.12);max-width: 1400px;">
+      <div class="container has-text-centered" style="background: rgba(255, 255, 255, 0.50); padding: 3rem 2rem; border-radius: 20px; backdrop-filter: blur(28px) saturate(0.7); -webkit-backdrop-filter: blur(28px) saturate(0.7); box-shadow: 0 8px 32px rgba(0,0,0,0.10);max-width: 1400px;">
         <img src="./resources/images/logo.png"
           alt="SimHum project logo"
           style="width: 50%; max-width: 400px; height: auto; margin-bottom: 2rem;"> 
