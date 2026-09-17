@@ -582,10 +582,11 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     background: rgba(255, 255, 255, 0.94);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid #e3e3e3;
-    transform: translateY(-100%);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(0);
+    transition: background 0.3s, box-shadow 0.3s;
   }
-  #site-nav.is-visible { transform: translateY(0); }
+  .hero.video .hero-body { padding-top: 5rem; }
+  #site-nav.is-scrolled { background: rgba(255, 255, 255, 0.97); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   #site-nav .nav-inner {
     max-width: 1200px;
     margin: 0 auto;
@@ -1858,7 +1859,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
           <h4 class="figure-subhead">(a) Human Data <span class="arrow">&rarr;</span> Visual Generalization</h4>
           <div class="content has-text-justified prose">
             <p>
-              <b>Setting.</b> Remove one diversity factor from the human data and test on the OOD scene that probes it. <b>Finding.</b> Every removal lowers OOD SR, background most (80.0% to 20.0%). Human data supplies the visual prior.
+              <b>Setting.</b> Remove one diversity factor from the human data and test on the OOD scene that probes it.<br><b>Finding.</b> Every removal lowers OOD SR, background most (80.0% to 20.0%). Human data supplies the visual prior.
             </p>
           </div>
         </div>
@@ -1866,7 +1867,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
           <h4 class="figure-subhead">(b) Simulation <span class="arrow">&rarr;</span> Spatial Robustness</h4>
           <div class="content has-text-justified prose">
             <p>
-              <b>Setting.</b> Objects on a 4&times;4 grid in an OOD scene. Human and real-robot demos cover only the inner 3&times;3 cells (black outline); simulation samples a broader range. <b>Finding.</b> HumReal collapses on the unseen outer cells, while SimHum stays high, <b class="pos">+36.7%</b> PR over HumReal there. Simulation supplies spatial coverage.
+              <b>Setting.</b> Objects on a 4&times;4 grid in an OOD scene. Human and real-robot demos cover only the inner 3&times;3 cells (black outline); simulation samples a broader range.<br><b>Finding.</b> HumReal collapses on the unseen outer cells, while SimHum stays high, <b class="pos">+36.7%</b> PR over HumReal there. Simulation supplies spatial coverage.
             </p>
           </div>
         </div>
@@ -1985,7 +1986,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
           <h4 class="figure-subhead">(a) Matched Collection-Time Budget</h4>
           <div class="content has-text-justified prose">
             <p>
-              <b>Setting.</b> 2/4/8&nbsp;h collection budgets. SimHum splits the time evenly between teleoperation and human collection; simulation runs in parallel and is not charged to any method. <b>Finding.</b> SimHum leads at every budget and beats the best single-source baseline by 35.0% in absolute SR at 8&nbsp;h.
+              <b>Setting.</b> 2/4/8&nbsp;h collection budgets. SimHum splits the time evenly between teleoperation and human collection; simulation runs in parallel and is not charged to any method.<br><b>Finding.</b> SimHum leads at every budget and beats the best single-source baseline by 35.0% in absolute SR at 8&nbsp;h.
             </p>
           </div>
         </div>
@@ -1993,7 +1994,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
           <h4 class="figure-subhead">(b) Scaling Real-Robot Demonstrations</h4>
           <div class="content has-text-justified prose">
             <p>
-              <b>Setting.</b> Fine-tune on 8 to 160 real-robot demos. <b>Finding.</b> SimHum leads at every scale, and with 8 demos it reaches the level of Real only trained on 160.
+              <b>Setting.</b> Fine-tune on 8 to 160 real-robot demos.<br><b>Finding.</b> SimHum leads at every scale, and with 8 demos it reaches the level of Real only trained on 160.
             </p>
           </div>
         </div>
@@ -2001,7 +2002,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
           <h4 class="figure-subhead">(c) Scaling Pre-training Data</h4>
           <div class="content has-text-justified prose">
             <p>
-              <b>Setting.</b> Fix one pre-training source at 500 episodes and sweep the other from 0 to 500. <b>Finding.</b> Both simulation and human data give steady PR gains, and neither has saturated.
+              <b>Setting.</b> Fix one pre-training source at 500 episodes and sweep the other from 0 to 500.<br><b>Finding.</b> Both simulation and human data give steady PR gains, and neither has saturated.
             </p>
           </div>
         </div>
@@ -2808,7 +2809,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     var targets = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
 
     var onScroll = function () {
-      nav.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.6);
+      nav.classList.toggle('is-scrolled', window.scrollY > 40);
       var y = window.scrollY + 140;
       var current = -1;
       targets.forEach(function (t, i) {
