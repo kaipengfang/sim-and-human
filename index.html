@@ -356,6 +356,20 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     font-size: 1.05rem;
     transition: background 0.25s ease, color 0.25s ease,
                 transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+    animation: setup-breathe 1.8s ease-in-out infinite;
+  }
+  .connector-knob::before, .connector-knob::after {
+    content: ""; position: absolute; inset: -2px; border-radius: 50%;
+    border: 2px solid var(--link); opacity: 0; pointer-events: none;
+    animation: setup-pulse 1.8s ease-out infinite;
+  }
+  .connector-knob::after { animation-delay: 0.9s; }
+  .connector:hover .connector-knob, .connector:focus-visible .connector-knob, .connector.is-open .connector-knob { animation: none; }
+  .connector:hover .connector-knob::before, .connector:hover .connector-knob::after,
+  .connector.is-open .connector-knob::before, .connector.is-open .connector-knob::after { animation: none; opacity: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    .connector-knob, .connector-knob::before, .connector-knob::after { animation: none !important; }
   }
   .connector:hover .connector-knob,
   .connector:focus-visible .connector-knob,
@@ -586,6 +600,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     transition: background 0.3s, box-shadow 0.3s;
   }
   .hero.video .hero-body { padding-top: 5rem; }
+  p, li, figcaption, .prose, .info-item, .task-content, .card-note { text-wrap: pretty; }
   #site-nav.is-scrolled { background: rgba(255, 255, 255, 0.97); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   #site-nav .nav-inner {
     max-width: 1200px;
@@ -2002,7 +2017,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
           <h4 class="figure-subhead">(c) Scaling Pre-training Data</h4>
           <div class="content has-text-justified prose">
             <p>
-              <b>Setting.</b> Fix one pre-training source at 500 episodes and sweep the other from 0 to 500.<br><b>Finding.</b> Both simulation and human data give steady PR gains, and neither has saturated.
+              <b>Setting.</b> Fix one pre-training source at 500 episodes and sweep the other from 0 to 500.<br><b>Finding.</b> Both simulation and human data give steady PR gains, and neither has&nbsp;saturated.
             </p>
           </div>
         </div>
@@ -2027,7 +2042,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
               Real-only
             </h4>
             <p class="card-note">
-              Trained solely on limited real-world data, it tends to overfit to spurious visual correlations, leading to poor generalization.
+              Trained solely on limited real-world data, it tends to overfit to spurious visual correlations, leading to poor&nbsp;generalization.
             </p>
           </div>
         </div>
