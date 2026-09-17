@@ -43,7 +43,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   <style>
     /* Button spacing */
     .link-block {
-      margin: 0 8px;
+      margin: 0 0.5rem;
     }
 
     /* Section alternating background colors */
@@ -158,7 +158,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     --human-edge: #567F98;
     --link:       #0F5F28;
     --link-soft:  #4E8B3A;
-    margin-top: 28px;
+    margin-top: 1.75rem;
   }
 
   /* Cards and connectors share one grid so the bars below can span columns. */
@@ -168,10 +168,10 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
      heights, so their tops and bottoms align on their own. */
   .source-grid {
     display: grid;
-    grid-template-columns: 1fr 60px 1fr 60px 1fr;
+    grid-template-columns: 1fr 3.1rem 1fr 3.1rem 1fr;
     grid-template-rows: auto auto;
     align-items: stretch;
-    gap: 14px 12px;
+    gap: 0.875rem 0.55rem;
   }
   .system-figure { margin: 0; position: relative; align-self: end; }
   .system-figure img { width: 100%; display: block; }
@@ -206,8 +206,8 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     z-index: 3;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 14px 6px 6px;
+    gap: 0.5rem;
+    padding: 0.375rem 0.875rem 0.375rem 0.375rem;
     border: 2px solid #fff;
     border-radius: 999px;
     background: #1E4B60;
@@ -222,8 +222,8 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   }
   .setup-trigger:hover { background: #12303d; animation: none; transform: scale(1.08); }
   .setup-trigger-dot {
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
     border-radius: 50%;
     background: #fff;
     color: #1E4B60;
@@ -269,7 +269,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     background: #fff;
     border: 2px solid #e0e0e0;
     border-radius: 12px;
-    padding: 20px 20px 16px;
+    padding: 1.25rem 1.25rem 1rem;
     transition: opacity 0.25s ease, transform 0.25s ease,
                 border-color 0.25s ease, box-shadow 0.25s ease;
     box-shadow: 0 4px 12px rgba(0,0,0,0.07);
@@ -284,9 +284,9 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    margin: -20px -20px 18px;
-    padding: 12px 16px;
+    gap: 0.75rem;
+    margin: -1.25rem -1.25rem 1.125rem;
+    padding: 0.75rem 1rem;
     border-radius: 9px 9px 0 0;
   }
   #card-sim   .data-card-header { background: var(--sim-pill);   }
@@ -306,16 +306,16 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     letter-spacing: 0.01em;
   }
 
-  .data-card-body { display: flex; flex-direction: column; gap: 16px; }
+  .data-card-body { display: flex; flex-direction: column; gap: 1rem; }
   .video-section { width: 100%; border-radius: 10px; overflow: hidden; transition: box-shadow 0.25s ease; }
   .data-video { width: 100%; display: block; border-radius: 10px; }
 
-  .info-section { display: flex; flex-direction: column; gap: 8px; }
+  .info-section { display: flex; flex-direction: column; gap: 0.5rem; }
   .info-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 9px 12px;
+    gap: 0.625rem;
+    padding: 0.5625rem 0.75rem;
     border-radius: 8px;
     background: #f8f9fa;
     transition: background 0.25s ease, color 0.25s ease;
@@ -344,8 +344,8 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   }
   .connector-knob {
     flex: 0 0 auto;
-    width: 44px;
-    height: 44px;
+    width: 2.75rem;
+    height: 2.75rem;
     border-radius: 50%;
     border: 2px solid var(--link);
     background: #fff;
@@ -385,10 +385,10 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
 
   .connector-tip {
     position: absolute;
-    bottom: calc(100% + 12px);
+    bottom: calc(100% + 0.75rem);
     left: 50%;
     transform: translateX(-50%) translateY(6px);
-    padding: 7px 12px;
+    padding: 0.4375rem 0.75rem;
     border: 1.5px solid var(--link-soft);
     border-radius: 8px;
     background: #fff;
@@ -452,7 +452,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     .source-grid {
       grid-template-columns: 1fr;
       grid-template-rows: none;
-      gap: 12px 0;
+      gap: 0.75rem 0;
     }
     .source-grid > * { grid-area: auto !important; }
     .source-grid > .system-figure:nth-of-type(1)  { order: 1; }
@@ -467,7 +467,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     /* No hover on touch: the knob keeps a permanent label beneath it. */
     .connector {
       flex-direction: column;
-      gap: 7px;
+      gap: 0.4375rem;
       padding: 2px 0;
     }
     .connector-line { display: none; }
@@ -507,7 +507,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   .setup-modal-panel {
     position: relative;
     width: 100%;
-    max-width: 1100px;
+    max-width: 68.75rem;
     max-height: 100%;
     display: flex;
     flex-direction: column;
@@ -527,7 +527,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 16px 22px;
+    padding: 1rem 1.375rem;
     border-bottom: 1px solid #ececec;
     background: #EDF3F7;
   }
@@ -545,17 +545,17 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     line-height: 1;
     color: #5a6b73;
     cursor: pointer;
-    padding: 0 4px;
+    padding: 0 0.25rem;
     transition: color 0.2s ease;
   }
   .setup-modal-close:hover { color: #12303d; }
-  .setup-modal-body { padding: 22px; overflow-y: auto; }
+  .setup-modal-body { padding: 1.375rem; overflow-y: auto; }
   .setup-modal-body .collection-display { margin-top: 0; }
 
   @media (max-width: 768px) {
     .setup-modal { padding: 0; }
     .setup-modal-panel { max-width: none; height: 100%; border-radius: 0; }
-    .setup-modal-body { padding: 16px; }
+    .setup-modal-body { padding: 1rem; }
   }
 
   /* === Global overflow guards === */
@@ -564,8 +564,25 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   #BibTeX code { white-space: pre; }
 
   /* === Hero title + venue line === */
+  /* Hero action buttons: sized from the root like everything else. */
+  .publication-links .button {
+    font-size: 1.1rem;
+    height: auto;
+    padding: 0.7em 1.4em;
+    line-height: 1.2;
+  }
+  .publication-links .button .icon,
+  .publication-links .button .icon i,
+  .publication-links .button .icon svg {
+    font-size: 1em;
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 0.35em;
+  }
+  .link-block { margin: 0 0.4rem; }
+
   .publication-title {
-    font-size: 3rem;          /* two lines at 1440 px */
+    font-size: 2.85rem;       /* two lines at 1440 / 1920 / 2560 */
     line-height: 1.2;
     font-weight: 600;
     color: #1a1a1a;
@@ -603,24 +620,25 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   p, li, figcaption, .prose, .info-item, .task-content, .card-note { text-wrap: pretty; }
   #site-nav.is-scrolled { background: rgba(255, 255, 255, 0.97); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   #site-nav .nav-inner {
-    max-width: 1200px;
+    max-width: var(--measure);
+    min-height: 3.6rem;
     margin: 0 auto;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0 1rem;
+    gap: 0.75rem;
+    padding: 0 1.25rem;
   }
   #site-nav .nav-brand {
     font-family: 'Courier New', monospace;
     font-weight: 700;
     color: #0F5F28;
-    font-size: 1.05rem;
-    padding: 0.7rem 0.6rem 0.7rem 0;
+    font-size: 1.15rem;
+    padding: 0.7rem 0.9rem 0.7rem 0;
     flex: 0 0 auto;
   }
   #site-nav .nav-links {
     display: flex;
-    gap: 0.15rem;
+    gap: 0.35rem;
     overflow-x: auto;
     scrollbar-width: none;
     flex: 1 1 auto;
@@ -628,8 +646,8 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   #site-nav .nav-links::-webkit-scrollbar { display: none; }
   #site-nav .nav-links a {
     white-space: nowrap;
-    padding: 0.75rem 0.7rem;
-    font-size: 0.92rem;
+    padding: 0.9rem 0.85rem;
+    font-size: 1.05rem;
     color: #444;
     border-bottom: 2px solid transparent;
     transition: color 0.2s ease, border-color 0.2s ease;
@@ -641,21 +659,34 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     border-bottom-color: #0F5F28;
   }
   @media (max-width: 768px) {
-    #site-nav .nav-brand { font-size: 0.9rem; }
-    #site-nav .nav-links a { padding: 0.65rem 0.5rem; font-size: 0.82rem; }
+    #site-nav .nav-brand { font-size: 1rem; }
+    #site-nav .nav-links a { padding: 0.7rem 0.55rem; font-size: 0.95rem; }
   }
 
   /* =====================================================================
      Typography scale -- one size per role, used across every section.
      ===================================================================== */
+  /* Fluid root: every rem below scales with the viewport, so the whole page
+     -- type, spacing, container width, figures -- grows together.
+     Calibrated on the primary review viewport, 2037 CSS px:
+     1440 -> 16.6px, 1920 -> 17.9px, 2037 -> 18.2px, 2560 -> 19.6px. */
+  html { font-size: clamp(16px, 0.27vw + 12.7px, 22px); }
+
+  /* Bulma sizes .container in px per breakpoint; drive it from the root
+     instead so the column grows with the type. */
+  .section > .container,
+  .section .container { max-width: var(--measure) !important; width: 100%; }
+  .section { padding: 3rem 1.5rem; }
+
   :root {
-    --fs-h2:      2.5rem;   /* section title            */
-    --fs-h3:      1.6rem;   /* subsection title         */
-    --fs-h4:      1.3rem;   /* card / figure sub-head   */
-    --fs-body:    1.2rem;   /* body prose               */
+    --fs-h2:      2.3rem;   /* section title            */
+    --fs-h3:      1.5rem;   /* subsection title         */
+    --fs-h4:      1.2rem;   /* card / figure sub-head   */
+    --fs-body:    1.125rem; /* body prose               */
     --lh-body:    1.7;
-    --fs-note:    1.05rem;  /* card notes, captions     */
-    --fs-hint:    1rem;     /* italic hints, tab labels */
+    --fs-note:    1rem;     /* card notes, captions     */
+    --fs-hint:    0.9rem;   /* italic hints, tab labels */
+    --measure:    71rem;    /* content column width     */
     --ink:        #333;
     --ink-soft:   #666;
     --brand:      #0F5F28;
@@ -702,7 +733,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   .tooltip-header       { font-size: var(--fs-h4) !important; }
 
   /* Section anchors clear the sticky nav. */
-  .section h2[id], .section h3[id] { scroll-margin-top: 72px; }
+  .section h2[id], .section h3[id] { scroll-margin-top: 4.5rem; }
   .prose .pos { color: var(--brand); }
 
   .chart-hint {
@@ -713,7 +744,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     margin-top: 0.6rem;
     margin-bottom: 0;
   }
-  .chart-hint i { margin-right: 6px; }
+  .chart-hint i { margin-right: 0.375rem; }
   .figure-note {
     text-align: center;
     color: var(--ink-soft);
@@ -723,12 +754,13 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
 
   @media (max-width: 768px) {
     :root {
-      --fs-h2:   1.9rem;
-      --fs-h3:   1.35rem;
-      --fs-h4:   1.15rem;
+      --fs-h2:   1.75rem;
+      --fs-h3:   1.3rem;
+      --fs-h4:   1.1rem;
       --fs-body: 1.05rem;
       --fs-note: 0.95rem;
-      --fs-hint: 0.9rem;
+      --fs-hint: 0.85rem;
+      --measure: 100%;
     }
   }
 
@@ -736,6 +768,24 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   .paper-figure {
     margin: 1.75rem auto 1.5rem;
     max-width: 92%;
+  }
+  /* A 2- or 3-panel figure carries much smaller internal text than a
+     single-panel one, so it is allowed to bleed past the text column until
+     its labels match the body size. */
+  .paper-figure--medium,
+  .paper-figure--wide {
+    max-width: none;
+    /* centre on the viewport, not on the narrower text column; a negative
+       side margin is used instead of a transform so it does not fight AOS */
+    margin-right: 0;
+  }
+  .paper-figure--medium {
+    width: min(80rem, 94vw);
+    margin-left: calc(50% - min(40rem, 47vw));
+  }
+  .paper-figure--wide {
+    width: min(90rem, 94vw);
+    margin-left: calc(50% - min(45rem, 47vw));
   }
   .figure-hotspot-layer { position: relative; width: 100%; }
   .paper-figure img {
@@ -748,11 +798,14 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     display: block;
     width: 92%;
     max-width: 92%;
-    margin: 0 auto 20px;
+    margin: 0 auto 1.25rem;
     border-radius: 8px;
   }
+  /* fig1's internal labels are set larger than the other figures', so it is
+     rendered narrower to keep its text the same visual size as body copy. */
+  .inset-figure--narrow { width: 68%; max-width: 68%; }
   @media (max-width: 768px) {
-    .inset-figure { width: 100%; max-width: 100%; }
+    .inset-figure, .inset-figure--narrow { width: 100%; max-width: 100%; }
   }
   @media (max-width: 768px) {
     /* A 2- or 3-panel paper figure is unreadable at 375 px, so let it keep a
@@ -762,8 +815,8 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
     }
-    .paper-figure--medium .figure-hotspot-layer { min-width: 620px; }
-    .paper-figure--wide   .figure-hotspot-layer { min-width: 780px; }
+    .paper-figure--medium .figure-hotspot-layer { min-width: 38.75rem; }
+    .paper-figure--wide   .figure-hotspot-layer { min-width: 48.75rem; }
     .paper-figure::after {
       content: "\2194 swipe to pan the figure";
       display: block;
@@ -791,7 +844,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     background: white;
     border: 1.5px solid #333;
     border-radius: 0;
-    padding: 16px 20px;
+    padding: 1rem 1.25rem;
     box-shadow: 2.5px 2.5px 0 0 #000;
 
     font-family: 'Courier New', monospace;
@@ -803,7 +856,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
     z-index: 9999;
-    min-width: 290px;
+    min-width: 18.125rem;
   }
 
   .chart-hotspot:hover .chart-tooltip,
@@ -818,35 +871,35 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   }
 
   .tooltip-title {
-    font-size: 15px;
+    font-size: 0.9375rem;
     font-weight: bold;
     color: #000;
-    margin-bottom: 10px;
-    padding-bottom: 8px;
+    margin-bottom: 0.625rem;
+    padding-bottom: 0.5rem;
     border-bottom: 2px solid #e0e0e0;
   }
 
   .tooltip-item {
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #222;
     line-height: 1.9;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
   }
 
   .tt-swatch {
     display: inline-block;
-    width: 13px;
-    height: 13px;
+    width: 0.8125rem;
+    height: 0.8125rem;
     border: 1.5px solid #000;
     flex: 0 0 auto;
   }
 
   @media (max-width: 768px) {
-    .chart-tooltip { min-width: 230px; padding: 12px 14px; }
-    .tooltip-title { font-size: 13px; }
-    .tooltip-item  { font-size: 12px; line-height: 1.7; }
+    .chart-tooltip { min-width: 14.375rem; padding: 0.75rem 0.875rem; }
+    .tooltip-title { font-size: 0.8125rem; }
+    .tooltip-item  { font-size: 0.75rem; line-height: 1.7; }
   }
   </style>
 </head>
@@ -916,10 +969,10 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
 
     <!-- Hero Content (Text) -->
     <div class="hero-body" style="position: relative; z-index: 3;">
-      <div class="container has-text-centered" style="background: rgba(255, 255, 255, 0.40); padding: 3rem 2rem; border-radius: 20px; backdrop-filter: blur(10px);max-width: 1400px;">
+      <div class="container has-text-centered" style="background: rgba(255, 255, 255, 0.40); padding: 3rem 2rem; border-radius: 1.25rem; backdrop-filter: blur(10px); max-width: 76rem;">
         <img src="./resources/images/logo.png"
           alt="SimHum project logo"
-          style="width: 50%; max-width: 400px; height: auto; margin-bottom: 2rem;"> 
+          style="width: 50%; max-width: 25rem; height: auto; margin-bottom: 2rem;"> 
         <h1 class="publication-title">
           SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bimanual Manipulation
         </h1>
@@ -1010,8 +1063,8 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
           <source src="./resources/video/introduction_video.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
-        <div class="video-play-button" id="teaser-play-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: rgba(0, 0, 0, 0.7); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; z-index: 10;">
-          <div style="width: 0; height: 0; border-left: 25px solid white; border-top: 15px solid transparent; border-bottom: 15px solid transparent; margin-left: 5px;"></div>
+        <div class="video-play-button" id="teaser-play-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 5rem; height: 5rem; background: rgba(0, 0, 0, 0.7); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; z-index: 10;">
+          <div style="width: 0; height: 0; border-left: 25px solid white; border-top: 15px solid transparent; border-bottom: 15px solid transparent; margin-left: 0.3125rem;"></div>
         </div>
       </div>
       <div class="content has-text-justified prose" style="margin-top: 1.5rem;" data-aos="fade-up" data-aos-delay="100">
@@ -1028,7 +1081,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   <section class="section section-alt">
     <div class="container">
       <h2 class="title is-2 is-size-3-mobile" id="abstract">Abstract</h2>
-      <img src="./resources/images/fig1.png" class="inset-figure" data-aos-once="true" data-aos="zoom-in" alt="Overview of SimHum: (a) the sim-to-real visual gap, (b) the human-to-robot embodiment gap, (c) the SimHum co-training framework, and (d) OOD generalization and data-efficiency results.">
+      <img src="./resources/images/fig1.png" class="inset-figure inset-figure--narrow" data-aos-once="true" data-aos="zoom-in" alt="Overview of SimHum: (a) the sim-to-real visual gap, (b) the human-to-robot embodiment gap, (c) the SimHum co-training framework, and (d) OOD generalization and data-efficiency results.">
       <div class="container mb-6" data-aos="fade-up" data-aos-delay="100">
         <div class="content has-text-justified prose">
           <p>
@@ -1175,7 +1228,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         .collection-mode-toggle {
           display: flex;
           justify-content: center;
-          gap: 60px;
+          gap: 3.75rem;
           border-bottom: 1px solid #eee;
           margin: 2rem 0 3rem 0;
         }
@@ -1183,11 +1236,11 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         .collection-tab-btn {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 0.625rem;
           background: none;
           border: none;
-          padding: 10px 30px;
-          font-size: 16px;
+          padding: 0.625rem 1.875rem;
+          font-size: 1rem;
           color: #888;
           cursor: pointer;
           position: relative;
@@ -1225,7 +1278,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         .hardware-image-container {
           background: #fff;
           border-radius: 12px;
-          padding: 10px 20px;
+          padding: 0.625rem 1.25rem;
         }
 
         .hardware-image {
@@ -1236,7 +1289,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         }
 
         .image-caption {
-          margin-top: 15px;
+          margin-top: 0.9375rem;
           text-align: center;
           color: #666;
           font-size: 1rem;
@@ -1244,7 +1297,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         }
 
         .image-caption i {
-          margin-right: 8px;
+          margin-right: 0.5rem;
           color: #3273dc;
         }
 
@@ -1252,23 +1305,23 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         .sync-video-container {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 30px;
-          margin-bottom: 20px;
+          gap: 1.875rem;
+          margin-bottom: 1.25rem;
         }
 
         .sync-video-box {
           background: #fff;
           border-radius: 12px;
-          padding: 20px;
+          padding: 1.25rem;
           box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .video-header {
           display: flex;
           align-items: center;
-          gap: 10px;
-          margin-bottom: 15px;
-          padding-bottom: 10px;
+          gap: 0.625rem;
+          margin-bottom: 0.9375rem;
+          padding-bottom: 0.625rem;
           border-bottom: 2px solid #f0f0f0;
         }
 
@@ -1297,15 +1350,15 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
           display: flex;
           justify-content: center;
           align-items: center;
-          gap: 30px;
-          margin-top: 20px;
+          gap: 1.875rem;
+          margin-top: 1.25rem;
         }
 
         .control-btn {
           display: flex;
           align-items: center;
-          gap: 10px;
-          padding: 12px 25px;
+          gap: 0.625rem;
+          padding: 0.75rem 1.5625rem;
           background: #000;
           color: white;
           border: none;
@@ -1328,7 +1381,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         .sync-indicator {
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 0.5rem;
           color: #48c774;
           font-size: 0.95rem;
           font-weight: 600;
@@ -1347,21 +1400,21 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         @media (max-width: 768px) {
           .sync-video-container {
             grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 1.25rem;
           }
 
           .collection-mode-toggle {
-            gap: 30px;
+            gap: 1.875rem;
           }
 
           .collection-tab-btn {
-            padding: 5px 20px;
-            font-size: 14px;
+            padding: 0.3125rem 1.25rem;
+            font-size: 0.875rem;
           }
 
           .video-controls {
             flex-direction: column;
-            gap: 15px;
+            gap: 0.9375rem;
           }
         }
       </style>
@@ -1371,7 +1424,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
       <div class="container mb-6" data-aos="fade-up">
         <p>Explore our multi-source demonstration dataset captured across diverse environments. Switch between the tabs below to view episodes for different manipulation tasks.</p>
       </div>
-      <!-- <h3 class="title is-4 has-text-centered" data-aos="fade-up" style="margin-bottom: 50px; color: #0091ff;">All Videos Autonomous 1×</h3> -->
+      <!-- <h3 class="title is-4 has-text-centered" data-aos="fade-up" style="margin-bottom: 3.125rem; color: #0091ff;">All Videos Autonomous 1×</h3> -->
     <div class="tabs" data-aos="fade-up">
         <button class="tab-btn" onclick="switchDatasetVideo(this, 'click_bell')"><span style="font-size: larger;">Click Bell</span></button>
         <button class="tab-btn active" onclick="switchDatasetVideo(this, 'grab_roller')"><span style="font-size: larger;">Grab Roller</span></button>
@@ -1381,19 +1434,19 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
 
     <div class="video-display" data-aos="fade-up">
         <div class="video-box">
-            <h3><i class="fas fa-desktop" style="color: #48c774; margin-right: 8px;"></i>Simulation Data</h3>
+            <h3><i class="fas fa-desktop" style="color: #48c774; margin-right: 0.5rem;"></i>Simulation Data</h3>
             <video id="Simulation_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/dataset_simulation_grab_roller.jpg">
                 <source data-src="./resources/video/dataset/simulation/grab_roller.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
         </div>
         <div class="video-box">
-            <h3><i class="fas fa-hand-paper" style="color: #ffaa00; margin-right: 8px;"></i>Human Data</h3>
+            <h3><i class="fas fa-hand-paper" style="color: #ffaa00; margin-right: 0.5rem;"></i>Human Data</h3>
             <video id="Human_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/dataset_human_grab_roller.jpg">
                 <source data-src="./resources/video/dataset/human/grab_roller.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
         </div>
         <div class="video-box">
-            <h3><i class="fas fa-robot" style="color: #3273dc; margin-right: 8px;"></i>Real Robot Data</h3>
+            <h3><i class="fas fa-robot" style="color: #3273dc; margin-right: 0.5rem;"></i>Real Robot Data</h3>
             <video id="Real-Robot_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/dataset_real_world_grab_roller.jpg">
                 <source data-src="./resources/video/dataset/real_world/grab_roller.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
@@ -1406,17 +1459,17 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   <style>
     .tabs {
     display: flex;
-    gap: 60px;
+    gap: 3.75rem;
     justify-content: center; /* 居中排列 */
     border-bottom: 1px solid #eee; /* 整个导航条的淡灰色底线 */
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem;
     }
 
     .tab-btn {
     background: none;
     border: none;
-    padding: 10px 30px;
-    font-size: 16px;
+    padding: 0.625rem 1.875rem;
+    font-size: 1rem;
     cursor: pointer;
     color: #888; /* 未选中的文字颜色（灰色） */
     position: relative;
@@ -1449,7 +1502,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     .video-display {
         display: flex;
         justify-content: space-between;
-        gap: 20px;
+        gap: 1.25rem;
     }
 
     .video-box {
@@ -1458,7 +1511,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     }
 
     .video-box h3 {
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
         font-weight: normal;
         color: #555;
     }
@@ -1474,15 +1527,15 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         grid-template-columns: repeat(3, 1fr);
         flex-wrap: wrap;
         justify-content: center;
-        gap: 8px; /* 标签之间的间距 */
-        margin-top: 12px;
+        gap: 0.5rem; /* 标签之间的间距 */
+        margin-top: 0.75rem;
     }
 
     .badge {
     /* === 你原本的样式 (完全保留) === */
     display: inline-flex;
     align-items: center;
-    padding: 4px 10px;
+    padding: 0.25rem 0.625rem;
     border-radius: 12px;
     font-size: 0.8rem;
     font-weight: bold;
@@ -1506,13 +1559,13 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
 
         /* 定位：显示在按钮下方 */
         position: absolute;
-        top: calc(100% + 10px);
+        top: calc(100% + 0.625rem);
         left: 50%;
         transform: translateX(-50%) translateY(-10px);
 
         /* === 关键修改点 === */
         white-space: normal;  /* 1. 允许文字换行 */
-        width: 300px;         /* 2. 设定固定宽度 (也可以用 max-width: 220px) */
+        width: 18.75rem;         /* 2. 设定固定宽度 (也可以用 max-width: 13.75rem) */
         text-align: left;     /* 3. 多行文字建议左对齐，阅读体验更好 */
         line-height: 1.5;     /* 4. 增加行高，防止多行挤在一起 */
         /* ================= */
@@ -1522,9 +1575,9 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         color: #f0f0f0;
         border: 1px solid rgba(255, 255, 255, 0.1);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        padding: 8px 12px;
+        padding: 0.5rem 0.75rem;
         border-radius: 8px;
-        font-size: 13px;
+        font-size: 0.8125rem;
         font-weight: normal;
         letter-spacing: 0.5px;
 
@@ -1544,7 +1597,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         position: absolute;
         top: calc(100% - 1.5px); /* 向上提，让箭头位于按钮和气泡框之间 */
         left: 50%;
-        margin-left: -6px; /* 修正居中偏移 */
+        margin-left: -0.375rem; /* 修正居中偏移 */
         transform: translateY(-10px); /* 初始状态向上偏移 */
 
         /* 画三角形 - 指向上方（按钮） */
@@ -1595,7 +1648,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     }
 
     .badge .icon {
-        margin-right: 5px;
+        margin-right: 0.3125rem;
         font-size: 0.9em;
     }
   </style>
@@ -1647,7 +1700,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         </p>
       </div>
 
-      <h3 class="title is-4 has-text-centered" style="margin-top: 2rem; margin-bottom: 50px; color: #0091ff;" data-aos="fade-up">All Videos Autonomous 1×</h3>
+      <h3 class="title is-4 has-text-centered" style="margin-top: 2rem; margin-bottom: 3.125rem; color: #0091ff;" data-aos="fade-up">All Videos Autonomous 1×</h3>
       <div class="tabs" data-aos="fade-up" data-aos-delay="100">
         <button class="tab-btn active" onclick="switchInferVideo(this, 'click_bell_infer')"><span style="font-size: larger;">Click Bell</span></button>
         <button class="tab-btn" onclick="switchInferVideo(this, 'grab_roller_infer')"><span style="font-size: larger;">Grab Roller</span></button>
@@ -1662,7 +1715,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
               <video id="Clean_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/inference_ours_click_bell_clean_click_bell.jpg">
                   <source data-src="./resources/video/inference/ours/click_bell/clean_click_bell.mp4" type="video/mp4">
               </video>
-              <div class="badge success" style="margin-top: 10px; margin-bottom: 10px;"
+              <div class="badge success" style="margin-top: 0.625rem; margin-bottom: 0.625rem;"
                   data-tooltip="A simple scene contains only the target object, without changes in lighting, tabletop, or distractions.">
                   Base Scene
               </div>
@@ -1671,7 +1724,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
               <video id="Red_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/inference_ours_click_bell_red_click_bell.jpg">
                   <source data-src="./resources/video/inference/ours/click_bell/red_click_bell.mp4" type="video/mp4">
               </video>
-              <div class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
+              <div class="badge warning" style="margin-top: 0.625rem; margin-bottom: 0.625rem;"
                    data-tooltip="Complex Scene 1: including a yellow flashlight, a red checkered tablecloth, 3 fruits, and 3 toy distractions.">
                    Complex Scene 1
               </div>
@@ -1680,7 +1733,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
               <video id="Yellow_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/inference_ours_click_bell_yellow_click_bell.jpg">
                   <source data-src="./resources/video/inference/ours/click_bell/yellow_click_bell.mp4" type="video/mp4">
               </video>
-              <div class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
+              <div class="badge warning" style="margin-top: 0.625rem; margin-bottom: 0.625rem;"
                    data-tooltip="Complex Scene 2: including an indoor low-light condition, a yellow checkered tablecloth, 3 fruits, and 3 toy distractions.">
                    Complex Scene 2
               </div>
@@ -1689,7 +1742,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
               <video id="Grey_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/inference_ours_click_bell_grey_click_bell.jpg">
                   <source data-src="./resources/video/inference/ours/click_bell/grey_click_bell.mp4" type="video/mp4">
               </video>
-              <div class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
+              <div class="badge warning" style="margin-top: 0.625rem; margin-bottom: 0.625rem;"
                    data-tooltip="Complex Scene 3: including a blue flash, a dark gray striped tablecloth, 3 fruits, and 3 toy distractions.">
                    Complex Scene 3
               </div>
@@ -1702,7 +1755,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
             <video id="Hard1_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/inference_ours_click_bell_hard1_click_bell.jpg">
                 <source data-src="./resources/video/inference/ours/click_bell/hard1_click_bell.mp4" type="video/mp4">
             </video>
-            <div class="badge danger" style="margin-top: 10px; margin-bottom: 10px;"
+            <div class="badge danger" style="margin-top: 0.625rem; margin-bottom: 0.625rem;"
                 data-tooltip="Extreme Complex Scene 1: including a red flashlight, a heavily wrinkled light gray tablecloth, 4 fruits, and 6 toy distractors. The lighting, tablecloth, and task object do not exist in all training dataset sources.">
                 Extreme Complex Scene 1
             </div>
@@ -1711,7 +1764,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
             <video id="Hard2_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/inference_ours_click_bell_hard2_click_bell.jpg">
                 <source data-src="./resources/video/inference/ours/click_bell/hard2_click_bell.mp4" type="video/mp4">
             </video>
-            <div class="badge danger" style="margin-top: 10px; margin-bottom: 10px;"
+            <div class="badge danger" style="margin-top: 0.625rem; margin-bottom: 0.625rem;"
                 data-tooltip="Extreme Complex Scene 2: including a green flashlight, a heavily wrinkled white tablecloth with daisies, 3 fruits, and 6 toy distractors.The lighting, tablecloth, and task object do not exist in all training dataset sources.">
                 Extreme Complex Scene 2
             </div>
@@ -1723,15 +1776,15 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   <style>
     /* 每一组任务的间距 */
     .task-group {
-        margin-bottom: 50px; /* 任务与任务之间的距离 */
+        margin-bottom: 3.125rem; /* 任务与任务之间的距离 */
     }
 
     .task-title {
-        font-size: 25px;
-        margin-bottom: 10px;
+        font-size: 1.5625rem;
+        margin-bottom: 0.625rem;
         color: #222;
         font-weight: bold;
-        margin-top: 30px;;
+        margin-top: 1.875rem;;
     }
 
     /* --- 核心：网格布局 --- */
@@ -1739,7 +1792,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         display: grid;
         /* 关键代码：每行自动重复 4 个，每个占 1 份 (即 25%) */
         grid-template-columns: repeat(4, 1fr);
-        gap: 20px; /* 视频之间的间隙 */
+        gap: 1.25rem; /* 视频之间的间隙 */
         position: relative; /* 必须设置 position 才能使 z-index 生效 */
         z-index: 20; /* 提升层级，确保气泡浮在下方元素之上 */
     }
@@ -1747,7 +1800,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         display: grid;
         /* 关键代码：每行自动重复 2 个，每个占 1 份 (即 50%) */
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px; /* 视频之间的间隙 */
+        gap: 1.25rem; /* 视频之间的间隙 */
         position: relative;
         z-index: 10; /* 较低的层级 */
     }
@@ -1765,11 +1818,11 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     }
 
     .caption {
-        margin-top: 8px;
-        font-size: 14px;
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
         color: #666;
         background-color: transparent;
-        margin-bottom: 30px;
+        margin-bottom: 1.875rem;
     }
 
     /* --- 手机端适配 (响应式) --- */
@@ -1788,7 +1841,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
       background: #fff;
       border: 1px solid #eee;
       border-radius: 12px;
-      padding: 24px;
+      padding: 1.5rem;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -1807,7 +1860,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
 
     /* 卡片标题样式 */
     .analysis-card .title {
-      margin-bottom: 24px;
+      margin-bottom: 1.5rem;
     }
 
     /* 文字区域：自动填充剩余空间 */
@@ -1818,7 +1871,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     /* 响应式调整 */
     @media (max-width: 768px) {
       .analysis-card {
-        padding: 20px;
+        padding: 1.25rem;
       }
     }
   </style>
@@ -2038,18 +2091,18 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         <div class="column is-one-third">
           <div class="baseline-card" data-baseline="realonly" style="background: #fff; border: 1px solid #e0e0e0; border-radius: 12px; padding: 1.5rem; height: 100%; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); transition: all 0.3s ease; cursor: pointer;">
             <h4 class="card-head">
-              <span style="display: inline-block; width: 8px; height: 8px; background: #666; border-radius: 50%; margin-right: 8px;"></span>
+              <span style="display: inline-block; width: 0.5rem; height: 0.5rem; background: #666; border-radius: 50%; margin-right: 0.5rem;"></span>
               Real-only
             </h4>
             <p class="card-note">
-              Trained solely on limited real-world data, it tends to overfit to spurious visual correlations, leading to poor&nbsp;generalization.
+              Trained only on limited real-world data, it overfits to spurious visual correlations and generalizes&nbsp;poorly.
             </p>
           </div>
         </div>
         <div class="column is-one-third">
           <div class="baseline-card" data-baseline="humreal" style="background: #fff; border: 1px solid #e0e0e0; border-radius: 12px; padding: 1.5rem; height: 100%; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); transition: all 0.3s ease; cursor: pointer;">
             <h4 class="card-head">
-              <span style="display: inline-block; width: 8px; height: 8px; background: #666; border-radius: 50%; margin-right: 8px;"></span>
+              <span style="display: inline-block; width: 0.5rem; height: 0.5rem; background: #666; border-radius: 50%; margin-right: 0.5rem;"></span>
               HumReal
             </h4>
             <p class="card-note">
@@ -2060,7 +2113,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         <div class="column is-one-third">
           <div class="baseline-card" data-baseline="simreal" style="background: #fff; border: 1px solid #e0e0e0; border-radius: 12px; padding: 1.5rem; height: 100%; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); transition: all 0.3s ease; cursor: pointer;">
             <h4 class="card-head">
-              <span style="display: inline-block; width: 8px; height: 8px; background: #666; border-radius: 50%; margin-right: 8px;"></span>
+              <span style="display: inline-block; width: 0.5rem; height: 0.5rem; background: #666; border-radius: 50%; margin-right: 0.5rem;"></span>
               SimReal
             </h4>
             <p class="card-note">
@@ -2070,7 +2123,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         </div>
       </div>
 
-      <h3 class="title is-4 has-text-centered" style="margin-top: 2rem; margin-bottom: 50px; color: #0091ff;" data-aos="fade-up">All Videos Autonomous 1×</h3>
+      <h3 class="title is-4 has-text-centered" style="margin-top: 2rem; margin-bottom: 3.125rem; color: #0091ff;" data-aos="fade-up">All Videos Autonomous 1×</h3>
 
       <div class="tabs" data-aos="fade-up">
         <button class="tab-btn active" onclick="switchDefeatVideo(this, 'click_bell')"><span style="font-size: larger;">Click Bell</span></button>
@@ -2085,7 +2138,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
           <video id="RealOnly_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/defeat_bell_R_bell.jpg">
             <source data-src="./resources/video/defeat/bell/R_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
           </video>
-          <div id="RealOnly_badge" class="badge danger" style="margin-top: 10px; margin-bottom: 10px;"
+          <div id="RealOnly_badge" class="badge danger" style="margin-top: 0.625rem; margin-bottom: 0.625rem;"
                data-tooltip="Failed to execute the action and froze in mid-air.">
             Final Score: 0/2
           </div>
@@ -2095,7 +2148,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
           <video id="HumReal_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/defeat_bell_H_bell.jpg">
             <source data-src="./resources/video/defeat/bell/H_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
           </video>
-          <div id="HumReal_badge" class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
+          <div id="HumReal_badge" class="badge warning" style="margin-top: 0.625rem; margin-bottom: 0.625rem;"
                data-tooltip="Successfully reached the bell but failed to press the button.">
             Final Score: 1/2
           </div>
@@ -2105,7 +2158,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
           <video id="SimReal_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/defeat_bell_S_bell.jpg">
             <source data-src="./resources/video/defeat/bell/S_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
           </video>
-          <div id="SimReal_badge" class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
+          <div id="SimReal_badge" class="badge warning" style="margin-top: 0.625rem; margin-bottom: 0.625rem;"
                data-tooltip="Successfully reached the bell but failed to press the button.">
             Final Score: 1/2
           </div>
@@ -2119,7 +2172,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   .tight-video-grid {
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    gap: 8px;
+    gap: 0.5rem;
     /* no more margin:auto or extra padding here */
   }
 
@@ -2165,7 +2218,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
           <p style="text-align: center;">
             Website template modified from incredible   <a href="https://dexwild.github.io/">DexWild</a>.
           </p>
-          <p style="text-align: center; margin-top: 10px; font-size: 0.9rem; color: #666;">
+          <p style="text-align: center; margin-top: 0.625rem; font-size: 0.9rem; color: #666;">
             Total Page View: <span id="vercount_value_page_pv">Loading</span>
           </p>
         </div>
