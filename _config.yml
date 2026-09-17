@@ -1,3 +1,10 @@
 include:
   - resources
   - favicon.ico
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - .vscode
+  - preview.html
