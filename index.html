@@ -1,14 +1,15 @@
 ---
 layout: default
+title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bimanual Manipulation"
 ---
 
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="Sim-and-Human Co-training for Data-Efficient and Generalization Robotic Manipulation">
+  <meta name="description" content="SimHum co-trains a bimanual manipulation policy on simulation and human demonstrations, then fine-tunes on a small real-robot dataset. With 80 real-robot episodes per task it reaches 62.5% success on held-out OOD scenes.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sim-and-Human Co-training for Data-Efficient and Generalization Robotic Manipulation</title>
+  <title>SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bimanual Manipulation</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -16,23 +17,28 @@ layout: default
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" type="image/x-icon" href="{{ '/favicon.ico' | relative_url }}">
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href="./static/css/aos.css" rel="stylesheet">
+  <script src="./static/js/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/chart.umd.min.js"></script>
   <script src="./static/js/index.js"></script>
-  <meta property="og:site_name" content="Sim-and-Human Co-training for Data-Efficient and Generalization Robotic Manipulation" />
-  <meta property="og:title" content="Sim-and-Human Co-training for Data-Efficient and Generalization Robotic Manipulation" />
+  <meta property="og:site_name" content="SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bimanual Manipulation" />
+  <meta property="og:title" content="SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bimanual Manipulation" />
+  <meta property="og:description" content="Conference on Robot Learning (CoRL) 2026. With 80 real-robot episodes per task, SimHum reaches 62.5% success on held-out OOD scenes, 53.7% higher than Real only in absolute success rate." />
+  <meta property="og:image" content="https://kaipengfang.github.io/sim-and-human/resources/images/og_image.jpg" />
   <meta property="og:image:width" content="1280" />
   <meta property="og:image:height" content="720" />
 
   <meta property="article:publisher" content="" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Sim-and-Human Co-training for Data-Efficient and Generalization Robotic Manipulation" />
+  <meta name="twitter:title" content="SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bimanual Manipulation" />
+  <meta name="twitter:description" content="Conference on Robot Learning (CoRL) 2026. With 80 real-robot episodes per task, SimHum reaches 62.5% success on held-out OOD scenes, 53.7% higher than Real only in absolute success rate." />
+  <meta name="twitter:image" content="https://kaipengfang.github.io/sim-and-human/resources/images/og_image.jpg" />
 
 
   <style>
@@ -469,82 +475,160 @@ layout: default
     transform: scale(0.98);
   }
 
-  /* === Chart Hotspot Interactive Tooltip === */
-  .chart-hotspot {
-    position: absolute;
-    cursor: pointer;
-    z-index: 10;
-  }
+  /* === Global overflow guards === */
+  html, body { overflow-x: hidden; }
+  #BibTeX pre { overflow-x: auto; max-width: 100%; }
+  #BibTeX code { white-space: pre; }
 
-  .chart-tooltip {
-    position: absolute;
-    bottom: calc(65%);
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
-
-    /* 气泡框样式 */
-    background: white;
-    border: 1.5px solid #333;
-    border-radius: 0;
-    padding: 18px 22px;
+  /* === Venue badge === */
+  .venue-badge {
+    display: inline-block;
+    margin: 0.9rem auto 0.4rem;
+    padding: 0.45rem 1.2rem;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.75);
     box-shadow: 2.5px 2.5px 0 0 #000;
-
-    /* 字体样式 */
     font-family: 'Courier New', monospace;
-    color: #000;
-    white-space: nowrap;
-
-    /* 默认隐藏 */
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
-    z-index: 9999;
-    min-width: 300px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    font-size: 1.1rem;
+    color: #0F5F28;
+  }
+  @media (max-width: 768px) {
+    .venue-badge { font-size: 0.8rem; padding: 0.35rem 0.8rem; }
   }
 
-  .chart-hotspot:hover .chart-tooltip {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
+  /* === Sticky navigation === */
+  #site-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 900;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #e3e3e3;
+    transform: translateY(-100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
-
-  .tooltip-title {
-    font-size: 16px;
-    font-weight: bold;
-    color: #000;
-    margin-bottom: 12px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #e0e0e0;
-  }
-
-  .tooltip-item {
-    font-size: 14px;
-    color: #333;
-    line-height: 2;
+  #site-nav.is-visible { transform: translateY(0); }
+  #site-nav .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
+    padding: 0 1rem;
   }
-
-  .tooltip-item span {
-    font-size: 16px;
+  #site-nav .nav-brand {
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    color: #0F5F28;
+    font-size: 1.05rem;
+    padding: 0.7rem 0.6rem 0.7rem 0;
+    flex: 0 0 auto;
   }
-
-  /* 响应式调整 */
+  #site-nav .nav-links {
+    display: flex;
+    gap: 0.15rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex: 1 1 auto;
+  }
+  #site-nav .nav-links::-webkit-scrollbar { display: none; }
+  #site-nav .nav-links a {
+    white-space: nowrap;
+    padding: 0.75rem 0.7rem;
+    font-size: 0.92rem;
+    color: #444;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  #site-nav .nav-links a:hover { color: #0F5F28; }
+  #site-nav .nav-links a.is-current {
+    color: #0F5F28;
+    font-weight: 700;
+    border-bottom-color: #0F5F28;
+  }
   @media (max-width: 768px) {
-    .chart-tooltip {
-      min-width: 250px;
-      font-size: 12px;
-    }
+    #site-nav .nav-brand { font-size: 0.9rem; }
+    #site-nav .nav-links a { padding: 0.65rem 0.5rem; font-size: 0.82rem; }
+  }
 
-    .tooltip-title {
-      font-size: 14px;
-    }
+  /* === Chart areas === */
+  .chart-hint {
+    text-align: center;
+    color: #999;
+    font-size: 0.95rem;
+    font-style: italic;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+  }
+  .analysis-card .chart-area {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin-bottom: 20px;
+  }
+  .analysis-card .chart-area canvas { width: 100% !important; height: 100% !important; }
+  @media (max-width: 768px) {
+    .analysis-card .chart-area { height: 260px; }
+  }
 
-    .tooltip-item {
-      font-size: 12px;
-    }
+  /* === Position-generalization heatmaps === */
+  .heatmap-area { height: auto; }
+  .heatmap-pair {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    font-family: 'Courier New', monospace;
+  }
+  .heatmap-block { flex: 1 1 0; max-width: 260px; }
+  .heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    aspect-ratio: 1 / 1;
+    border: 2px solid transparent;
+  }
+  .heatmap-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    aspect-ratio: 1 / 1;
+    border-radius: 2px;
+    cursor: default;
+  }
+  .heatmap-cell.is-seen { box-shadow: inset 0 0 0 1.5px #000; }
+  .heatmap-caption {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #333;
+  }
+  .heatmap-legend {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.7rem;
+    color: #666;
+    padding-top: 0.2rem;
+  }
+  .heatmap-legend-bar {
+    width: 10px;
+    height: 150px;
+    background: linear-gradient(to top, #F7F7F7, #A6D9AE, #1B4F29);
+    border: 1px solid #ccc;
+  }
+  .heatmap-legend-label { writing-mode: vertical-rl; font-size: 0.65rem; margin-top: 0.3rem; }
+  @media (max-width: 768px) {
+    .heatmap-cell { font-size: 0.65rem; }
+    .heatmap-legend-bar { height: 110px; }
   }
   </style>
 </head>
@@ -553,18 +637,36 @@ layout: default
 <body>
   <!-- Main Content -->
   <div id="main-content">
+
+  <!-- Sticky navigation -->
+  <nav id="site-nav" aria-label="Section navigation">
+    <div class="nav-inner">
+      <span class="nav-brand">SimHum</span>
+      <div class="nav-links">
+        <a href="#abstract">Abstract</a>
+        <a href="#data-collection">Data</a>
+        <a href="#approach">Approach</a>
+        <a href="#real-world">Results</a>
+        <a href="#decoupling">Decoupling</a>
+        <a href="#scalability">Scaling</a>
+        <a href="#baseline-failures">Failures</a>
+        <a href="#BibTeX">BibTeX</a>
+      </div>
+    </div>
+  </nav>
+
   <!-- Background Video -->
   <section class="hero is-link is-fullheight video" style="overflow: hidden; position: relative;">
     
     <!-- Background Video -->
     <!-- Desktop Splash -->
     <div class="hero-video desktop-only" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden;">
-      <video preload="auto" playsinline autoplay muted loop style="width: 100%; height: 100%; object-fit: cover; object-position: center bottom;" poster="./resources/images/website_background_poster.jpg">
+      <video preload="metadata" playsinline autoplay muted loop style="width: 100%; height: 100%; object-fit: cover; object-position: center bottom;" poster="./resources/images/website_background_poster.jpg">
         <source src="./resources/video/website_background.mp4"  type="video/mp4">
       </video>
     </div>
 
-    <!-- Mobile Splash -->
+
     <!-- Commented out: Mobile background video file is missing
     <div class="hero-video mobile-only" style="height: 100%; width: 100vw; min-height: 100vh; position: absolute; top: 0; left: 0; z-index: 1;">
       <video preload="auto" playsinline autoplay muted loop style="object-fit: cover; width: 100%; height: 100%;" poster="./resources/images/phone_poster.png">
@@ -598,11 +700,12 @@ layout: default
     <div class="hero-body" style="position: relative; z-index: 3;">
       <div class="container has-text-centered" style="background: rgba(255, 255, 255, 0.40); padding: 3rem 2rem; border-radius: 20px; backdrop-filter: blur(10px);max-width: 1400px;">
         <img src="./resources/images/logo.png"
-          alt="Sim & Human Logo"
+          alt="SimHum project logo"
           style="width: 50%; max-width: 400px; height: auto; margin-bottom: 2rem;"> 
         <h1 class="subtitle is-1 publication-title is-size-4-mobile" style="font-size: 4rem; color: #1a1a1a;">
-          Sim-and-Human Co-training for Data-Efficient and Generalizable Robotic Manipulation
+          SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bimanual Manipulation
         </h1>
+        <div class="venue-badge">Conference on Robot Learning (CoRL) 2026</div>
         <span class="author-block is-size-6-mobile is-size-3-tablet is-size-3-desktop"  style="color: #333; font-size: 1.6rem !important;">
           <u><a href="https://kaipengfang.github.io/">Kaipeng Fang</a></u><sup>1</sup>&nbsp;&nbsp;
           <u><a href="https://github.com/weiqing11/">Weiqing Liang</a></u><sup>1</sup>&nbsp;&nbsp;
@@ -610,9 +713,9 @@ layout: default
           <u><a href="https://jimzai.github.io/">Ji Zhang</a></u><sup>2</sup>&nbsp;&nbsp;
           <u><a href="https://ppengzeng.github.io/">Pengpeng Zeng</a></u><sup>3</sup>&nbsp;&nbsp;
           <br>
-          <u><a href="https://lianligao.github.io/">Lianli Gao</a></u><sup>1</sup>&nbsp;&nbsp;
           <u><a href="https://cfm.uestc.edu.cn/~shenht/">Heng Tao Shen</a></u><sup>3</sup>&nbsp;&nbsp;
           <u><a href="https://jingkuansong.github.io/">Jingkuan Song</a></u><sup>3,4</sup>&nbsp;&nbsp;
+          <u><a href="https://lianligao.github.io/">Lianli Gao</a></u><sup>1&dagger;</sup>&nbsp;&nbsp;
         </span>
         <h1 class="is-2 is-italic is-size-6-mobile" style="font-size: 1.5rem; color: #333;">
           <br>
@@ -624,6 +727,7 @@ layout: default
 
           <sup>4</sup>Shanghai Innovation Institute&nbsp;&nbsp;
         </h1>
+        <p class="is-size-7-mobile" style="font-size: 1.05rem; color: #444; margin-top: 0.6rem;"><sup>&dagger;</sup>Corresponding author.</p>
         <br>
         <div class="publication-links">
           <!-- twitter Link. -->
@@ -648,7 +752,7 @@ layout: default
             </span>
           <!-- PDF Link. -->
           <span class="link-block">
-            <a href="./resources/pdf/sim-and-human co-trainging.pdf"
+            <a href="./resources/pdf/simhum_corl2026.pdf"
                class="external-link button is-normal is-rounded is-dark">
               <span class="icon">
                   <i class="fas fa-file-pdf"></i>
@@ -685,7 +789,7 @@ layout: default
   <section class="section">
     <div class="container">
       <div class="video-wrapper" style="position: relative; width: 100%;" data-aos="fade-up">
-        <video id="teaser" muted loop playsinline controls preload="none" poster="./resources/images/video cover.png" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); display: block;">
+        <video id="teaser" muted loop playsinline controls preload="none" poster="./resources/images/video_cover.jpg" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); display: block;">
           <source src="./resources/video/introduction_video.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
@@ -695,7 +799,10 @@ layout: default
       </div>
       <div class="content has-text-justified" style="margin-top: 1.5rem;" data-aos="fade-up" data-aos-delay="100">
         <p style="font-size: 1.15rem; line-height: 1.8; color: #333;">
-          <strong style="font-weight: 800; color: #1a1a1a;">SimHum unifies transferable actions from simulation with realistic visuals from human data to achieve data-efficient and generalizable robotic manipulation.</strong> In this video, we demonstrate how our co-training framework leverages the inherent complementarity of these sources. Empirically, SimHum outperforms the baseline by up to <b style="font-weight: 700; color: #1a1a1a;">35%</b> under the same data budget, , and achieves relative improvements of up to <b style="font-weight: 700; color: #1a1a1a;">7.1x</b> compared to the real-only baseline in unseen environments.
+          <strong style="font-weight: 800; color: #1a1a1a;">SimHum co-trains a bimanual manipulation policy on simulation data and human demonstrations, then fine-tunes it on a small real-robot dataset.</strong>
+          Simulation supplies robot-valid actions. Human demonstrations supply real-world observations. This video walks through the recipe and the real-robot results.
+          With only 80 real-robot episodes per task, SimHum reaches a <b style="font-weight: 700; color: #1a1a1a;">62.5%</b> average success rate on held-out OOD scenes. That is <b style="font-weight: 700; color: #1a1a1a;">53.7%</b> higher than Real only in absolute success rate.
+          Under matched collection time, SimHum is <b style="font-weight: 700; color: #1a1a1a;">35.0%</b> higher than the best single-source pre-training baseline in absolute success rate.
         </p>
       </div>
     </div>
@@ -704,11 +811,11 @@ layout: default
   <section class="section section-alt">
     <div class="container">
       <h2 class="title is-2 is-size-3-mobile" id="abstract">Abstract</h2>
-      <img src="./resources/images/Introduction.png" style="width: 100%; display: block; margin-bottom: 20px;" data-aos="zoom-in" alt="Teaser Image">
+      <img src="./resources/images/fig1.png" style="width: 100%; display: block; margin-bottom: 20px;" data-aos="zoom-in" alt="Overview of SimHum: (a) the sim-to-real visual gap, (b) the human-to-robot embodiment gap, (c) the SimHum co-training framework, and (d) OOD generalization and data-efficiency results.">
       <div class="container mb-6" data-aos="fade-up" data-aos-delay="100">
         <div class="content has-text-justified" style="font-size: 1.15rem; line-height: 1.8; color: #333;">
           <p>
-            Synthetic simulation data and real-world human data provide scalable alternatives to circumvent the prohibitive costs of robot data collection. However, these sources suffer from the <em>sim-to-real visual gap</em> <strong style="font-family: 'Consolas', 'Courier New', monospace; font-weight: 700; color: #000; font-size: 1.2rem;">(a)</strong> and the <em>human-to-robot embodiment gap</em> <strong style="font-family: 'Consolas', 'Courier New', monospace; font-weight: 700; color: #000; font-size: 1.2rem;">(b)</strong>, respectively, which limits the policy's generalization to real-world scenarios. In this work, we identify a natural yet underexplored complementarity between these sources: simulation offers the robot action that human data lacks, while human data provides the real-world observation that simulation struggles to render. Motivated by this insight, we present SimHum, a co-training framework to simultaneously extract kinematic prior from simulated robot actions and visual prior from real-world human observations <strong style="font-family: 'Consolas', 'Courier New', monospace; font-weight: 700; color: #000; font-size: 1.2rem;">(c)</strong>. Based on the two complementary priors, we achieves data-efficient and generalizable robotic manipulation in real-world tasks. Empirically, SimHum outperforms the baseline by up to 35% under the same data collection budget, and achieves a 62.5% average success rate, showing relative improvements of up to 7.1× compared to the real-only baseline <strong style="font-family: 'Consolas', 'Courier New', monospace; font-weight: 700; color: #000; font-size: 1.2rem;">(d)</strong>.
+            Real-robot demonstrations are prohibitively expensive, while simulation data and real-world human demonstrations are both scalable but each leaves a distinct gap&mdash;simulation suffers from a <em>sim-to-real visual gap</em> <strong style="font-family: 'Consolas', 'Courier New', monospace; font-weight: 700; color: #000; font-size: 1.2rem;">(a)</strong>, and human data suffers from a <em>human-to-robot embodiment gap</em> <strong style="font-family: 'Consolas', 'Courier New', monospace; font-weight: 700; color: #000; font-size: 1.2rem;">(b)</strong>. In this work, we identify a natural yet underexplored complementarity between these sources: simulation contributes robot-valid actions absent in human data, while human data provides real-world observations that simulation struggles to render. Building on this insight, we present <b>SimHum</b>, a co-training recipe that extracts kinematic priors from simulation and visual priors from human observations, then fine-tunes on a small real-robot dataset <strong style="font-family: 'Consolas', 'Courier New', monospace; font-weight: 700; color: #000; font-size: 1.2rem;">(c)</strong>. SimHum exhibits strong scene-generalizable and data-efficient capabilities. With only <b>80</b> real-robot episodes per task, it achieves <b>62.5%</b> success on held-out OOD scenes across four bimanual tabletop tasks, <b>53.7%</b> higher than Real only in absolute success rate. Moreover, in a controlled data-collection study with matched collection time, SimHum improves over the best single-source pre-training baseline by <b>35.0%</b> in absolute success rate <strong style="font-family: 'Consolas', 'Courier New', monospace; font-weight: 700; color: #000; font-size: 1.2rem;">(d)</strong>.
           </p>
         </div>
       </div>
@@ -875,12 +982,15 @@ layout: default
         </div>
       </div>
 
-      <!-- Subsection 2: Human Data Collection System -->
-      <h3 class="title is-5 is-size-6-mobile" id="collection-system" style="margin-top: 4rem; margin-bottom: 1rem;">Human Data Collection System</h3>
+      <!-- Subsection 2: Data Collection Systems -->
+      <h3 class="title is-5 is-size-6-mobile" id="collection-system" style="margin-top: 4rem; margin-bottom: 1rem;">Data Collection Systems</h3>
       <div class="content has-text-justified" data-aos="fade-up" style="font-size: 1.1rem; line-height: 1.8; color: #333; margin-bottom: 1.5rem;">
         <p>
-          Our human data collection system consists of hardware devices, a real-time GUI interface, and synchronized recording capabilities. The system ensures high-quality data capture with frame-level synchronization between GUI telemetry and scene observations.
+          We use three pipelines. Simulation data is generated automatically on top of RoboTwin 2.0. Real-robot data is teleoperated on COBOT Magic with a leader&ndash;follower system. Human data is collected with a VR interface and a stationary camera. Simulation shares identical kinematics with the real robot, and human data shares an identical camera, so all three sources cover the same tasks with complementary priors.
         </p>
+      </div>
+      <div class="content" data-aos="zoom-in" style="margin-bottom: 2rem;">
+        <img src="./resources/images/data_collection.png" style="width: 100%; display: block; border-radius: 8px;" alt="Overview of the three data collection systems: automated simulation generation, real-robot teleoperation on COBOT Magic, and human data collection with a VR interface and a stationary camera.">
       </div>
       <div class="content" data-aos="fade-up" style="text-align: center; margin-top: 1rem; margin-bottom: 1.5rem;">
        
@@ -901,7 +1011,7 @@ layout: default
       <!-- Hardware Image Display (Default) -->
       <div class="collection-display" id="hardware-display" data-aos="fade-up">
         <div class="hardware-image-container">
-          <img src="./resources/images/human_collection_system.png" alt="Hardware Setup" class="hardware-image">
+          <img src="./resources/images/human_collection_system.png" alt="Human data collection hardware: VR headset, stationary ego camera, and recording pedal" class="hardware-image">
          
         </div>
       </div>
@@ -1152,20 +1262,20 @@ layout: default
     <div class="video-display" data-aos="fade-up">
         <div class="video-box">
             <h3><i class="fas fa-desktop" style="color: #48c774; margin-right: 8px;"></i>Simulation Data</h3>
-            <video id="Simulation_video" autoplay loop muted playsinline>
-                <source src="./resources/video/dataset/simulation/click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
+            <video id="Simulation_video" autoplay loop muted playsinline preload="none" data-lazy>
+                <source data-src="./resources/video/dataset/simulation/click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
         </div>
         <div class="video-box">
             <h3><i class="fas fa-hand-paper" style="color: #ffaa00; margin-right: 8px;"></i>Human Data</h3>
-            <video id="Human_video" autoplay loop muted playsinline>
-                <source src="./resources/video/dataset/human/click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
+            <video id="Human_video" autoplay loop muted playsinline preload="none" data-lazy>
+                <source data-src="./resources/video/dataset/human/click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
         </div>
         <div class="video-box">
             <h3><i class="fas fa-robot" style="color: #3273dc; margin-right: 8px;"></i>Real Robot Data</h3>
-            <video id="Real-Robot_video" autoplay loop muted playsinline>
-                <source src="./resources/video/dataset/real_world/click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
+            <video id="Real-Robot_video" autoplay loop muted playsinline preload="none" data-lazy>
+                <source data-src="./resources/video/dataset/real_world/click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
         </div>
     </div>
@@ -1395,7 +1505,7 @@ layout: default
   <section class="section section-alt">
     <div class="container">
       <h2 class="title is-2 is-size-3-mobile" id="approach">Approach</h2>
-      <img src="./resources/images/model.png" style="width: 100%; display: block; margin-bottom: 20px;" data-aos="zoom-in" alt="Teaser Image">
+      <img src="./resources/images/model.png" style="width: 100%; display: block; margin-bottom: 20px;" data-aos="zoom-in" alt="SimHum architecture: (a) Sim-and-Human pre-training with modular action encoders and decoders plus domain-specific vision adaptors, and (b) real-robot fine-tuning with the retained modules.">
       <div class="container mb-6" data-aos="fade-up" data-aos-delay="100">
         <div class="content has-text-justified" style="font-size: 1.15rem; line-height: 1.8; color: #333;">
           <p>
@@ -1413,7 +1523,7 @@ layout: default
       <div class="content has-text-justified" style="font-size: 1.15rem; line-height: 1.8; color: #333; margin-top: 1.5rem;" data-aos="fade-up">
         <p>
           We evaluate the <b>SimHum</b> under <b>In-Distribution (ID)</b> and <b>Out-of-Distribution (OOD)</b> settings.
-          While baselines degrade significantly in OOD scenarios (featuring unseen background textures, distractors, and extreme lighting), SimHum maintains robust performance.  SimHum achieves relative improvements of up to <b style="font-weight: 700; color: #1a1a1a;">7.1×</b> compared to the real-only baseline in these challenging unseen environments.
+          While baselines degrade significantly in OOD scenarios (featuring unseen background textures, distractors, and extreme lighting), SimHum maintains robust performance. With only 80 real-robot episodes per task, SimHum reaches a <b style="font-weight: 700; color: #1a1a1a;">62.5%</b> average OOD success rate. That is <b style="font-weight: 700; color: #1a1a1a;">53.7%</b> higher than Real only in absolute success rate.
         </p>
       </div>
 
@@ -1429,8 +1539,8 @@ layout: default
       <div class="task-group">
         <div class="video-grid-four" data-aos="fade-up">
           <div class="grid-item">
-              <video id="Clean_video" autoplay loop muted playsinline>
-                  <source src="./resources/video/inference/ours/click_bell/clean_click_bell.mp4" type="video/mp4">
+              <video id="Clean_video" autoplay loop muted playsinline preload="none" data-lazy>
+                  <source data-src="./resources/video/inference/ours/click_bell/clean_click_bell.mp4" type="video/mp4">
               </video>
               <div class="badge success" style="margin-top: 10px; margin-bottom: 10px;"
                   data-tooltip="A simple scene contains only the target object, without changes in lighting, tabletop, or distractions.">
@@ -1438,8 +1548,8 @@ layout: default
               </div>
           </div>
           <div class="grid-item">
-              <video id="Red_video" autoplay loop muted playsinline>
-                  <source src="./resources/video/inference/ours/click_bell/red_click_bell.mp4" type="video/mp4">
+              <video id="Red_video" autoplay loop muted playsinline preload="none" data-lazy>
+                  <source data-src="./resources/video/inference/ours/click_bell/red_click_bell.mp4" type="video/mp4">
               </video>
               <div class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
                    data-tooltip="Complex Scene 1: including a yellow flashlight, a red checkered tablecloth, 3 fruits, and 3 toy distractions.">
@@ -1447,8 +1557,8 @@ layout: default
               </div>
           </div>
           <div class="grid-item">
-              <video id="Yellow_video" autoplay loop muted playsinline>
-                  <source src="./resources/video/inference/ours/click_bell/yellow_click_bell.mp4" type="video/mp4">
+              <video id="Yellow_video" autoplay loop muted playsinline preload="none" data-lazy>
+                  <source data-src="./resources/video/inference/ours/click_bell/yellow_click_bell.mp4" type="video/mp4">
               </video>
               <div class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
                    data-tooltip="Complex Scene 2: including an indoor low-light condition, a yellow checkered tablecloth, 3 fruits, and 3 toy distractions.">
@@ -1456,8 +1566,8 @@ layout: default
               </div>
           </div>
           <div class="grid-item">
-              <video id="Grey_video" autoplay loop muted playsinline>
-                  <source src="./resources/video/inference/ours/click_bell/grey_click_bell.mp4" type="video/mp4">
+              <video id="Grey_video" autoplay loop muted playsinline preload="none" data-lazy>
+                  <source data-src="./resources/video/inference/ours/click_bell/grey_click_bell.mp4" type="video/mp4">
               </video>
               <div class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
                    data-tooltip="Complex Scene 3: including a blue flash, a dark gray striped tablecloth, 3 fruits, and 3 toy distractions.">
@@ -1469,8 +1579,8 @@ layout: default
         <h4 class="title is-5" style="margin-top: 2rem; margin-bottom: 1rem; color: #d9534f;">Out-of-Distribution (OOD)</h4>
         <div class="video-grid-two" data-aos="fade-up">
           <div class="grid-item">
-            <video id="Hard1_video" autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/click_bell/hard1_click_bell.mp4" type="video/mp4">
+            <video id="Hard1_video" autoplay loop muted playsinline preload="none" data-lazy>
+                <source data-src="./resources/video/inference/ours/click_bell/hard1_click_bell.mp4" type="video/mp4">
             </video>
             <div class="badge danger" style="margin-top: 10px; margin-bottom: 10px;"
                 data-tooltip="Extreme Complex Scene 1: including a red flashlight, a heavily wrinkled light gray tablecloth, 4 fruits, and 6 toy distractors. The lighting, tablecloth, and task object do not exist in all training dataset sources.">
@@ -1478,8 +1588,8 @@ layout: default
             </div>
           </div>
           <div class="grid-item">
-            <video id="Hard2_video" autoplay loop muted playsinline>
-                <source src="./resources/video/inference/ours/click_bell/hard2_click_bell.mp4" type="video/mp4">
+            <video id="Hard2_video" autoplay loop muted playsinline preload="none" data-lazy>
+                <source data-src="./resources/video/inference/ours/click_bell/hard2_click_bell.mp4" type="video/mp4">
             </video>
             <div class="badge danger" style="margin-top: 10px; margin-bottom: 10px;"
                 data-tooltip="Extreme Complex Scene 2: including a green flashlight, a heavily wrinkled white tablecloth with daisies, 3 fruits, and 6 toy distractors.The lighting, tablecloth, and task object do not exist in all training dataset sources.">
@@ -1580,25 +1690,6 @@ layout: default
       margin-bottom: 24px;
     }
 
-    /* 图片区域：固定高度空间 */
-    .analysis-card .img-area {
-      flex: 0 0 auto;
-      height: 380px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      border-radius: 12px;
-      overflow: visible;
-      background: #fff;
-    }
-
-    .analysis-card .img-area img {
-      max-height: 100%;
-      max-width: 100%;
-      object-fit: contain;
-    }
-
     /* 文字区域：自动填充剩余空间 */
     .analysis-card .text-area {
       flex: 1 1 auto;
@@ -1608,10 +1699,6 @@ layout: default
     @media (max-width: 768px) {
       .analysis-card {
         padding: 20px;
-      }
-
-      .analysis-card .img-area {
-        height: 280px;
       }
     }
   </style>
@@ -1626,56 +1713,17 @@ layout: default
   <section class="section section-alt">
     <div class="container mb-6">
       <h2 class="title is-2 is-size-3-mobile" id="decoupling">Decoupling the Effects: Why Both Sources Matter</h2>
-      <p style="text-align: center; color: #999; font-size: 0.95rem; font-style: italic; margin-top: 0.5rem; margin-bottom: 0;" data-aos="fade-up"><i class="fas fa-info-circle" style="margin-right: 5px;"></i>Hover over the charts to view detailed data</p>
+      <p class="chart-hint" data-aos="fade-up"><i class="fas fa-info-circle" style="margin-right: 5px;"></i>Hover or tap the charts to read exact values (mean &plusmn; standard error)</p>
 
       <div class="columns is-centered is-variable is-8" style="margin-top: 20px;">
 
-        <div class="column is-half" data-aos="fade-up" style="z-index: 100; position: relative;">
+        <div class="column is-half" data-aos="fade-up">
           <div class="analysis-card">
-            <h4 class="title is-4 has-text-centered">Human Data <span style="color: #3273dc;">→</span> Visual Generalization</h4>
-
-            <div class="img-area">
-              <div style="position: relative; width: 100%; height: 100%;">
-                <img src="./resources/images/factor_ablation_no_randomsim.png" alt="Human Data Analysis" style="width: 100%; height: 100%; display: block; border-radius: 8px;">
-
-                <!-- 交互热区层 -->
-                <div class="chart-hotspot" style="left: 8%; top: 15%; width: 18%; height: 70%;">
-                  <div class="chart-tooltip">
-                    <div class="tooltip-title">Background Diversity</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #0F5F28; border: 1.5px solid #000;"></span> <b>SimHum (Full):</b> 80.0% ± 8.9</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #F2C641; border: 1.5px solid #000;"></span> <b>SimHum (w/o Factor):</b> 20.0% ± 8.9</div>
-                  </div>
-                </div>
-
-                <div class="chart-hotspot" style="left: 32%; top: 15%; width: 18%; height: 70%;">
-                  <div class="chart-tooltip">
-                    <div class="tooltip-title">Distractor Diversity</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #0F5F28; border: 1.5px solid #000;"></span> <b>SimHum (Full):</b> 75.0% ± 10.7</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #F2C641; border: 1.5px solid #000;"></span> <b>SimHum (w/o Factor):</b> 35.0% ± 9.7</div>
-                  </div>
-                </div>
-
-                <div class="chart-hotspot" style="left: 56%; top: 15%; width: 18%; height: 70%;">
-                  <div class="chart-tooltip">
-                    <div class="tooltip-title">Lighting Diversity</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #0F5F28; border: 1.5px solid #000;"></span> <b>SimHum (Full):</b> 75.0% ± 11.2</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #F2C641; border: 1.5px solid #000;"></span> <b>SimHum (w/o Factor):</b> 50.0% ± 9.7</div>
-                  </div>
-                </div>
-
-                <div class="chart-hotspot" style="left: 80%; top: 15%; width: 18%; height: 70%;">
-                  <div class="chart-tooltip">
-                    <div class="tooltip-title">Object Diversity</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #0F5F28; border: 1.5px solid #000;"></span> <b>SimHum (Full):</b> 80.0% ± 11.2</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #F2C641; border: 1.5px solid #000;"></span> <b>SimHum (w/o Factor):</b> 50.0% ± 8.9</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="text-area content has-text-justified" style="font-size: 1.1rem; line-height: 1.6;">
+            <h4 class="title is-4 has-text-centered">Human Data <span style="color: #3273dc;">&rarr;</span> Visual Generalization</h4>
+            <div class="chart-area"><canvas id="chart-factor" aria-label="Leave-one-factor-out ablation on human data" role="img"></canvas></div>
+            <div class="text-area content has-text-justified">
               <p>
-                Human data provides diverse visual priors. As shown in the ablation study, excluding background diversity (<span style="font-family: 'Consolas', monospace;">F_bg</span>) causes a sharp performance drop (<b style="color: #d9534f;">-60%</b>), highlighting its critical role in handling real-world visual perturbations.
+                We remove one diversity factor at a time from the human dataset and evaluate on the OOD scenario that probes that factor. Removing any factor lowers OOD success rate. Removing background diversity has the largest effect, from 80.0% to 20.0% <b style="color: #9D1616;">(-60%)</b>. Human data supplies a visual prior that transfers to real-world scenes.
               </p>
             </div>
           </div>
@@ -1683,15 +1731,20 @@ layout: default
 
         <div class="column is-half" data-aos="fade-up" data-aos-delay="100">
           <div class="analysis-card">
-            <h4 class="title is-4 has-text-centered">Simulation <span style="color: #3273dc;">→</span> Spatial Robustness</h4>
-
-            <div class="img-area">
-              <img src="./resources/images/position_ablation.png" alt="Sim Data Analysis" style="border-radius: 8px;">
+            <h4 class="title is-4 has-text-centered">Simulation <span style="color: #3273dc;">&rarr;</span> Spatial Robustness</h4>
+            <div class="chart-area heatmap-area">
+              <div class="heatmap-pair">
+                <div class="heatmap-block"><div class="heatmap-grid" id="heat-humreal"></div><div class="heatmap-caption">HumReal</div></div>
+                <div class="heatmap-block"><div class="heatmap-grid" id="heat-simhum"></div><div class="heatmap-caption">SimHum (Ours)</div></div>
+                <div class="heatmap-legend">
+                  <span>20</span><div class="heatmap-legend-bar"></div><span>100</span>
+                  <div class="heatmap-legend-label">Task Progress (%)</div>
+                </div>
+              </div>
             </div>
-
-            <div class="text-area content has-text-justified" style="font-size: 1.1rem; line-height: 1.6;">
+            <div class="text-area content has-text-justified">
               <p>
-                 Simulation data provides dense kinematic coverage. The heatmap demonstrates that SimHum generalizes significantly better to <b>unseen object positions</b> (outer grid), improving performance by <b style="color: #28a745;">+36.7%</b> compared to human-only pre-training.
+                Objects start on a 4&times;4 grid in an OOD scene. Human and real-robot demonstrations cover only the inner 3&times;3 cells (outlined in black); simulation samples positions continuously over a broader range. HumReal degrades most at the unseen outer cells. SimHum extends generalization to unseen areas by <b style="color: #0F5F28;">+36.7%</b> over HumReal in absolute PR.
               </p>
             </div>
           </div>
@@ -1704,55 +1757,21 @@ layout: default
   <section class="section">
     <div class="container mb-6">
       <h2 class="title is-2 is-size-3-mobile" id="scalability">Data Efficiency and Performance Scalability</h2>
-      <p style="text-align: center; color: #999; font-size: 0.95rem; font-style: italic; margin-top: 0.5rem; margin-bottom: 0;" data-aos="fade-up"><i class="fas fa-info-circle" style="margin-right: 5px;"></i>Hover over the charts to view detailed data</p>
+      <p class="chart-hint" data-aos="fade-up"><i class="fas fa-info-circle" style="margin-right: 5px;"></i>Hover or tap the charts to read exact values (mean &plusmn; standard error)</p>
+      <div class="content has-text-centered" style="color: #666; font-size: 0.95rem; margin-top: 0.25rem;">
+        All three studies are run on <i>Stack Bowls Two</i> under OOD.
+      </div>
 
-      <div class="columns is-centered is-variable is-8" style="margin-top: 20px;">
+      <div class="columns is-centered is-variable is-6 is-multiline" style="margin-top: 20px;">
         <div class="column is-half" data-aos="fade-up">
           <div class="analysis-card">
-            <h4 class="title is-4 has-text-centered">Data Efficiency</h4>
-
-            <div class="img-area">
-              <div style="position: relative; width: 100%; height: 100%;">
-                <img src="./resources/images/time_scaling.png" alt="Data Efficiency Chart" style="width: 100%; height: 100%; display: block; border-radius: 8px;">
-
-                <!-- 交互热区层 -->
-                <!-- 第一组：8 demos -->
-                <div class="chart-hotspot" style="left: 13%; top: 15%; width: 18%; height: 70%;">
-                  <div class="chart-tooltip">
-                    <div class="tooltip-title">2 hours of data</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #F2C641; border: 1.5px solid #000;"></span> <b>Real Only:</b> 15.0% ± 8.0</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #0F5F28; border: 1.5px solid #000;"></span> <b>SimHum (Ours):</b> 30.0% ± 10.3</div>
-                  </div>
-                </div>
-
-                <!-- 第二组：40 demos -->
-                <div class="chart-hotspot" style="left: 36%; top: 15%; width: 18%; height: 70%;">
-                  <div class="chart-tooltip">
-                    <div class="tooltip-title">4 hours of data</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #F2C641; border: 1.5px solid #000;"></span> <b>Real Only:</b> 15.0% ± 8.0</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #0F5F28; border: 1.5px solid #000;"></span> <b>SimHum (Ours):</b> 40.0% ± 11.0</div>
-                  </div>
-                </div>
-
-                <!-- 第三组：160 demos -->
-                <div class="chart-hotspot" style="left: 59%; top: 15%; width: 36%; height: 70%;">
-                  <div class="chart-tooltip">
-                    <div class="tooltip-title">8 hours of data</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #D9D9D9; border: 1.5px solid #000;"></span> <b>HumReal:</b> 20.0% ± 8.9</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #F2C641; border: 1.5px solid #000;"></span> <b>Real Only:</b> 25.0% ± 9.7</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #90C987; border: 1.5px solid #000;"></span> <b>SimReal:</b> 30.0% ± 10.3</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #0F5F28; border: 1.5px solid #000;"></span> <b>SimHum (Ours):</b> 70.0% ± 10.3</div>
-                    
-                   
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="text-area content has-text-justified" style="font-size: 1.1rem; line-height: 1.6;">
+            <h4 class="title is-4 has-text-centered">(a) Matched Collection-Time Budget</h4>
+            <div class="chart-area"><canvas id="chart-budget" aria-label="Success rate under matched 2, 4 and 8 hour collection-time budgets" role="img"></canvas></div>
+            <div class="text-area content has-text-justified">
               <p>
-                <strong style="font-weight: 800; color: #1a1a1a;">SimHum is significantly more data-efficient.</strong>
-                It matches the baseline performance using <b style="font-weight: 700; color: #1a1a1a;">20x less real-world data</b> (achieving comparable results with only 8 real demos vs. 160 demos for the baseline).
+                <strong style="font-weight: 800; color: #1a1a1a;">SimHum is more data-efficient under a fixed collection budget.</strong>
+                SimHum splits each budget evenly between real-robot teleoperation and human collection. Simulation is generated in parallel and is not charged against any method's budget. At 8&nbsp;h, SimHum uses 80R+400S+400H, SimReal uses 160R+400S, HumReal uses 80R+400H, and Real only uses 160R.
+                SimHum beats Real only at every budget, by 45.0% in absolute SR at 8&nbsp;h. At 8&nbsp;h it is 35.0% above SimReal and 50.0% above HumReal in absolute SR.
               </p>
             </div>
           </div>
@@ -1760,66 +1779,23 @@ layout: default
 
         <div class="column is-half" data-aos="fade-up" data-aos-delay="100">
           <div class="analysis-card">
-            <h4 class="title is-4 has-text-centered">Performance Scalability</h4>
-
-            <div class="img-area">
-              <div style="position: relative; width: 100%; height: 90%; top: 3%">
-                <img src="./resources/images/data_scaling.png" alt="Data Scaling Chart" style="width: 100%; height: 100%; display: block; border-radius: 8px;">
-
-                <!-- 交互热区层 -->
-                <!-- 第一组：8 demos -->
-                <div class="chart-hotspot" style="left: 16%; top: 30%; width: 4%; height: 50%;">
-                  <div class="chart-tooltip">
-                    <div class="tooltip-title">8 Real Demos</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #6aa84f; border: 1.5px solid #000;"></span> <b>SimHum (Ours):</b> 55.0% ± 11.1</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #666666; border: 1.5px solid #000;"></span> <b>Real Only:</b> 38.3% ± 10.9</div>
-                  </div>
-                </div>
-
-                <!-- 第二组：19 demos -->
-                <div class="chart-hotspot" style="left: 22%; top: 25%; width: 4%; height: 50%;">
-                  <div class="chart-tooltip">
-                    <div class="tooltip-title">19 Real Demos</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #6aa84f; border: 1.5px solid #000;"></span> <b>SimHum (Ours):</b> 60.0% ± 11.0</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #666666; border: 1.5px solid #000;"></span> <b>Real Only:</b> 43.3% ± 11.1</div>
-                    
-                  </div>
-                </div>
-
-                <!-- 第三组：40 demos -->
-                <div class="chart-hotspot" style="left: 32%; top: 15%; width: 4%; height: 70%;">
-                  <div class="chart-tooltip">
-                    <div class="tooltip-title">40 Real Demos</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #6aa84f; border: 1.5px solid #000;"></span> <b>SimHum (Ours):</b> 65.0% ± 10.7</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #666666; border: 1.5px solid #000;"></span> <b>Real Only:</b> 45.0% ± 11.1</div>
-                    
-                  </div>
-                </div>
-
-                <!-- 第四组：80 demos -->
-                <div class="chart-hotspot" style="left: 52%; top: 5%; width: 4%; height: 80%;">
-                  <div class="chart-tooltip" style="left: auto; right: 0; transform: translateX(50%) translateY(-40%);">
-                    <div class="tooltip-title">80 Real Demos</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #6aa84f; border: 1.5px solid #000;"></span> <b>SimHum (Ours):</b> 83.3% ± 8.3</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #666666; border: 1.5px solid #000;"></span> <b>Real Only:</b> 48.3% ± 11.2</div>
-                  </div>
-                </div>
-
-                <!-- 第五组：160 demos -->
-                <div class="chart-hotspot" style="left: 90%; top: 5%; width: 4%; height: 80%;">
-                  <div class="chart-tooltip" style="left: auto; right: 0; transform: translateX(105%) translateY(50%);">
-                    <div class="tooltip-title">160 Real Demos</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #6aa84f; border: 1.5px solid #000;"></span> <b>SimHum (Ours):</b> 91.7% ± 6.2</div>
-                    <div class="tooltip-item"><span style="display: inline-block; width: 12px; height: 12px; background-color: #666666; border: 1.5px solid #000;"></span> <b>Real Only:</b> 58.3% ± 11.0</div>
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="text-area content has-text-justified" style="font-size: 1.1rem; line-height: 1.6;">
+            <h4 class="title is-4 has-text-centered">(b) Scaling Real-Robot Demonstrations</h4>
+            <div class="chart-area"><canvas id="chart-demo" aria-label="Task progress rate as the number of real-robot demonstrations grows from 8 to 160" role="img"></canvas></div>
+            <div class="text-area content has-text-justified">
               <p>
-                Our performance scales consistently with the size of pre-training datasets, suggesting continued improvements with larger simulation and human datasets. This demonstrates the scalability of our approach.
+                We vary the real-robot fine-tuning set from 8 to 160 demonstrations. SimHum outperforms Real only at every scale. With only 8 real demos, SimHum already reaches the level of Real only trained on 160 demos, in both PR and SR. Pre-training on simulation and human data yields priors that reduce reliance on real-robot data.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-half" data-aos="fade-up">
+          <div class="analysis-card">
+            <h4 class="title is-4 has-text-centered">(c) Scaling Pre-training Data</h4>
+            <div class="chart-area"><canvas id="chart-pretrain" aria-label="Task progress rate as one pre-training source is scaled from 0 to 500 episodes" role="img"></canvas></div>
+            <div class="text-area content has-text-justified">
+              <p>
+                We hold one pre-training source fixed at 500 episodes and sweep the other from 0 to 500. Either axis yields consistent gains in PR, so the two priors contribute independently. Both curves are still rising at 500 episodes, so neither source has saturated.
               </p>
             </div>
           </div>
@@ -1828,20 +1804,6 @@ layout: default
     </div>
   </section>
 
-
-
-  <!-- Results Section -->
-  <!-- <section class="section">
-    <div class="container">
-      <h2 class="title is-2 is-size-3-mobile">Results</h2>
-      <h3 class="title is-4" style="margin-top: 30px; margin-bottom: 30px;">OOD scene</h3>
-      <p style="margin-bottom: 20px;">
-        Training with <b>DexWild</b> data, our policies are capable of zero-shot transfer to a new robot arm and few-shot transfer to a new robot hand. 
-        This is because DexWild data is <b>embodiment-agnostic</b>. The cameras only capture task-relevant information and the human hand data can be retargeted to any end effector-we train on LEAP V2 Advanced and Xarm6 yet can transfer to Franka Panda arms and LEAP Hands. This enables us to deploy on entirely new robots, in unseen environments, and with never-before-seen objects.
-      </p>
-    </div>
-  </section> -->
-  
   <!-- Bad Case -->
   <section class="section section-alt">
     <div class="container">
@@ -1899,8 +1861,8 @@ layout: default
       <div class="video-display" data-aos="fade-up">
         <div class="video-box" data-baseline="realonly">
           <h3>Real Only</h3>
-          <video id="RealOnly_video" autoplay loop muted playsinline>
-            <source src="./resources/video/defeat/bell/R_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
+          <video id="RealOnly_video" autoplay loop muted playsinline preload="none" data-lazy>
+            <source data-src="./resources/video/defeat/bell/R_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
           </video>
           <div id="RealOnly_badge" class="badge danger" style="margin-top: 10px; margin-bottom: 10px;"
                data-tooltip="Failed to execute the action and froze in mid-air.">
@@ -1909,8 +1871,8 @@ layout: default
         </div>
         <div class="video-box" data-baseline="humreal">
           <h3>HumReal</h3>
-          <video id="HumReal_video" autoplay loop muted playsinline>
-            <source src="./resources/video/defeat/bell/H_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
+          <video id="HumReal_video" autoplay loop muted playsinline preload="none" data-lazy>
+            <source data-src="./resources/video/defeat/bell/H_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
           </video>
           <div id="HumReal_badge" class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
                data-tooltip="Successfully reached the bell but failed to press the button.">
@@ -1919,8 +1881,8 @@ layout: default
         </div>
         <div class="video-box" data-baseline="simreal">
           <h3>SimReal</h3>
-          <video id="SimReal_video" autoplay loop muted playsinline>
-            <source src="./resources/video/defeat/bell/S_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
+          <video id="SimReal_video" autoplay loop muted playsinline preload="none" data-lazy>
+            <source data-src="./resources/video/defeat/bell/S_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
           </video>
           <div id="SimReal_badge" class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
                data-tooltip="Successfully reached the bell but failed to press the button.">
@@ -1958,46 +1920,21 @@ layout: default
   <section class="section" id="BibTeX">
   <div class="container content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{fang2026simhum,
-  title = {Sim-and-Human Co-training for Data-Efficient and Generalizable Robotic Manipulation},
-  author = {Fang, Kaipeng and Liang, Weiqing and Li, Yuyang and Zhang, Ji and Zeng, Pengpeng and Gao, Lianli and Song, Jingkuan and Shen, Heng Tao},
-  journal = {arXiv preprint arXiv:2601.19406},
-  year = {2026},
+    <pre><code>@inproceedings{fang2026simhum,
+  title     = {Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bimanual Manipulation},
+  author    = {Fang, Kaipeng and Liang, Weiqing and Li, Yuyang and Zhang, Ji and Zeng, Pengpeng and
+               Shen, Heng Tao and Song, Jingkuan and Gao, Lianli},
+  booktitle = {Conference on Robot Learning (CoRL)},
+  year      = {2026},
 }</code>
     </pre>
   </div>
 </section>
 
 
-<!-- <section class="section" id="Ack">
-  <div class="container content">
-    <h2 class="title">Acknowledgements</h2>
-We would like to thank Yulong Li, Hengkai Pan, and Sandeep
-Routray for thoughtful discussions. We’d also like to thank
-Andrew Wang for setting up compute and Yulong Li for helping
-with robot system setup. Lastly, we’d like to express thanks to
-Hengkai Pan, Andrew Wang, Adam Kan, Ray Liu, Mingxuan
-Li, Lukas Vargas, Jose German, Laya Satish, Sri Shasanka
-Madduri for helping collect data. This work was supported
-in part by AFOSR FA9550-23-1-0747 and Apple Research
-Award
-</div>
-</section> -->
 
-<!--
-<section class="section">
-  <div class="container">
-    <h2 class="title is-2 is-size-3-mobile" style="text-align: center;">You've reached the end...</h2>
-    <div class="columns is-centered">
-      <div class="column is-half is-centered has-text-centered">
-        <figure>
-        Commented out: end.mp4 file is missing
-        <video controls autoplay loop muted playsinline preload="metadata" src="./resources/misc/end.mp4" poster="./resources/loading-icon.gif" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;"></video>
-      </figure>
-      </div>
-    </div>
-  </div>
-</section> -->
+
+
 
 <footer class="footer">
   <div class="container">
@@ -2016,14 +1953,15 @@ Award
   </div>
 </footer>
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="./static/js/aos.js"></script>
 <script>
   AOS.init({
-    offset: 200, // 触发动画的偏移距离 (px)
-    delay: 0,    // 延迟 (ms)
-    duration: 1600, // 动画持续时间 (ms)
-    easing: 'ease-out-cubic', // 动画曲线
-    mirror: false, 
+    offset: 120,              // trigger offset (px)
+    delay: 0,                 // delay (ms)
+    duration: 800,            // animation duration (ms)
+    easing: 'ease-out-cubic', // easing curve
+    once: true,               // animate once; never re-hide on scroll-up
+    mirror: false,
   });
 </script>
 
@@ -2031,7 +1969,7 @@ Award
   // --- 1. 全局视频自动播放/暂停逻辑 ---
   // 这种写法比原来的更节省性能，且适用于页面所有视频
   document.addEventListener('DOMContentLoaded', () => {
-    const videos = Array.from(document.querySelectorAll('video'));
+    const videos = Array.from(document.querySelectorAll('video:not([data-lazy])'));
     
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -2494,6 +2432,308 @@ Award
       });
     }
   })();
+</script>
+
+<!-- ======================= SimHum figures & navigation ======================= -->
+<script>
+(function () {
+  'use strict';
+
+  var MONO = "'Courier New', Courier, monospace";
+  var C = {
+    ours: '#0F5F28',
+    simreal: '#90C987',
+    real: '#F2C641',
+    humreal: '#D9D9D9',
+    sim_axis: '#7A7A7A'
+  };
+
+  /* ---------- error-bar plugin (mean +/- SE) ---------- */
+  var errorBars = {
+    id: 'errorBars',
+    afterDatasetsDraw: function (chart) {
+      var ctx = chart.ctx;
+      chart.data.datasets.forEach(function (ds, di) {
+        if (!ds.errors) return;
+        var meta = chart.getDatasetMeta(di);
+        if (meta.hidden) return;
+        ctx.save();
+        ctx.strokeStyle = '#000';
+        ctx.lineWidth = 1;
+        meta.data.forEach(function (el, i) {
+          var v = ds.data[i], e = ds.errors[i];
+          if (v === null || v === undefined || !e) return;
+          var yTop = chart.scales.y.getPixelForValue(v + e);
+          var yBot = chart.scales.y.getPixelForValue(v - e);
+          var x = el.x, cap = 4;
+          ctx.beginPath();
+          ctx.moveTo(x, yTop); ctx.lineTo(x, yBot);
+          ctx.moveTo(x - cap, yTop); ctx.lineTo(x + cap, yTop);
+          ctx.moveTo(x - cap, yBot); ctx.lineTo(x + cap, yBot);
+          ctx.stroke();
+        });
+        ctx.restore();
+      });
+    }
+  };
+
+  function tooltipLabel(ctx) {
+    var ds = ctx.dataset;
+    var v = ctx.parsed.y;
+    if (v === null || v === undefined) return null;
+    var e = ds.errors ? ds.errors[ctx.dataIndex] : null;
+    var txt = ' ' + ds.label + ': ' + v.toFixed(1) + '%';
+    if (e) txt += ' ± ' + e.toFixed(1);
+    return txt;
+  }
+
+  function baseOptions(yTitle, xTitle, yMin, yMax) {
+    return {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      layout: { padding: { top: 6 } },
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: { font: { family: MONO, size: 11 }, boxWidth: 12, boxHeight: 12, usePointStyle: false }
+        },
+        tooltip: {
+          backgroundColor: '#fff',
+          borderColor: '#333',
+          borderWidth: 1.5,
+          titleColor: '#000',
+          bodyColor: '#222',
+          titleFont: { family: MONO, size: 13, weight: 'bold' },
+          bodyFont: { family: MONO, size: 12 },
+          padding: 10,
+          displayColors: true,
+          callbacks: { label: tooltipLabel }
+        }
+      },
+      scales: {
+        y: {
+          min: yMin, max: yMax,
+          title: { display: true, text: yTitle, font: { family: MONO, size: 11 } },
+          ticks: { font: { family: MONO, size: 10 } },
+          grid: { color: '#D0D0D0' }
+        },
+        x: {
+          title: xTitle ? { display: true, text: xTitle, font: { family: MONO, size: 11 } } : { display: false },
+          ticks: { font: { family: MONO, size: 10 } },
+          grid: { display: false }
+        }
+      }
+    };
+  }
+
+  var LINE = { borderWidth: 2, pointRadius: 4, pointBorderColor: '#000', pointBorderWidth: 1, tension: 0 };
+
+  function makeChart(id, config) {
+    var el = document.getElementById(id);
+    if (!el || typeof Chart === 'undefined') return null;
+    return new Chart(el.getContext('2d'), config);
+  }
+
+  /* ---------- (1) Factor ablation on human data ---------- */
+  makeChart('chart-factor', {
+    type: 'bar',
+    plugins: [errorBars],
+    data: {
+      labels: ['F_bg', 'F_dis', 'F_light', 'F_obj'],
+      datasets: [
+        { label: 'SimHum (Full)', data: [80.0, 75.0, 75.0, 80.0], errors: [8.94, 9.68, 9.68, 8.94],
+          backgroundColor: C.ours, borderColor: '#000', borderWidth: 1 },
+        { label: 'w/o Factor', data: [20.0, 35.0, 50.0, 50.0], errors: [8.94, 10.67, 11.18, 11.18],
+          backgroundColor: C.real, borderColor: '#000', borderWidth: 1 }
+      ]
+    },
+    options: baseOptions('Task Success Rate (%)', 'Removed diversity factor', 0, 100)
+  });
+
+  /* ---------- (2) Matched collection-time budget ---------- */
+  makeChart('chart-budget', {
+    type: 'bar',
+    plugins: [errorBars],
+    data: {
+      labels: ['2h', '4h', '8h'],
+      datasets: [
+        { label: 'Real only', data: [15.0, 15.0, 25.0], errors: [7.98, 7.98, 9.68],
+          backgroundColor: C.real, borderColor: '#000', borderWidth: 1 },
+        { label: 'HumReal', data: [null, null, 20.0], errors: [null, null, 8.94],
+          backgroundColor: C.humreal, borderColor: '#000', borderWidth: 1 },
+        { label: 'SimReal', data: [null, null, 35.0], errors: [null, null, 10.67],
+          backgroundColor: C.simreal, borderColor: '#000', borderWidth: 1 },
+        { label: 'SimHum (Ours)', data: [30.0, 40.0, 70.0], errors: [10.25, 10.95, 10.25],
+          backgroundColor: C.ours, borderColor: '#000', borderWidth: 1 }
+      ]
+    },
+    options: (function () {
+      var o = baseOptions('Task Success Rate (%)', 'Data collection budget', 0, 90);
+      o.skipNull = true;
+      return o;
+    })()
+  });
+
+  /* ---------- (3) Real-robot demo scaling ---------- */
+  makeChart('chart-demo', {
+    type: 'line',
+    plugins: [errorBars],
+    data: {
+      labels: ['8', '19', '40', '80', '160'],
+      datasets: [
+        { label: 'Real only', data: [38.33, 43.33, 45.00, 48.33, 58.33],
+          errors: [10.87, 11.08, 11.12, 11.17, 11.02],
+          borderColor: C.real, backgroundColor: C.real, pointStyle: 'rect',
+          borderDash: [5, 4], ...LINE },
+        { label: 'SimHum (Ours)', data: [55.00, 60.00, 65.00, 83.33, 91.67],
+          errors: [11.12, 10.95, 10.67, 8.33, 6.18],
+          borderColor: C.ours, backgroundColor: C.ours, pointStyle: 'circle', ...LINE }
+      ]
+    },
+    options: baseOptions('Task Progress Rate (%)', 'Number of real demos', 20, 105)
+  });
+
+  /* ---------- (4) Pre-training source scaling ---------- */
+  makeChart('chart-pretrain', {
+    type: 'line',
+    plugins: [errorBars],
+    data: {
+      labels: ['0', '100', '200', '400', '500'],
+      datasets: [
+        { label: 'Scaling Sim', data: [58.33, 61.67, 63.33, 75.00, 83.33],
+          errors: [11.02, 10.87, 10.78, 9.68, 8.33],
+          borderColor: C.sim_axis, backgroundColor: C.sim_axis, pointStyle: 'rect',
+          borderDash: [5, 4], ...LINE },
+        { label: 'Scaling Human', data: [60.00, 63.33, 70.00, 76.67, 83.33],
+          errors: [10.95, 10.78, 10.25, 9.46, 8.33],
+          borderColor: C.ours, backgroundColor: C.ours, pointStyle: 'circle', ...LINE }
+      ]
+    },
+    options: baseOptions('Task Progress Rate (%)', 'Num of human / sim demos', 30, 95)
+  });
+
+  /* ---------- (5) Position-generalization heatmaps ---------- */
+  var HEAT = {
+    'heat-humreal': [
+      [63.33, 60.00, 66.67, 26.67],
+      [66.67, 53.33, 53.33, 16.67],
+      [60.00, 60.00, 63.33, 10.00],
+      [16.67, 30.00, 43.33, 23.33]
+    ],
+    'heat-simhum': [
+      [90.00, 83.33, 83.33, 66.67],
+      [83.33, 86.67, 76.67, 53.33],
+      [86.67, 83.33, 80.00, 43.33],
+      [50.00, 76.67, 80.00, 53.33]
+    ]
+  };
+  var STOPS = [[0.0, [247, 247, 247]], [0.5, [166, 217, 174]], [1.0, [27, 79, 41]]];
+
+  function heatColor(t) {
+    t = Math.max(0, Math.min(1, t));
+    for (var i = 1; i < STOPS.length; i++) {
+      if (t <= STOPS[i][0]) {
+        var a = STOPS[i - 1], b = STOPS[i];
+        var f = (t - a[0]) / (b[0] - a[0]);
+        return 'rgb(' + a[1].map(function (c, k) { return Math.round(c + f * (b[1][k] - c)); }).join(',') + ')';
+      }
+    }
+    return 'rgb(27,79,41)';
+  }
+
+  Object.keys(HEAT).forEach(function (id) {
+    var host = document.getElementById(id);
+    if (!host) return;
+    var label = id === 'heat-humreal' ? 'HumReal' : 'SimHum';
+    HEAT[id].forEach(function (row, r) {
+      row.forEach(function (v, c) {
+        var t = (v - 20) / 80;
+        var cell = document.createElement('div');
+        cell.className = 'heatmap-cell' + (r < 3 && c < 3 ? ' is-seen' : '');
+        cell.style.background = heatColor(t);
+        cell.style.color = t > 0.55 ? '#fff' : '#222';
+        cell.textContent = v.toFixed(0);
+        cell.title = label + ' — ' + (r < 3 && c < 3 ? 'seen' : 'unseen') +
+          ' cell (row ' + (r + 1) + ', col ' + (c + 1) + '): ' + v.toFixed(1) + '% PR';
+        host.appendChild(cell);
+      });
+    });
+  });
+
+  /* ---------- (6) Sticky nav + scroll-spy ---------- */
+  var nav = document.getElementById('site-nav');
+  if (nav) {
+    var links = Array.prototype.slice.call(nav.querySelectorAll('.nav-links a'));
+    var targets = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+
+    var onScroll = function () {
+      nav.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.6);
+      var y = window.scrollY + 140;
+      var current = -1;
+      targets.forEach(function (t, i) {
+        if (t && t.getBoundingClientRect().top + window.scrollY <= y) current = i;
+      });
+      links.forEach(function (a, i) { a.classList.toggle('is-current', i === current); });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* ---------- (7) Lazy-load autoplay videos (data-src) ---------- */
+  var MAX_CONCURRENT = window.matchMedia('(max-width: 768px)').matches ? 2 : 24;
+  var visible = new Set();
+  var loadedCount = 0;
+
+  function loadVideo(v) {
+    var pending = v.querySelectorAll('source[data-src]');
+    Array.prototype.forEach.call(pending, function (src) {
+      src.src = src.dataset.src;
+      src.removeAttribute('data-src');
+    });
+    if (pending.length) v.load();
+    v.dataset.loaded = '1';
+    loadedCount++;
+  }
+
+  function unloadVideo(v) {
+    if (v.dataset.loaded !== '1') return;
+    v.pause();
+    v.dataset.loaded = '0';
+    loadedCount = Math.max(0, loadedCount - 1);
+  }
+
+  function pump() {
+    visible.forEach(function (v) {
+      if (v.dataset.loaded === '1') return;
+      if (loadedCount >= MAX_CONCURRENT) return;
+      loadVideo(v);
+    });
+    visible.forEach(function (v) {
+      if (v.dataset.loaded !== '1') return;
+      var pl = v.play();
+      if (pl && pl.catch) pl.catch(function () {});
+    });
+  }
+
+  var lazyVideos = Array.prototype.slice.call(document.querySelectorAll('video[data-lazy]'));
+  if (lazyVideos.length && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          visible.add(entry.target);
+        } else {
+          visible.delete(entry.target);
+          unloadVideo(entry.target);
+        }
+      });
+      pump();
+    }, { rootMargin: '200px 0px', threshold: 0.01 });
+    lazyVideos.forEach(function (v) { io.observe(v); });
+  } else {
+    lazyVideos.forEach(loadVideo);
+  }
+})();
 </script>
 
 <!-- Vercount visitor counter -->
