@@ -167,8 +167,9 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
      with the card beneath it. The three source panels have identical
      heights, so their tops and bottoms align on their own. */
   .source-grid {
-    width: 100%;
-    margin-left: 0;
+    width: 84%;
+    margin-left: auto;
+    margin-right: auto;
     display: grid;
     grid-template-columns: 1fr 2.9rem 1fr 2.9rem 1fr;
     grid-template-rows: auto auto;
@@ -176,7 +177,7 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
     gap: 0.875rem 0.45rem;
   }
   .system-figure { margin: 0; position: relative; align-self: end; }
-  .system-figure img { width: 84%; margin: 0 auto; display: block; }
+  .system-figure img { width: 100%; display: block; }
 
   .source-grid > .system-figure:nth-of-type(1) { grid-area: 1 / 1; }
   .source-grid > .system-figure:nth-of-type(2) { grid-area: 1 / 3; }
@@ -203,19 +204,19 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
   }
   .setup-trigger {
     position: absolute;
-    left: 5%;
-    bottom: 17%;
+    left: 6%;
+    bottom: 15%;
     z-index: 3;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.375rem 0.875rem 0.375rem 0.375rem;
+    gap: 0.35rem;
+    padding: 0.25rem 0.65rem 0.25rem 0.25rem;
     border: 2px solid #fff;
     border-radius: 999px;
     background: #1E4B60;
     color: #fff;
     font-family: 'Courier New', monospace;
-    font-size: 0.88rem;
+    font-size: 0.7rem;
     font-weight: 700;
     cursor: pointer;
     box-shadow: 0 6px 18px rgba(13, 45, 60, 0.45);
@@ -224,8 +225,8 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
   }
   .setup-trigger:hover { background: #12303d; animation: none; transform: scale(1.08); }
   .setup-trigger-dot {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.2rem;
+    height: 1.2rem;
     border-radius: 50%;
     background: #fff;
     color: #1E4B60;
@@ -322,6 +323,16 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
     background: #f8f9fa;
     transition: background 0.25s ease, color 0.25s ease;
   }
+  /* The sources block sits at 84% of the column, so everything inside the
+     cards is scaled by the same factor to keep proportions with the panels. */
+  .source-grid .data-card { padding: 1.05rem 1.05rem 0.85rem; border-radius: 10px; }
+  .source-grid .data-card-header { margin: -1.05rem -1.05rem 0.95rem; padding: 0.6rem 0.85rem; gap: 0.6rem; }
+  .source-grid .data-card-header .title { font-size: 0.98rem; }
+  .source-grid .header-icon i { font-size: 1.25rem; }
+  .source-grid .data-card-body { gap: 0.85rem; }
+  .source-grid .info-section { gap: 0.42rem; }
+  .source-grid .info-item { font-size: 0.86rem; padding: 0.45rem 0.65rem; gap: 0.5rem; border-radius: 7px; }
+  .source-grid .connector-knob { width: 2.3rem; height: 2.3rem; font-size: 0.85rem; }
   .info-item.has-success       { background: #effaf3; }
   .info-item.has-success i     { color: #257942; }
   .info-item.has-cross         { background: #feecf0; }
@@ -796,7 +807,33 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
     display: block;
     border-radius: 8px;
   }
-  .figure-legend-columns { margin-top: 0.5rem; }
+  .figure-legend-columns {
+    margin: 0.5rem 0 0 !important;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: stretch;
+  }
+  .figure-legend-columns .column { width: auto; flex: none; }
+  @media (max-width: 768px) { .figure-legend-columns { grid-template-columns: 1fr; } }
+  .figure-legend-columns .column {
+    background: #fff;
+    border: 1px solid #e6e8eb;
+    border-radius: 10px;
+    padding: 1rem 1.1rem 0.9rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .figure-legend-columns .figure-subhead { text-align: left; margin-bottom: 0.6rem; padding-bottom: 0.45rem; border-bottom: 1px solid #eceff1; white-space: nowrap; }
+  .legend-block p { margin: 0; text-align: left; }
+  .legend-row { display: flex; align-items: flex-start; gap: 0.6rem; }
+  .legend-row + .legend-row { margin-top: 0.55rem; }
+  .legend-tag {
+    flex: 0 0 auto; margin-top: 0.2em;
+    font-family: 'Courier New', monospace; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 0.12em 0.5em; border-radius: 4px; line-height: 1.5;
+  }
+  .legend-tag--setting { background: #eef1f4; color: #4a5560; }
+  .legend-tag--finding { background: #e6f2ea; color: #0F5F28; }
   .inset-figure {
     display: block;
     width: 100%;
@@ -1928,17 +1965,15 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
         <div class="column is-half" data-aos="fade-up">
           <h4 class="figure-subhead">(a) Human Data <span class="arrow">&rarr;</span> Visual Generalization</h4>
           <div class="content has-text-justified prose">
-            <p>
-              <b>Setting.</b> Remove one diversity factor from the human data and test on the OOD scene that probes it.<br><b>Finding.</b> Every removal lowers OOD SR, background most (80.0% to 20.0%). Human data supplies the visual prior.
-            </p>
+            <div class="legend-row"><span class="legend-tag legend-tag--setting">Setting</span><p>Remove one diversity factor from the human data and test on the OOD scene that probes it.</p></div>
+              <div class="legend-row"><span class="legend-tag legend-tag--finding">Finding</span><p>Every removal lowers OOD SR, background most (80.0% to 20.0%). Human data supplies the visual prior.</p></div>
           </div>
         </div>
         <div class="column is-half" data-aos="fade-up" data-aos-delay="100">
           <h4 class="figure-subhead">(b) Simulation <span class="arrow">&rarr;</span> Spatial Robustness</h4>
           <div class="content has-text-justified prose">
-            <p>
-              <b>Setting.</b> Objects on a 4&times;4 grid in an OOD scene. Human and real-robot demos cover only the inner 3&times;3 cells (black outline); simulation samples a broader range.<br><b>Finding.</b> HumReal collapses on the unseen outer cells, while SimHum stays high, <b class="pos">+36.7%</b> PR over HumReal there. Simulation supplies spatial coverage.
-            </p>
+            <div class="legend-row"><span class="legend-tag legend-tag--setting">Setting</span><p>Objects on a 4&times;4 grid in an OOD scene. Human and real-robot demos cover only the inner 3&times;3 cells (black outline); simulation samples a broader range.</p></div>
+              <div class="legend-row"><span class="legend-tag legend-tag--finding">Finding</span><p>HumReal collapses on the unseen outer cells, while SimHum stays high, <b class="pos">+36.7%</b> PR over HumReal there. Simulation supplies spatial coverage.</p></div>
           </div>
         </div>
       </div>
@@ -2053,27 +2088,24 @@ title: "Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bim
 
       <div class="columns is-centered is-variable is-6 figure-legend-columns">
         <div class="column is-one-third" data-aos="fade-up">
-          <h4 class="figure-subhead">(a) Matched Collection-Time Budget</h4>
+          <h4 class="figure-subhead">(a) Matched Time Budget</h4>
           <div class="content has-text-justified prose">
-            <p>
-              <b>Setting.</b> 2/4/8&nbsp;h collection budgets. SimHum splits the time evenly between teleoperation and human collection; simulation runs in parallel and is not charged to any method.<br><b>Finding.</b> SimHum leads at every budget and beats the best single-source baseline by 35.0% in absolute SR at 8&nbsp;h.
-            </p>
+            <div class="legend-row"><span class="legend-tag legend-tag--setting">Setting</span><p>2/4/8&nbsp;h collection budgets. SimHum splits the time evenly between teleoperation and human collection; simulation runs in parallel and is not charged to any method.</p></div>
+              <div class="legend-row"><span class="legend-tag legend-tag--finding">Finding</span><p>SimHum leads at every budget and beats the best single-source baseline by 35.0% in absolute SR at 8&nbsp;h.</p></div>
           </div>
         </div>
         <div class="column is-one-third" data-aos="fade-up" data-aos-delay="100">
-          <h4 class="figure-subhead">(b) Scaling Real-Robot Demonstrations</h4>
+          <h4 class="figure-subhead">(b) Real Demo Scaling</h4>
           <div class="content has-text-justified prose">
-            <p>
-              <b>Setting.</b> Fine-tune on 8 to 160 real-robot demos.<br><b>Finding.</b> SimHum leads at every scale, and with 8 demos it reaches the level of Real only trained on 160.
-            </p>
+            <div class="legend-row"><span class="legend-tag legend-tag--setting">Setting</span><p>Fine-tune on 8 to 160 real-robot demos.</p></div>
+              <div class="legend-row"><span class="legend-tag legend-tag--finding">Finding</span><p>SimHum leads at every scale, and with 8 demos it reaches the level of Real only trained on 160.</p></div>
           </div>
         </div>
         <div class="column is-one-third" data-aos="fade-up" data-aos-delay="200">
-          <h4 class="figure-subhead">(c) Scaling Pre-training Data</h4>
+          <h4 class="figure-subhead">(c) Pre-training Scaling</h4>
           <div class="content has-text-justified prose">
-            <p>
-              <b>Setting.</b> Fix one pre-training source at 500 episodes and sweep the other from 0 to 500.<br><b>Finding.</b> Both simulation and human data give steady PR gains with no sign of&nbsp;saturation.
-            </p>
+            <div class="legend-row"><span class="legend-tag legend-tag--setting">Setting</span><p>Fix one pre-training source at 500 episodes and sweep the other from 0 to 500.</p></div>
+              <div class="legend-row"><span class="legend-tag legend-tag--finding">Finding</span><p>Both simulation and human data give steady PR gains with no sign of&nbsp;saturation.</p></div>
           </div>
         </div>
       </div>
