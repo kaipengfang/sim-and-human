@@ -566,12 +566,12 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   .analysis-card .chart-area {
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 360px;
     margin-bottom: 20px;
   }
   .analysis-card .chart-area canvas { width: 100% !important; height: 100% !important; }
   @media (max-width: 768px) {
-    .analysis-card .chart-area { height: 260px; }
+    .analysis-card .chart-area { height: 300px; }
   }
 
   /* === Position-generalization heatmaps === */
@@ -588,9 +588,9 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   .heatmap-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     gap: 2px;
     aspect-ratio: 1 / 1;
-    border: 2px solid transparent;
   }
   .heatmap-cell {
     display: flex;
@@ -601,7 +601,13 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     border-radius: 2px;
     cursor: default;
   }
-  .heatmap-cell.is-seen { box-shadow: inset 0 0 0 1.5px #000; }
+  .heatmap-outline {
+    grid-area: 1 / 1 / 4 / 4;
+    border: 2.5px solid #000;
+    box-shadow: 0 0 0 1.5px #fff;
+    pointer-events: none;
+    z-index: 5;
+  }
   .heatmap-caption {
     text-align: center;
     margin-top: 0.5rem;
@@ -628,7 +634,22 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   .heatmap-legend-label { writing-mode: vertical-rl; font-size: 0.65rem; margin-top: 0.3rem; }
   @media (max-width: 768px) {
     .heatmap-cell { font-size: 0.65rem; }
-    .heatmap-legend-bar { height: 110px; }
+    /* lay the colorbar out horizontally so it does not stretch the card */
+    .heatmap-pair { flex-wrap: wrap; }
+    .heatmap-legend {
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+      justify-content: center;
+      gap: 0.4rem;
+      padding-top: 0.75rem;
+    }
+    .heatmap-legend-bar {
+      width: 120px;
+      height: 10px;
+      background: linear-gradient(to left, #F7F7F7, #A6D9AE, #1B4F29);
+    }
+    .heatmap-legend-label { writing-mode: horizontal-tb; margin-top: 0; }
   }
   </style>
 </head>
@@ -1262,19 +1283,19 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     <div class="video-display" data-aos="fade-up">
         <div class="video-box">
             <h3><i class="fas fa-desktop" style="color: #48c774; margin-right: 8px;"></i>Simulation Data</h3>
-            <video id="Simulation_video" autoplay loop muted playsinline preload="none" data-lazy>
+            <video id="Simulation_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/dataset_simulation_click_bell.jpg">
                 <source data-src="./resources/video/dataset/simulation/click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
         </div>
         <div class="video-box">
             <h3><i class="fas fa-hand-paper" style="color: #ffaa00; margin-right: 8px;"></i>Human Data</h3>
-            <video id="Human_video" autoplay loop muted playsinline preload="none" data-lazy>
+            <video id="Human_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/dataset_human_click_bell.jpg">
                 <source data-src="./resources/video/dataset/human/click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
         </div>
         <div class="video-box">
             <h3><i class="fas fa-robot" style="color: #3273dc; margin-right: 8px;"></i>Real Robot Data</h3>
-            <video id="Real-Robot_video" autoplay loop muted playsinline preload="none" data-lazy>
+            <video id="Real-Robot_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/dataset_real_world_click_bell.jpg">
                 <source data-src="./resources/video/dataset/real_world/click_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
             </video>
         </div>
@@ -1539,7 +1560,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
       <div class="task-group">
         <div class="video-grid-four" data-aos="fade-up">
           <div class="grid-item">
-              <video id="Clean_video" autoplay loop muted playsinline preload="none" data-lazy>
+              <video id="Clean_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/inference_ours_click_bell_clean_click_bell.jpg">
                   <source data-src="./resources/video/inference/ours/click_bell/clean_click_bell.mp4" type="video/mp4">
               </video>
               <div class="badge success" style="margin-top: 10px; margin-bottom: 10px;"
@@ -1548,7 +1569,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
               </div>
           </div>
           <div class="grid-item">
-              <video id="Red_video" autoplay loop muted playsinline preload="none" data-lazy>
+              <video id="Red_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/inference_ours_click_bell_red_click_bell.jpg">
                   <source data-src="./resources/video/inference/ours/click_bell/red_click_bell.mp4" type="video/mp4">
               </video>
               <div class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
@@ -1557,7 +1578,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
               </div>
           </div>
           <div class="grid-item">
-              <video id="Yellow_video" autoplay loop muted playsinline preload="none" data-lazy>
+              <video id="Yellow_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/inference_ours_click_bell_yellow_click_bell.jpg">
                   <source data-src="./resources/video/inference/ours/click_bell/yellow_click_bell.mp4" type="video/mp4">
               </video>
               <div class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
@@ -1566,7 +1587,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
               </div>
           </div>
           <div class="grid-item">
-              <video id="Grey_video" autoplay loop muted playsinline preload="none" data-lazy>
+              <video id="Grey_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/inference_ours_click_bell_grey_click_bell.jpg">
                   <source data-src="./resources/video/inference/ours/click_bell/grey_click_bell.mp4" type="video/mp4">
               </video>
               <div class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
@@ -1579,7 +1600,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         <h4 class="title is-5" style="margin-top: 2rem; margin-bottom: 1rem; color: #d9534f;">Out-of-Distribution (OOD)</h4>
         <div class="video-grid-two" data-aos="fade-up">
           <div class="grid-item">
-            <video id="Hard1_video" autoplay loop muted playsinline preload="none" data-lazy>
+            <video id="Hard1_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/inference_ours_click_bell_hard1_click_bell.jpg">
                 <source data-src="./resources/video/inference/ours/click_bell/hard1_click_bell.mp4" type="video/mp4">
             </video>
             <div class="badge danger" style="margin-top: 10px; margin-bottom: 10px;"
@@ -1588,7 +1609,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
             </div>
           </div>
           <div class="grid-item">
-            <video id="Hard2_video" autoplay loop muted playsinline preload="none" data-lazy>
+            <video id="Hard2_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/inference_ours_click_bell_hard2_click_bell.jpg">
                 <source data-src="./resources/video/inference/ours/click_bell/hard2_click_bell.mp4" type="video/mp4">
             </video>
             <div class="badge danger" style="margin-top: 10px; margin-bottom: 10px;"
@@ -1723,7 +1744,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
             <div class="chart-area"><canvas id="chart-factor" aria-label="Leave-one-factor-out ablation on human data" role="img"></canvas></div>
             <div class="text-area content has-text-justified">
               <p>
-                We remove one diversity factor at a time from the human dataset and evaluate on the OOD scenario that probes that factor. Removing any factor lowers OOD success rate. Removing background diversity has the largest effect, from 80.0% to 20.0% <b style="color: #9D1616;">(-60%)</b>. Human data supplies a visual prior that transfers to real-world scenes.
+                We remove one diversity factor at a time from the human dataset and evaluate on the OOD scenario that probes that factor. Removing any factor lowers OOD success rate. Removing background diversity has the largest effect, from 80.0% to 20.0%. Human data supplies a visual prior that transfers to real-world scenes.
               </p>
             </div>
           </div>
@@ -1734,8 +1755,8 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
             <h4 class="title is-4 has-text-centered">Simulation <span style="color: #3273dc;">&rarr;</span> Spatial Robustness</h4>
             <div class="chart-area heatmap-area">
               <div class="heatmap-pair">
-                <div class="heatmap-block"><div class="heatmap-grid" id="heat-humreal"></div><div class="heatmap-caption">HumReal</div></div>
-                <div class="heatmap-block"><div class="heatmap-grid" id="heat-simhum"></div><div class="heatmap-caption">SimHum (Ours)</div></div>
+                <div class="heatmap-block"><div class="heatmap-grid" id="heat-humreal"><div class="heatmap-outline"></div></div><div class="heatmap-caption">HumReal</div></div>
+                <div class="heatmap-block"><div class="heatmap-grid" id="heat-simhum"><div class="heatmap-outline"></div></div><div class="heatmap-caption">SimHum (Ours)</div></div>
                 <div class="heatmap-legend">
                   <span>100</span><div class="heatmap-legend-bar"></div><span>20</span>
                   <div class="heatmap-legend-label">Task Progress (%)</div>
@@ -1861,7 +1882,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
       <div class="video-display" data-aos="fade-up">
         <div class="video-box" data-baseline="realonly">
           <h3>Real Only</h3>
-          <video id="RealOnly_video" autoplay loop muted playsinline preload="none" data-lazy>
+          <video id="RealOnly_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/defeat_bell_R_bell.jpg">
             <source data-src="./resources/video/defeat/bell/R_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
           </video>
           <div id="RealOnly_badge" class="badge danger" style="margin-top: 10px; margin-bottom: 10px;"
@@ -1871,7 +1892,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         </div>
         <div class="video-box" data-baseline="humreal">
           <h3>HumReal</h3>
-          <video id="HumReal_video" autoplay loop muted playsinline preload="none" data-lazy>
+          <video id="HumReal_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/defeat_bell_H_bell.jpg">
             <source data-src="./resources/video/defeat/bell/H_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
           </video>
           <div id="HumReal_badge" class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
@@ -1881,7 +1902,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
         </div>
         <div class="video-box" data-baseline="simreal">
           <h3>SimReal</h3>
-          <video id="SimReal_video" autoplay loop muted playsinline preload="none" data-lazy>
+          <video id="SimReal_video" autoplay loop muted playsinline preload="none" data-lazy poster="./resources/images/posters/defeat_bell_S_bell.jpg">
             <source data-src="./resources/video/defeat/bell/S_bell.mp4" poster="./resources/loading-icon.gif" type="video/mp4">
           </video>
           <div id="SimReal_badge" class="badge warning" style="margin-top: 10px; margin-bottom: 10px;"
@@ -1921,7 +1942,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   <div class="container content">
     <h2 class="title">BibTeX</h2>
     <pre><code>@inproceedings{fang2026simhum,
-  title     = {Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bimanual Manipulation},
+  title     = {SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bimanual Manipulation},
   author    = {Fang, Kaipeng and Liang, Weiqing and Li, Yuyang and Zhang, Ji and Zeng, Pengpeng and
                Shen, Heng Tao and Song, Jingkuan and Gao, Lianli},
   booktitle = {Conference on Robot Learning (CoRL)},
@@ -2487,7 +2508,12 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     return txt;
   }
 
-  function baseOptions(yTitle, xTitle, yMin, yMax) {
+  var SMALL = window.matchMedia('(max-width: 768px)').matches;
+  var TICK_FS   = SMALL ? 11 : 12;
+  var AXIS_FS   = SMALL ? 12 : 13;
+  var LEGEND_FS = SMALL ? 11 : 12;
+
+  function baseOptions(yTitle, xTitle, yMin, yMax, usePoints) {
     return {
       responsive: true,
       maintainAspectRatio: false,
@@ -2496,7 +2522,12 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
       plugins: {
         legend: {
           position: 'top',
-          labels: { font: { family: MONO, size: 11 }, boxWidth: 12, boxHeight: 12, usePointStyle: false }
+          labels: {
+            font: { family: MONO, size: LEGEND_FS },
+            boxWidth: 14, boxHeight: 14,
+            padding: 12,
+            usePointStyle: usePoints
+          }
         },
         tooltip: {
           backgroundColor: '#fff',
@@ -2504,8 +2535,8 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
           borderWidth: 1.5,
           titleColor: '#000',
           bodyColor: '#222',
-          titleFont: { family: MONO, size: 13, weight: 'bold' },
-          bodyFont: { family: MONO, size: 12 },
+          titleFont: { family: MONO, size: 14, weight: 'bold' },
+          bodyFont: { family: MONO, size: 13 },
           padding: 10,
           displayColors: true,
           callbacks: { label: tooltipLabel }
@@ -2514,13 +2545,13 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
       scales: {
         y: {
           min: yMin, max: yMax,
-          title: { display: true, text: yTitle, font: { family: MONO, size: 11 } },
-          ticks: { font: { family: MONO, size: 10 } },
+          title: { display: true, text: yTitle, font: { family: MONO, size: AXIS_FS, weight: 'bold' } },
+          ticks: { font: { family: MONO, size: TICK_FS }, color: '#333' },
           grid: { color: '#D0D0D0' }
         },
         x: {
-          title: xTitle ? { display: true, text: xTitle, font: { family: MONO, size: 11 } } : { display: false },
-          ticks: { font: { family: MONO, size: 10 } },
+          title: xTitle ? { display: true, text: xTitle, font: { family: MONO, size: AXIS_FS, weight: 'bold' } } : { display: false },
+          ticks: { font: { family: MONO, size: TICK_FS }, color: '#333' },
           grid: { display: false }
         }
       }
@@ -2540,7 +2571,8 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     type: 'bar',
     plugins: [errorBars],
     data: {
-      labels: ['F_bg', 'F_dis', 'F_light', 'F_obj'],
+      labels: [['Background', '(F_bg)'], ['Distractor', '(F_dis)'],
+               ['Lighting', '(F_light)'], ['Object', '(F_obj)']],
       datasets: [
         { label: 'SimHum (Full)', data: [80.0, 75.0, 75.0, 80.0], errors: [8.94, 9.68, 9.68, 8.94],
           backgroundColor: C.ours, borderColor: '#000', borderWidth: 1 },
@@ -2548,7 +2580,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
           backgroundColor: C.real, borderColor: '#000', borderWidth: 1 }
       ]
     },
-    options: baseOptions('Task Success Rate (%)', 'Removed diversity factor', 0, 100)
+    options: baseOptions('Task Success Rate (%)', 'Removed diversity factor', 0, 100, false)
   });
 
   /* ---------- (2) Matched collection-time budget ---------- */
@@ -2569,7 +2601,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
       ]
     },
     options: (function () {
-      var o = baseOptions('Task Success Rate (%)', 'Data collection budget', 0, 90);
+      var o = baseOptions('Task Success Rate (%)', 'Data collection budget', 0, 90, false);
       o.skipNull = true;
       return o;
     })()
@@ -2591,7 +2623,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
           borderColor: C.ours, backgroundColor: C.ours, pointStyle: 'circle', ...LINE }
       ]
     },
-    options: baseOptions('Task Progress Rate (%)', 'Number of real demos', 20, 105)
+    options: baseOptions('Task Progress Rate (%)', 'Number of real demos', 20, 105, true)
   });
 
   /* ---------- (4) Pre-training source scaling ---------- */
@@ -2610,7 +2642,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
           borderColor: C.ours, backgroundColor: C.ours, pointStyle: 'circle', ...LINE }
       ]
     },
-    options: baseOptions('Task Progress Rate (%)', 'Num of human / sim demos', 30, 95)
+    options: baseOptions('Task Progress Rate (%)', 'Num of human / sim demos', 30, 95, true)
   });
 
   /* ---------- (5) Position-generalization heatmaps ---------- */
@@ -2650,7 +2682,9 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
       row.forEach(function (v, c) {
         var t = (v - 20) / 80;
         var cell = document.createElement('div');
-        cell.className = 'heatmap-cell' + (r < 3 && c < 3 ? ' is-seen' : '');
+        cell.className = 'heatmap-cell';
+        cell.style.gridRow = (r + 1);
+        cell.style.gridColumn = (c + 1);
         cell.style.background = heatColor(t);
         cell.style.color = t > 0.55 ? '#fff' : '#222';
         cell.textContent = v.toFixed(0);
