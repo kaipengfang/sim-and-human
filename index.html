@@ -167,11 +167,13 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
      with the card beneath it. The three source panels have identical
      heights, so their tops and bottoms align on their own. */
   .source-grid {
+    width: min(70rem, 94vw);
+    margin-left: calc(50% - min(35rem, 47vw));
     display: grid;
-    grid-template-columns: 1fr 3.1rem 1fr 3.1rem 1fr;
+    grid-template-columns: 1fr 2.9rem 1fr 2.9rem 1fr;
     grid-template-rows: auto auto;
     align-items: stretch;
-    gap: 0.875rem 0.55rem;
+    gap: 0.875rem 0.45rem;
   }
   .system-figure { margin: 0; position: relative; align-self: end; }
   .system-figure img { width: 100%; display: block; }
@@ -450,6 +452,8 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   @media screen and (max-width: 768px) {
     /* Single column; each panel keeps its place directly above its card. */
     .source-grid {
+      width: 100%;
+      margin-left: 0;
       grid-template-columns: 1fr;
       grid-template-rows: none;
       gap: 0.75rem 0;
@@ -566,7 +570,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   /* === Hero title + venue line === */
   /* Hero action buttons: sized from the root like everything else. */
   .publication-links .button {
-    font-size: 1.1rem;
+    font-size: 1rem;
     height: auto;
     padding: 0.7em 1.4em;
     line-height: 1.2;
@@ -582,7 +586,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   .link-block { margin: 0 0.4rem; }
 
   .publication-title {
-    font-size: 2.85rem;       /* two lines at 1440 / 1920 / 2560 */
+    font-size: 2.5rem;        /* two lines from 1358 up */
     line-height: 1.2;
     font-weight: 600;
     color: #1a1a1a;
@@ -616,12 +620,12 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     transform: translateY(0);
     transition: background 0.3s, box-shadow 0.3s;
   }
-  .hero.video .hero-body { padding-top: 5rem; }
+  .hero.video .hero-body { padding-top: 4rem; padding-bottom: 2rem; }
   p, li, figcaption, .prose, .info-item, .task-content, .card-note { text-wrap: pretty; }
   #site-nav.is-scrolled { background: rgba(255, 255, 255, 0.97); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   #site-nav .nav-inner {
     max-width: var(--measure);
-    min-height: 3.6rem;
+    min-height: 3.4rem;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -632,7 +636,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
     font-family: 'Courier New', monospace;
     font-weight: 700;
     color: #0F5F28;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     padding: 0.7rem 0.9rem 0.7rem 0;
     flex: 0 0 auto;
   }
@@ -646,8 +650,8 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   #site-nav .nav-links::-webkit-scrollbar { display: none; }
   #site-nav .nav-links a {
     white-space: nowrap;
-    padding: 0.9rem 0.85rem;
-    font-size: 1.05rem;
+    padding: 0.85rem 0.8rem;
+    font-size: 1rem;
     color: #444;
     border-bottom: 2px solid transparent;
     transition: color 0.2s ease, border-color 0.2s ease;
@@ -668,9 +672,9 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
      ===================================================================== */
   /* Fluid root: every rem below scales with the viewport, so the whole page
      -- type, spacing, container width, figures -- grows together.
-     Calibrated on the primary review viewport, 2037 CSS px:
-     1440 -> 16.6px, 1920 -> 17.9px, 2037 -> 18.2px, 2560 -> 19.6px. */
-  html { font-size: clamp(16px, 0.27vw + 12.7px, 22px); }
+     Calibrated on the primary review viewport, 1358 CSS px at 2x:
+     1358 -> 15.8px, 1440 -> 16.0px, 1920 -> 17.7px, 2560 -> 19px. */
+  html { font-size: clamp(15px, 0.35vw + 11px, 19px); }
 
   /* Bulma sizes .container in px per breakpoint; drive it from the root
      instead so the column grows with the type. */
@@ -679,14 +683,15 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   .section { padding: 3rem 1.5rem; }
 
   :root {
-    --fs-h2:      2.3rem;   /* section title            */
-    --fs-h3:      1.5rem;   /* subsection title         */
-    --fs-h4:      1.2rem;   /* card / figure sub-head   */
-    --fs-body:    1.125rem; /* body prose               */
-    --lh-body:    1.7;
-    --fs-note:    1rem;     /* card notes, captions     */
-    --fs-hint:    0.9rem;   /* italic hints, tab labels */
-    --measure:    71rem;    /* content column width     */
+    --fs-h2:      2rem;     /* section title            */
+    --fs-h3:      1.35rem;  /* subsection title         */
+    --fs-h4:      1.15rem;  /* card / figure sub-head   */
+    --fs-body:    1.12rem;  /* body prose               */
+    --lh-body:    1.65;
+    --fs-note:    0.95rem;  /* card notes, captions     */
+    --fs-hint:    0.85rem;  /* italic hints, tab labels */
+    /* Content column stops growing on very wide screens. */
+    --measure:    min(70rem, 1140px);
     --ink:        #333;
     --ink-soft:   #666;
     --brand:      #0F5F28;
@@ -754,12 +759,12 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
 
   @media (max-width: 768px) {
     :root {
-      --fs-h2:   1.75rem;
-      --fs-h3:   1.3rem;
-      --fs-h4:   1.1rem;
-      --fs-body: 1.05rem;
-      --fs-note: 0.95rem;
-      --fs-hint: 0.85rem;
+      --fs-h2:   1.65rem;
+      --fs-h3:   1.25rem;
+      --fs-h4:   1.05rem;
+      --fs-body: 1.02rem;
+      --fs-note: 0.92rem;
+      --fs-hint: 0.82rem;
       --measure: 100%;
     }
   }
@@ -796,16 +801,20 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
   .figure-legend-columns { margin-top: 0.5rem; }
   .inset-figure {
     display: block;
-    width: 92%;
-    max-width: 92%;
-    margin: 0 auto 1.25rem;
+    width: min(64rem, 94vw);
+    max-width: none;
+    margin: 0 0 1.25rem calc(50% - min(32rem, 47vw));
     border-radius: 8px;
   }
   /* fig1's internal labels are set larger than the other figures', so it is
      rendered narrower to keep its text the same visual size as body copy. */
-  .inset-figure--narrow { width: 68%; max-width: 68%; }
+  .inset-figure--narrow {
+    width: min(47.5rem, 94vw);
+    margin-left: calc(50% - min(23.75rem, 47vw));
+  }
   @media (max-width: 768px) {
-    .inset-figure, .inset-figure--narrow { width: 100%; max-width: 100%; }
+    .inset-figure,
+    .inset-figure--narrow { width: 100%; max-width: 100%; margin-left: 0; margin-right: 0; }
   }
   @media (max-width: 768px) {
     /* A 2- or 3-panel paper figure is unreadable at 375 px, so let it keep a
@@ -969,10 +978,10 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
 
     <!-- Hero Content (Text) -->
     <div class="hero-body" style="position: relative; z-index: 3;">
-      <div class="container has-text-centered" style="background: rgba(255, 255, 255, 0.40); padding: 3rem 2rem; border-radius: 1.25rem; backdrop-filter: blur(10px); max-width: 76rem;">
+      <div class="container has-text-centered" style="background: rgba(255, 255, 255, 0.40); padding: 2rem 2rem 1.75rem; border-radius: 1.25rem; backdrop-filter: blur(10px); max-width: 68rem;">
         <img src="./resources/images/logo.png"
           alt="SimHum project logo"
-          style="width: 50%; max-width: 25rem; height: auto; margin-bottom: 2rem;"> 
+          style="width: 42%; max-width: 15rem; height: auto; margin-bottom: 1.25rem;"> 
         <h1 class="publication-title">
           SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generalizable Bimanual Manipulation
         </h1>
@@ -2095,7 +2104,7 @@ title: "SimHum: Sim-and-Human Co-training for Data-Efficient and Scene-Generaliz
               Real-only
             </h4>
             <p class="card-note">
-              Trained only on limited real-world data, it overfits to spurious visual correlations and generalizes&nbsp;poorly.
+              Trained only on limited real-world data, it overfits to spurious visual correlations and generalizes poorly.
             </p>
           </div>
         </div>
